@@ -10,9 +10,12 @@ importers:
 
   apps/landing:
     dependencies:
-      '@polgubau/utils':
+      '@polgubau/fuzzy':
         specifier: workspace:*
         version: link:../..
+      '@polgubau/utils':
+        specifier: ^1.0.3
+        version: 1.0.3
       '@react-router/node':
         specifier: ^7.3.0
         version: 7.3.0(react-router@7.3.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(typescript@5.8.2)
@@ -520,6 +523,10 @@ packages:
 
   '@polgubau/animated@1.0.12':
     resolution: {integrity: sha512-cWUj5HREsWdcagJE9aAK9XEd64DBCc4Aej1CYj2i1VOArgOICihYCImxu31EBzLwphl9QkzDD+hKX276AfbwTw==}
+
+  '@polgubau/utils@1.0.3':
+    resolution: {integrity: sha512-ytYN8mwy/EeNwAVlxW0wm1wtqpGxtyWAmGD/GeSAHJHpw8EFY+fbN0s4yN/E4sjBGmRlBlbttSrBzZEvrzXwtw==}
+    engines: {node: '>= 22', npm: Please use pnpm instead of yarn to install dependencies, pnpm: '>= 9', yarn: Please use pnpm instead of yarn to install dependencies}
 
   '@radix-ui/number@1.1.0':
     resolution: {integrity: sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==}
@@ -2788,6 +2795,8 @@ snapshots:
   '@polgubau/animated@1.0.12':
     dependencies:
       esbuild: 0.24.2
+
+  '@polgubau/utils@1.0.3': {}
 
   '@radix-ui/number@1.1.0': {}
 

@@ -15,7 +15,8 @@
     "url": "git+https://github.com/PolGubau/utils.git"
   },
   "license": "MIT",
-  "author": "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)","maintainers": [
+  "author": "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)",
+  "maintainers": [
     {
       "name": "Pol Gubau Amores",
       "email": "gubaupol@gmail.com"
@@ -25,7 +26,8 @@
     "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)"
   ],
   "dependencies": {
-    "@polgubau/utils": "workspace:*",
+    "@polgubau/fuzzy": "workspace:*",
+    "@polgubau/utils": "^1.0.3",
     "@react-router/node": "^7.3.0",
     "@react-router/serve": "^7.3.0",
     "isbot": "^5.1.17",
