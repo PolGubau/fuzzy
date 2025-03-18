@@ -1,0 +1,74 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["@polgubau/biome-config"],
+  "linter": {
+    "rules": {
+      "performance": {
+        "noAccumulatingSpread": {
+          "level": "off"
+        },
+        "noReExportAll": {
+          "level": "off"
+        },
+        "noBarrelFile": {
+          "level": "off"
+        }
+      },
+      "correctness": {
+        "noNodejsModules": "off",
+        "useExhaustiveDependencies": "off",
+        "useImportExtensions": "off"
+      },
+
+      "style": {
+        "noParameterAssign": "off",
+        "noUnusedTemplateLiteral": {
+          "fix": "safe",
+          "level": "warn"
+        },
+        "useBlockStatements": {
+          "fix": "safe",
+          "level": "warn"
+        },
+        "noUselessElse": {
+          "fix": "safe",
+          "level": "warn"
+        },
+        "useFilenamingConvention": "off",
+        "useNamingConvention": "off",
+        "noDefaultExport": "off",
+        "noNamespaceImport": "off"
+      },
+
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "off"
+      }
+    }
+  },
+  "javascript": {
+    "globals": ["$", "_", "externalVariable", "React"],
+    "jsxRuntime": "transparent"
+  },
+  "overrides": [
+    {
+      "include": ["tools/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["src/index.ts"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noReExportAll": "off"
+          }
+        }
+      }
+    }
+  ]
+}

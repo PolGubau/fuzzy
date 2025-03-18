@@ -1,0 +1,42 @@
+{
+  "name": "@polgubau/utils",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [
+    "typescript",
+    "utils",
+    "polgubau",
+    "polgubau/utils"
+  ],
+  "author": "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)",
+  "maintainers": [
+    {
+      "name": "Pol Gubau Amores",
+      "email": "gubaupol@gmail.com"
+    }
+  ],
+  "contributors": [
+    "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)"
+  ],
+  "scripts": {
+    "dev": "pnpm run /^dev:.*/",
+    "dev:lib": "cd packages/utils && pnpm build:watch",
+    "dev:app": "cd apps/landing && pnpm dev",
+    "build:lib": "cd packages/utils && pnpm build",
+    "build": "pnpm -r build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PolGubau/utils.git"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PolGubau/utils/issues"
+  },
+  "homepage": "https://github.com/PolGubau/utils#readme",
+  "description": ""
+}

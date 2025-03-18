@@ -1,0 +1,5 @@
+packages:
+  - packages/utils
+  - apps/docs
+  - apps/landing
+
