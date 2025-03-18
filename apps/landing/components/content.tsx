@@ -1,35 +1,45 @@
 import { CopySnipped } from "./copy-snipped";
+import { fuzzy } from "@polgubau/fuzzy";
 export const Content = () => {
 	return (
-		<section className="prose prose-invert max-md:prose-sm prose-h2:text-primary prose-code:text-yellow-50 p-1 max-md:max-w-[80vw]">
-			<h1>Lightweight Utility Library ✨</h1>
+		<section className="prose prose-invert max-md:prose-sm prose-h2:text-primary prose-code:text-yellow-50 p-1 max-md:max-w-[90vw]">
+			<h1 className="text-balance">Framework agnostic Fuzzy finder 🔍</h1>
 			<h2>What and why</h2>
-			Over the past few years, <strong>TypeScript</strong> has become almost my
-			second mother tongue after Spanish.
 			<p>
-				I kept noticing how often I was rewriting the same utilities "debounce",
-				"throttle", or "copy to clipboard" across different projects. Instead of
-				reinventing the wheel every time, I decided to build a small library
-				with the utilities I use the most in my daily work.
+				After loosing some afternoons trying to create a{" "}
+				<strong>fuzzy finder</strong> for a side project I decided to export it
+				as an open source library that could help me (and other devs) with
+				filters in the future.
 			</p>
+			I wanted to create a library that fits perfect for filters, selects,
+			autocompletes, navigate commands, etc. The main goal was to create a
+			library that is:
+			<ul>
+				<li>Easy to use.</li>
+				<li>Framework-agnostic without dependencies.</li>
+				<li>Fast, should filter thousands of items in milliseconds.</li>
+				<li>Lightweight. Less than 2kb.</li>
+				<li>Case-insensitive and diacritics-insensitive</li>
+				<li>Returns the matched positions and points of each result</li>
+			</ul>
 			<p>
-				<strong>@polgubau/utils</strong> is a lightweight utility library
-				designed to simplify common JavaScript and TypeScript tasks. It's
-				<strong>modular</strong>, <strong>framework-agnostic</strong>,
-				<strong>tree-shakable</strong>, and optimized for performance.
+				This is how <strong>@polgubau/fuzzy</strong> ended being an optimized
+				library designed with Typescript since the roots, you just need to type
+				one command and call one function to get a fuzzy finder for your
+				project.
 			</p>
 			<h3>What this is NOT ⚠️</h3>
 			<ul>
-				<li>A catch-all library that solves every problem.</li>
-				<li>A replacement for Lodash or Underscore.</li>
-				<li>A package that will unnecessarily inflate your bundle size.</li>
+				<li>A library that tries to do everything.</li>
+				<li>A monolithic package with a lot of features you don't need.</li>
+				<li>A complete Filter library.</li>
 			</ul>
 			<h3>What this IS ✅</h3>
 			<ul>
-				<li>A collection of small, focused utility functions.</li>
-				<li>Modular, tree-shakable and lightweight both for CJS and ESM.</li>
-				<li>Designed to be simple, efficient, and easy to use.</li>
-				<li>Fully typed, with TypeScript definitions included.</li>
+				<li>A small direct library which solves a specific problem.</li>
+				<li>A helper to your filters and lists</li>
+				<li>A library that is easy to use and understand.</li>
+				<li>Open source without pricing tag in the navbar</li>
 			</ul>
 			<h2>Installation</h2>
 			<p>Install the library using your package manager of choice:</p>
@@ -37,63 +47,34 @@ export const Content = () => {
 			<h2>Usage</h2>
 			<p>Import the utilities you need from the package:</p>
 			<pre>
-				<code>{`import { copyToClipboard } from "@polgubau/utils";`}</code>
+				<code>{`import { fuzzy } from "@polgubau/fuzzy";`}</code>
 			</pre>
-			<p>
-				For even better optimization, you can import specific modules or
-				functions as needed:
-			</p>
-			<pre className="flex flex-col gap-2">
-				<code>{`import { copyToClipboard } from "@polgubau/utils/functions";`}</code>
-
-				<code>{`import { shuffle } from "@polgubau/utils/arrays";`}</code>
-			</pre>
-			<h2>Available Modules</h2>
-			<ul>
-				<li>
-					<strong>Storage</strong> - Utilities for working with localStorage and
-					sessionStorage.
-				</li>
-				<li>
-					<strong>Accessibility</strong> - Helpers to improve web accessibility.
-				</li>
-				<li>
-					<strong>Arrays</strong> - Functions to manipulate arrays efficiently.
-				</li>
-				<li>
-					<strong>Comparators</strong> - Utility functions for sorting and
-					comparing data.
-				</li>
-				<li>
-					<strong>Functions</strong> - Higher-order functions and utility
-					methods.
-				</li>
-				<li>
-					<strong>Numbers</strong> - Mathematical and number-related utilities.
-				</li>
-				<li>
-					<strong>Objects</strong> - Object manipulation and transformation
-					helpers.
-				</li>
-				<li>
-					<strong>Parsers</strong> - Functions for parsing different types of
-					data as JSON.
-				</li>
-				<li>
-					<strong>Texts</strong> - String and text processing utilities.
-				</li>
-			</ul>
-			<h2>Example</h2>
-			<p>
-				Using the <code>arrays</code> module:
-			</p>
+			<h2>Usage</h2>
+			<h3>Simple string array</h3>
 			<pre>
 				<code>
-					{`import {limitArray} from "@polgubau/utils/arrays"; 
-const {limitedArray} = limitArray([1, 2, 3, 4, 5]); 
-console.log(unique(numbers)); // [1, 2, 3]`}
+					{`import fuzzy from '@polgubau/fuzzy';
+
+const list = ["apple", "banana", "orange", "grape"];
+const queryText = "appl"; // The search term
+const fuzzySearch = fuzzy(list)
+
+// Run this whenever search term changes
+const results = fuzzySearch(queryText)
+`}
 				</code>
 			</pre>
+			<p>
+				Returns an array of results sorted by how well they match the query
+				(descending order). Only the matching items will be returned. This code
+				will return the following results:
+				<pre>
+					<code>{`[
+	{ item: "apple", score: 0.5, indices: [[0, 3]] },	
+	{ item: "grape", score: 2, indices: [[0, 1]] },
+]`}</code>
+				</pre>
+			</p>
 			<h2>TypeScript Support</h2>
 			<p>
 				As it should always be, this library includes full TypeScript support

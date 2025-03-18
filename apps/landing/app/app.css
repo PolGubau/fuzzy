@@ -24,9 +24,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  @apply bg-black text-gray-100;
+  @apply text-gray-100;
+  background-color: black;
 }
 @theme{
-  --color-primary: #f0b100;
+  --color-primary: oklch(0.768 0.233 130.85);
 }
 

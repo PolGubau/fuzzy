@@ -13,7 +13,7 @@ export const Links = () => {
 			<Link
 				target="_blank"
 				rel="noopener noreferrer"
-				to="https://github.com/PolGubau/utils"
+				to="https://github.com/PolGubau/fuzzy"
 				className="hover:underline text-center w-fit py-2 px-4 rounded-xl"
 			>
 				Github

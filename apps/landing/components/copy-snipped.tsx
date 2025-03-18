@@ -4,7 +4,7 @@ type CopySnippedProps = {
 	text?: string;
 };
 export const CopySnipped = ({
-	text = "pnpm add @polgubau/utils",
+	text = "pnpm add @polgubau/fuzzy",
 }: CopySnippedProps) => {
 	const [isCopied, setIsCopied] = useState(false);
 

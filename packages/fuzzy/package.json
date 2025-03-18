@@ -32,42 +32,6 @@
       "types": "./dist/esm/index.d.mts",
       "import": "./dist/esm/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./storage": {
-      "import": "./dist/esm/storage/index.mjs",
-      "require": "./dist/storage/index.js"
-    },
-    "./accessibility": {
-      "import": "./dist/esm/accessibility/index.mjs",
-      "require": "./dist/accessibility/index.js"
-    },
-    "./arrays": {
-      "import": "./dist/esm/arrays/index.mjs",
-      "require": "./dist/arrays/index.js"
-    },
-    "./comparators": {
-      "import": "./dist/esm/comparators/index.mjs",
-      "require": "./dist/comparators/index.js"
-    },
-    "./functions": {
-      "import": "./dist/esm/functions/index.mjs",
-      "require": "./dist/functions/index.js"
-    },
-    "./numbers": {
-      "import": "./dist/esm/numbers/index.mjs",
-      "require": "./dist/numbers/index.js"
-    },
-    "./objects": {
-      "import": "./dist/esm/objects/index.mjs",
-      "require": "./dist/objects/index.js"
-    },
-    "./parsers": {
-      "import": "./dist/esm/parsers/index.mjs",
-      "require": "./dist/parsers/index.js"
-    },
-    "./texts": {
-      "import": "./dist/esm/texts/index.mjs",
-      "require": "./dist/texts/index.js"
     }
   },
   "main": "./dist/index.js",

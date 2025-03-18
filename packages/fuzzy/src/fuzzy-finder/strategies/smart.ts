@@ -49,6 +49,10 @@ export function experimentalSmartFuzzyMatch(
 				normalizedItem.slice(idx, idx + minimumChunkLen) === minimumQueryChunk
 			) {
 				chunkFirstIdx = idx;
+			} else {
+				// Move index to continue search for valid chunk
+				chunkLastIdx += 1;
+				continue;
 			}
 		}
 

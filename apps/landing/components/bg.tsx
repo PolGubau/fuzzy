@@ -124,14 +124,14 @@ export function Background({
 	spinRotation = -2.0,
 	spinSpeed = 2.0,
 	offset = [0.0, 0.0],
-	color1 = "#222",
-	color2 = "#900",
-	color3 = "#444",
-	contrast = 4,
+	color1 = "#477500",
+	color2 = "#ddd",
+	color3 = "#aaa",
+	contrast = 15,
 	lighting = 0.4,
-	spinAmount = 0.15,
-	pixelFilter = 2000.0,
-	spinEase = 1.3,
+	spinAmount = 0.14,
+	pixelFilter = 50000,
+	spinEase = 1.4,
 	isRotate = false,
 	mouseInteraction = false,
 }: BackgroundProps) {
@@ -232,5 +232,5 @@ export function Background({
 		mouseInteraction,
 	]);
 
-	return <div ref={containerRef} className="w-full h-full" />;
+	return <div ref={containerRef} className="w-full h-full animate-blur bg-black" />;
 }

@@ -1,1 +1,1 @@
-export * from "./fuzzy-finder";
+export { fuzzy , fuzzyMatch } from "./fuzzy-finder";

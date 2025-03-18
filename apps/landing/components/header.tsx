@@ -16,10 +16,11 @@ export const Header = () => {
 					src="https://avatars.githubusercontent.com/u/63197171?v=4&amp;size=64"
 				/>
 			</a>
-			<div className="flex flex-col gap-1">
+			<div className="flex flex-col">
 				<a
 					href="https://polgubau.com/"
 					target="_blank"
+					className="text-neutral-300/80"
 					rel="noreferrer"
 					aria-label="Pol Gubau's website"
 				>
@@ -27,7 +28,7 @@ export const Header = () => {
 				</a>
 				<h1>
 					{/* <span className="text-4xl font-bold">Typescript</span> */}
-					<span className="text-4xl font-bold text-primary"> Utils</span>
+					<span className="text-4xl font-bold text-primary"> Fuzzy</span>
 				</h1>
 			</div>
 		</header>

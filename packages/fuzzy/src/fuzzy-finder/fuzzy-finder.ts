@@ -58,7 +58,7 @@ Note:
  *
  * If you use React, use `useFuzzySearchList` hook for convenience.
  */
-export function createFuzzySearch<T>(
+export function fuzzy<T>(
 	list: T[],
 	options?: FuzzySearchOptions<T>,
 ): FuzzySearcher<T> {

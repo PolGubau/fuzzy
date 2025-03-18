@@ -5,16 +5,17 @@ export function meta(_args: Route.MetaArgs) {
 	return [
 		{
 			title:
-				"Utils - Lightweight Typescript helpers for your Projects 🚀 - Pol Gubau Amores",
+				"Fuzzy - Typescript Fuzzy finder algorithm - by Pol Gubau Amores",
+			name: "title",
 		},
 		{
 			name: "description",
 			content:
-				"Documentation of @polgubau/utils, a framework agnostic library with builtin helper functions for your typescript project",
+				"Documentation of @polgubau/fuzzy, a framework agnostic fuzzy finder algorithm for your typescript project",
 		},
 		{
 			name: "keywords",
-			content: "typescript, utils, helpers, library, framework agnostic",
+			content: "typescript, utils, helpers, library, framework agnostic, fuzzy",
 		},
 		{
 			name: "author",
@@ -27,12 +28,16 @@ export function meta(_args: Route.MetaArgs) {
 		{
 			property: "og:title",
 			content:
-				"Utils - Lightweight Typescript helpers for your Projects 🚀 - Pol Gubau Amores",
+				"Fuzzy - Typescript Fuzzy finder - Pol Gubau Amores",
 		},
 		{
 			property: "og:description",
 			content:
-				"Documentation of @polgubau/utils, a framework agnostic library with builtin helper functions for your typescript project",
+				"Documentation of @polgubau/fuzzy, a framework agnostic fuzzy finder algorithm for your typescript project",
+		},
+		{
+			property: "og:url",
+			content: "https://examfuzzy.polgubau.com", 
 		},
 	];
 }
