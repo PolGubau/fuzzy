@@ -1,16 +1,16 @@
-![Branches](./badges/packages/utils/coverage-branches.svg)
-![Functions](./badges/packages/utils/coverage-functions.svg)
-![Lines](./badges/packages/utils/coverage-lines.svg)
-![Statements](./badges/packages/utils/coverage-statements.svg)
-![Coverage total](./badges/packages/utils/coverage-total.svg)
+![Branches](./badges/packages/fuzzy/coverage-branches.svg)
+![Functions](./badges/packages/fuzzy/coverage-functions.svg)
+![Lines](./badges/packages/fuzzy/coverage-lines.svg)
+![Statements](./badges/packages/fuzzy/coverage-statements.svg)
+![Coverage total](./badges/packages/fuzzy/coverage-total.svg)
 
-![Last commit](https://img.shields.io/github/last-commit/PolGubau/utils?logo=git)
-![Last Update](https://img.shields.io/npm/last-update/%40polgubau%2Futils?logo=npm&label=last%20update)
-![Version](https://img.shields.io/npm/v/%40polgubau%2Futils?logo=npm&label=version)
-![License](https://img.shields.io/github/license/PolGubau/utils?logo=github&label=license)
-![Downloads](https://img.shields.io/npm/dt/%40polgubau%2Futils?logo=npm&label=downloads)
+![Last commit](https://img.shields.io/github/last-commit/PolGubau/fuzzy?logo=git)
+![Last Update](https://img.shields.io/npm/last-update/%40polgubau%2Ffuzzy?logo=npm&label=last%20update)
+![Version](https://img.shields.io/npm/v/%40polgubau%2Ffuzzy?logo=npm&label=version)
+![License](https://img.shields.io/github/license/PolGubau/fuzzy?logo=github&label=license)
+![Downloads](https://img.shields.io/npm/dt/%40polgubau%2Ffuzzy?logo=npm&label=downloads)
 
-# @polgubau/utils
+# @polgubau/fuzzy
 
 A collection of modern typescript utilities. 
 
@@ -19,9 +19,9 @@ A collection of modern typescript utilities.
 Install the package via npm or pnpm:
 
 ```sh
-npm install @polgubau/utils
+npm install @polgubau/fuzzy
 # or
-pnpm add @polgubau/utils
+pnpm add @polgubau/fuzzy
 ```
 
 
@@ -30,7 +30,7 @@ pnpm add @polgubau/utils
 Over the past few years, TypeScript has become almost my second mother tongue after Spanish.  
 I kept noticing how often I was rewriting the same utilities "debounce", "throttle", or "copy to clipboard" across different projects. Instead of reinventing the wheel every time, I decided to build a small library with the utilities I use the most in my daily work.
 
-**@polgubau/utils** is a lightweight utility library designed to simplify common JavaScript and TypeScript tasks. It's modular, framework-agnostic, tree-shakable, and optimized for performance.
+**@polgubau/fuzzy** is a lightweight utility library designed to simplify common JavaScript and TypeScript tasks. It's modular, framework-agnostic, tree-shakable, and optimized for performance.
 
 ### What this is NOT ⚠️
 - A catch-all library that solves every problem.
@@ -48,7 +48,7 @@ I kept noticing how often I was rewriting the same utilities "debounce", "thrott
 Install the library using your package manager of choice:
 
 ```sh
-pnpm add @polgubau/utils
+pnpm add @polgubau/fuzzy
 ```
 
 ## Usage
@@ -56,14 +56,14 @@ pnpm add @polgubau/utils
 Import the utilities you need from the package:
 
 ```js
-import { copyToClipboard } from "@polgubau/utils";
+import { copyToClipboard } from "@polgubau/fuzzy";
 ```
 
 For even better optimization, you can import specific modules or functions as needed:
 
 ```js
-import { copyToClipboard } from "@polgubau/utils/functions";
-import { shuffle } from "@polgubau/utils/arrays";
+import { copyToClipboard } from "@polgubau/fuzzy/functions";
+import { shuffle } from "@polgubau/fuzzy/arrays";
 ```
 
 ## Available Modules
@@ -83,7 +83,7 @@ import { shuffle } from "@polgubau/utils/arrays";
 Using the arrays module:
 
 ```js
-import { limitArray } from "@polgubau/utils/arrays"; 
+import { limitArray } from "@polgubau/fuzzy/arrays"; 
 const { limitedArray } = limitArray([1, 2, 3, 4, 5]); 
 console.log(limitedArray); // [1, 2]
 ```

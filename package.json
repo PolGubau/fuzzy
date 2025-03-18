@@ -1,5 +1,5 @@
 {
-  "name": "@polgubau/utils",
+  "name": "@polgubau/fuzzy",
   "publishConfig": {
     "access": "public"
   },
@@ -7,9 +7,9 @@
   "main": "index.js",
   "keywords": [
     "typescript",
-    "utils",
+    "fuzzy",
     "polgubau",
-    "polgubau/utils"
+    "polgubau/fuzzy"
   ],
   "author": "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)",
   "maintainers": [
@@ -23,20 +23,20 @@
   ],
   "scripts": {
     "dev": "pnpm run /^dev:.*/",
-    "dev:lib": "cd packages/utils && pnpm build:watch",
+    "dev:lib": "cd packages/fuzzy && pnpm build:watch",
     "dev:app": "cd apps/landing && pnpm dev",
-    "build:lib": "cd packages/utils && pnpm build",
+    "build:lib": "cd packages/fuzzy && pnpm build",
     "build": "pnpm -r build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PolGubau/utils.git"
+    "url": "git+https://github.com/PolGubau/fuzzy.git"
   },
   "license": "MIT",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/PolGubau/utils/issues"
+    "url": "https://github.com/PolGubau/fuzzy/issues"
   },
-  "homepage": "https://github.com/PolGubau/utils#readme",
+  "homepage": "https://github.com/PolGubau/fuzzy#readme",
   "description": ""
 }
