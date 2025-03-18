@@ -1,4 +1,3 @@
-
 /**
  * Range of indices in a string, [index of first character, index of last character]
  */
@@ -32,9 +31,9 @@ export type FuzzyResult<T> = { item: T; score: number; matches: FuzzyMatches };
 export type FuzzySearchStrategy = "off" | "smart" | "aggressive";
 
 export type FuzzySearchOptions<T> = {
-  key?: keyof T;
-  getText?: (item: T) => Array<string | null>;
-  strategy?: FuzzySearchStrategy;
+	key?: keyof T;
+	getText?: (item: T) => Array<string | null>;
+	strategy?: FuzzySearchStrategy;
 };
 
 export type FuzzySearcher<T> = (query: string) => Array<FuzzyResult<T>>;

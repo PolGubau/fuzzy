@@ -14,8 +14,22 @@
     "type": "git",
     "url": "git+https://github.com/PolGubau/fuzzy.git"
   },
+  "bugs": {
+    "url": "https://github.com/PolGubau/fuzzy/issues"
+  },
   "license": "MIT",
-  "author": "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)",
+  "author": {
+    "name": "Pol Gubau Amores",
+    "email": "gubaupol@gmail.com",
+    "url": "https://polgubau.com"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "package.json"
+  ],
   "maintainers": [
     {
       "name": "Pol Gubau Amores",
@@ -32,15 +46,15 @@
       "types": "./dist/esm/index.d.mts",
       "import": "./dist/esm/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./react": {
+      "import": "./dist/react.js",
+      "types": "./dist/react.d.ts"
     }
   },
   "main": "./dist/index.js",
   "module": "./dist/esm/index.mjs",
   "types": "./dist/esm/index.d.mts",
-  "files": [
-    "dist",
-    "package.json"
-  ],
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",
@@ -58,8 +72,14 @@
     "coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit"
   },
-  "dependencies": {},
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "@types/react": "^19.0.0"
+  },
   "devDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/react": "^19.0.0",
     "@biomejs/biome": "^1.9.4",
     "@polgubau/biome-config": "^1.0.0",
     "@types/node": "^22.13.10",
