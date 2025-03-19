@@ -73,19 +73,24 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "@types/react": "^19.0.0"
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0"
+  },
+  "homepage": "https://github.com/polgubau.com/fuzzy",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "@types/react": "^19.0.0",
     "@biomejs/biome": "^1.9.4",
     "@polgubau/biome-config": "^1.0.0",
     "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
     "@vitest/coverage-v8": "^3.0.8",
     "esbuild-plugin-file-path-extensions": "^2.1.4",
     "jsdom": "^26.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
     "vitest": "^3.0.8"

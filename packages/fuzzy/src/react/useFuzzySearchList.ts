@@ -28,6 +28,7 @@ export default function useFuzzySearchList<T, U>({
 	strategy,
 }: UseFuzzySearchListOptions<T, U>): U[] {
 	const performSearch = React.useMemo(
+		// @ts-ignore
 		() => fuzzy(list, { key, getText, strategy }),
 		[list, key, getText, strategy],
 	);
