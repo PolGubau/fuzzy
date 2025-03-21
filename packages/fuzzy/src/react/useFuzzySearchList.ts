@@ -32,7 +32,6 @@ export default function useFuzzySearchList<T, U>({
 		() => fuzzy(list, { key, getText, strategy }),
 		[list, key, getText, strategy],
 	);
-
 	const searchResults = React.useMemo(() => {
 		return queryText
 			? performSearch(queryText).map(mapResultItem)
