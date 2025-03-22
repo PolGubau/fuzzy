@@ -4,8 +4,7 @@ import { Homepage } from "../pages/home/home";
 export function meta(_args: Route.MetaArgs) {
 	return [
 		{
-			title:
-				"Fuzzy - Typescript Fuzzy finder algorithm - by Pol Gubau Amores",
+			title: "Fuzzy - Typescript Fuzzy finder algorithm - by Pol Gubau Amores",
 			name: "title",
 		},
 		{
@@ -27,8 +26,7 @@ export function meta(_args: Route.MetaArgs) {
 		},
 		{
 			property: "og:title",
-			content:
-				"Fuzzy - Typescript Fuzzy finder - Pol Gubau Amores",
+			content: "Fuzzy - Typescript Fuzzy finder - Pol Gubau Amores",
 		},
 		{
 			property: "og:description",
@@ -37,11 +35,10 @@ export function meta(_args: Route.MetaArgs) {
 		},
 		{
 			property: "og:url",
-			content: "https://examfuzzy.polgubau.com", 
+			content: "https://examfuzzy.polgubau.com",
 		},
 	];
 }
-
 export default function Home() {
 	return <Homepage />;
 }
