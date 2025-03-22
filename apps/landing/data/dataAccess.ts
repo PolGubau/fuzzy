@@ -1,6 +1,6 @@
 import { rawData } from "~/assets/data";
 import type { Category, CategoryWithAll, Data } from "~/assets/data.types";
-import createFuzzySearch from "./ff";
+import { fuzzy } from "@polgubau/fuzzy";
 class DataAccess {
 	private data: Data;
 
@@ -36,7 +36,7 @@ class DataAccess {
 		// 		category && category !== "all" ? util.category === category : true;
 		// 	return nameMatch && categoryMatch;
 		// });
-		const fuzzySearch = createFuzzySearch(this.data.utils, {
+		const fuzzySearch = fuzzy(this.data.utils, {
 			// search by `name` property
 			// key: "name",
 
