@@ -1,4 +1,4 @@
-import type { FuzzyResult, HighlightRanges } from "data/ff";
+import type { FuzzyResult, HighlightRanges } from "@polgubau/fuzzy";
 import { Link } from "react-router";
 import type { Util } from "~/assets/data.types";
 type ItemProps = {
