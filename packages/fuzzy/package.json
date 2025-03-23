@@ -48,8 +48,9 @@
       "require": "./dist/index.js"
     },
     "./react": {
-      "import": "./dist/react.js",
-      "types": "./dist/react.d.ts"
+      "import": "./dist/esm/react/index.mjs",
+      "types": "./dist/esm/react/index.d.mts",
+      "require": "./dist/react/index.js"
     }
   },
   "main": "./dist/index.js",
