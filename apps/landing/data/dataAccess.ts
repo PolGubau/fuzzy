@@ -15,12 +15,15 @@ class DataAccess {
 	protected getUtilBy(key: keyof Data["utils"][0], value: string) {
 		return this.data.utils.find((util) => util[key] === value);
 	}
+
 	public getUtilByName(uName: string) {
 		return this.getUtilBy("name", uName);
 	}
+
 	public getUtilByCategory(category: Category) {
 		return this.getUtilBy("category", category);
 	}
+
 	public filterUtils({
 		q = "",
 		category = "all",
