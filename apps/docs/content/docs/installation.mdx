@@ -7,20 +7,29 @@ description: Installation instructions for @polgubau/fuzzy
 
 Install the library using your package manager of choice:
 
-<Tabs groupId="language" items={['Javascript', 'Rust']} persist>
-  <Tab value="Javascript">Javascript is weird</Tab>
-  <Tab value="Rust">Rust is fast</Tab>
+<Tabs groupId="language" items={['npm','yarn','pnpm','bun']} persist defaultIndex="0">
+  <Tab value="npm">
+  ```sh
+  npm install @polgubau/fuzzy
+  ```
+  </Tab>
+  <Tab value="yarn">
+  ```sh
+  yarn add @polgubau/fuzzy
+  ```
+  </Tab>
+  <Tab value="pnpm">
+  ```sh
+  pnpm add @polgubau/fuzzy
+  ```
+  </Tab>
+  <Tab value="bun">
+  ```sh
+  bun add @polgubau/fuzzy
+  ```
+  </Tab>
 </Tabs>
 
-```sh  
-npm install @polgubau/fuzzy
-# or
-yarn add @polgubau/fuzzy
-# or
-pnpm add @polgubau/fuzzy
-# or
-bun add @polgubau/fuzzy
-```
 
 ## Getting Started
 
@@ -30,14 +39,14 @@ Import the library and use it with a simple list:
 import fuzzy from '@polgubau/fuzzy';
 
 const list = ["apple", "banana", "orange", "grape"];
-const queryText = "ap"; // The search term
+const queryText = "appl"; // The search term
 const fuzzySearch = fuzzy(list);
 
 // Run this whenever the search term changes
 const results = fuzzySearch(queryText);
 
 console.log(results); 
-{/* // Example output: [{ item: "apple", score: 0.9, matches: [0,1] }] */}
+/* Example output: [{ item: "apple", score: 0.9, matches: [0,3] }] */
 ```
 
 ## How It Works
