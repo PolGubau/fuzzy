@@ -21,7 +21,11 @@ const locales = [
 	},
 	{
 		name: "Català",
-		locale: "ca",
+		locale: "cat",
+	},
+	{
+		name: "Deutsch",
+		locale: "de",
 	},
 ];
 export default async function RootLayout({

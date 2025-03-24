@@ -7,12 +7,12 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "postinstall": "pnpm --filter @polgubau/utils build"
+    "postinstall": "pnpm --filter @polgubau/fuzzy build"
   },
   "repository": {
     "directory": "apps/landing",
     "type": "git",
-    "url": "git+https://github.com/PolGubau/utils.git"
+    "url": "git+https://github.com/PolGubau/fuzzy.git"
   },
   "license": "MIT",
   "author": "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)",

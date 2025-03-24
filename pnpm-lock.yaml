@@ -43,6 +43,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      shiki:
+        specifier: ^3.2.1
+        version: 3.2.1
       ts-morph:
         specifier: ^25.0.1
         version: 25.0.1

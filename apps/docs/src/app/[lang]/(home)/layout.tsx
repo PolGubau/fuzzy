@@ -1,7 +1,7 @@
 import { Background } from "@/components/bg";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import type { ReactNode } from "react";
-import { baseOptions } from "../layout.config";
+import { baseOptions } from "../../layout.config";
 import type { Lang } from "@/types/base";
 
 export default async function Layout({
