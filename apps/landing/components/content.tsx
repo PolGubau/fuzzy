@@ -1,5 +1,4 @@
 import { CopySnipped } from "./copy-snipped";
-import { fuzzy } from "@polgubau/fuzzy";
 export const Content = () => {
 	return (
 		<section className="prose prose-invert max-md:prose-sm prose-h2:text-primary prose-code:text-yellow-50 p-1 max-md:max-w-[90vw]">
@@ -56,7 +55,7 @@ export const Content = () => {
 					{`import fuzzy from '@polgubau/fuzzy';
 
 const list = ["apple", "banana", "orange", "grape"];
-const queryText = "appl"; // The search term
+const queryText = "ap"; // The search term
 const fuzzySearch = fuzzy(list)
 
 // Run this whenever search term changes
@@ -69,10 +68,16 @@ const results = fuzzySearch(queryText)
 				(descending order). Only the matching items will be returned. This code
 				will return the following results:
 				<pre>
-					<code>{`[
-	{ item: "apple", score: 0.5, indices: [[0, 3]] },	
-	{ item: "grape", score: 2, indices: [[0, 1]] },
-]`}</code>
+					<code>{`[{
+	"item": "apple",
+	"score": 0.5,
+	"matches": [[[0, 1]]]
+},
+{
+	"item": "grape",
+	"score": 2,
+	"matches": [[[2, 3]]]
+}]`}</code>
 				</pre>
 			</p>
 			<h2>TypeScript Support</h2>
