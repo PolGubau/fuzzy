@@ -12,11 +12,13 @@ import { TypeTable } from "fumadocs-ui/components/type-table";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { createTypeTable } from "fumadocs-typescript/ui";
 
-export default async function Page(props: {
-	params: Promise<{ slug?: string[] }>;
+export default async function Page({
+	params,
+}: {
+	params: Promise<{ lang: string; slug?: string[] }>;
 }) {
-	const params = await props.params;
-	const page = source.getPage(params.slug);
+	const { slug, lang } = await params;
+	const page = source.getPage(slug, lang);
 	if (!page) notFound();
 
 	const MDXContent = page.data.body;
