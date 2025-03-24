@@ -8,6 +8,7 @@ type Letter = {
 	char: string;
 	isHighlighted: boolean;
 };
+
 const areLettersHighlighted = (
 	str: string,
 	matches: HighlightRanges | null,
