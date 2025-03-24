@@ -1,5 +1,5 @@
-import { createFuzzySearchImpl, fuzzyMatchImpl } from "./impl";
-import type { FuzzyResult, FuzzySearcher, FuzzySearchOptions } from "./types";
+import { fuzzySearch, findFuzzyMatch } from "./impl";
+import type { Result, FuzzySearcher, FuzzySearchOptions } from "./types";
 
 /*
 Based on https://github.com/Nozbe/microfuzz, but with some changes as direct tailwind support or more customization. Thanks to Nozbe for the original idea.
@@ -62,17 +62,17 @@ export function fuzzy<T>(
 	list: T[],
 	options?: FuzzySearchOptions<T>,
 ): FuzzySearcher<T> {
-	return createFuzzySearchImpl<T>(list, options);
+	return fuzzySearch<T>(list, options);
 }
 
 /**
  * Runs a one-off fuzzy search matching on `text` against `queryText`.
  *
- * Use `createFuzzySearch` whenever you have a list of items to search.
+ * Use `fuzzyMatch` whenever you have a single item to search.
  */
 export function fuzzyMatch(
 	text: string,
 	queryText: string,
-): FuzzyResult<string> | null {
-	return fuzzyMatchImpl(text, queryText);
+): Result<string> | null {
+	return findFuzzyMatch(text, queryText);
 }

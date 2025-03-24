@@ -26,6 +26,23 @@ export type Result<T> = { item: T; score: number; matches: Matches };
 export type FuzzySearchOptions<T> = {
 	key?: keyof T;
 	getText?: (item: T) => Array<string | null>;
+	/**
+	 * If true, will log debug information to the console
+	 * @default false
+	 */
+	debug?: boolean;
 };
 
-export type FuzzySearcher<T> = (query: string) => Array<Result<T>>;
+export type FuzzySearchResponse<T> = {
+	results: Array<Result<T>>;
+	/**
+	 * The number of results found
+	 */
+	length: number;
+	/**
+	 * The time it took to run the search in milliseconds
+	 */
+	time: number;
+};
+
+export type FuzzySearcher<T> = (query: string) => FuzzySearchResponse<T>;

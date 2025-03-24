@@ -2,15 +2,42 @@ import { getFuzzyMatchScore } from "./getScore/getScore";
 import { sortByScore } from "./helpers/sorters";
 import normalizeText from "./normalizeText";
 import type {
+	FuzzySearchOptions,
+	FuzzySearchResponse,
+	FuzzySearcher,
 	Matches,
 	Result,
-	FuzzySearchOptions,
-	FuzzySearcher,
 } from "./types";
 
 const { MAX_SAFE_INTEGER } = Number;
 
-export function fuzzyMatchImpl(
+class FuzzySearcherBuilder<T> {
+	private results: Array<Result<T>>;
+	private time: number;
+
+	constructor({
+		results,
+		startTime = Date.now(),
+		endTime = Date.now(),
+	}: {
+		results?: Array<Result<T>>;
+		startTime?: number;
+		endTime?: number;
+	}) {
+		this.time = endTime - startTime;
+		this.results = results ?? [];
+	}
+
+	public build(): FuzzySearchResponse<T> {
+		return {
+			results: this.results,
+			length: this.results.length,
+			time: this.time,
+		};
+	}
+}
+
+export function findFuzzyMatch(
 	text: string,
 	query: string,
 ): Result<string> | null {
@@ -34,14 +61,14 @@ export function fuzzyMatchImpl(
 	return null;
 }
 
-export function createFuzzySearchImpl<Element>(
-	collection: Element[],
-	options: FuzzySearchOptions<Element> = {},
-): FuzzySearcher<Element> {
-	const { getText } = options;
+export function fuzzySearch<T>(
+	collection: T[],
+	options: FuzzySearchOptions<T> = {},
+): FuzzySearcher<T> {
+	const { getText, debug } = options;
 
-	const preprocessedCollection: [Element, [string, string, Set<string>][]][] =
-		collection.map((element: Element) => {
+	const preprocessedCollection: [T, [string, string, Set<string>][]][] =
+		collection.map((element: T) => {
 			let texts: (string | null)[];
 
 			if (getText) {
@@ -49,7 +76,7 @@ export function createFuzzySearchImpl<Element>(
 			} else {
 				texts = [
 					options.key
-						? element[options.key as keyof Element]
+						? element[options.key as keyof T]
 						: // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 							(element as any),
 				];
@@ -69,9 +96,8 @@ export function createFuzzySearchImpl<Element>(
 		});
 
 	return (query: string) => {
-		// DEBUG
-		// const b4 = Date.now()
-		const results: Array<Result<Element>> = [];
+		const startTime = Date.now();
+		const results: Array<Result<T>> = [];
 		const normalizedQuery = normalizeText(query);
 		const queryWords = normalizedQuery.split(" ");
 
@@ -106,9 +132,24 @@ export function createFuzzySearchImpl<Element>(
 
 		results.sort(sortByScore);
 
-		// DEBUG
-		// console.log(`fuzzy search complete in ${Date.now() - b4} ms`)
+		const endTime = Date.now();
 
-		return results;
+		const time = endTime - startTime;
+
+		const built = new FuzzySearcherBuilder(results, time).build();
+
+		if (debug) {
+			// Group of logs with the info of the search
+			console.groupCollapsed("Fuzzy Search");
+			console.log("Query:", query);
+			console.log("Normalized Query:", normalizedQuery);
+			console.log("Results Length:", built.length);
+			console.log("Results:", built.results);
+			console.log("Preprocessed Collection:", preprocessedCollection);
+			console.log("Time:", built.time, "ms");
+			console.groupEnd();
+		}
+
+		return built;
 	};
 }
