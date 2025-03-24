@@ -1,13 +1,12 @@
 import React from "react";
-import { fuzzy, type FuzzyResult, type FuzzySearchStrategy } from "../index";
+import { fuzzy, type Result } from "../index";
 
 export type UseFuzzySearchListOptions<T, U> = {
 	list: T[];
 	key?: string;
 	getText?: (item: T) => Array<string | null>;
 	queryText: string;
-	mapResultItem: (result: FuzzyResult<T>) => U;
-	strategy?: FuzzySearchStrategy;
+	mapResultItem: (result: Result<T>) => U;
 };
 
 /**
@@ -25,16 +24,15 @@ export default function useFuzzySearchList<T, U>({
 	getText,
 	queryText,
 	mapResultItem,
-	strategy,
 }: UseFuzzySearchListOptions<T, U>): U[] {
 	const performSearch = React.useMemo(
 		// @ts-ignore
-		() => fuzzy(list, { key, getText, strategy }),
-		[list, key, getText, strategy],
+		() => fuzzy(list, { key, getText }),
+		[list, key, getText],
 	);
 	const searchResults = React.useMemo(() => {
 		return queryText
-			? performSearch(queryText).map(mapResultItem)
+			? performSearch(queryText).results.map(mapResultItem)
 			: list.map((item) =>
 					mapResultItem({
 						item,

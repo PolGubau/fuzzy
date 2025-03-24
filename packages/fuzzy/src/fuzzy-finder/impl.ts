@@ -67,7 +67,7 @@ export function fuzzySearch<T>(
 ): FuzzySearcher<T> {
 	const { getText, debug } = options;
 
-	const preprocessedCollection: [T, [string, string, Set<string>][]][] =
+	const normalizedTexts: [T, [string, string, Set<string>][]][] =
 		collection.map((element: T) => {
 			let texts: (string | null)[];
 
@@ -95,17 +95,21 @@ export function fuzzySearch<T>(
 			return [element, preprocessedTexts];
 		});
 
-	return (query: string) => {
+	const res: FuzzySearcher<T> = (query: string): FuzzySearchResponse<T> => {
 		const startTime = Date.now();
 		const results: Array<Result<T>> = [];
 		const normalizedQuery = normalizeText(query);
 		const queryWords = normalizedQuery.split(" ");
 
 		if (!normalizedQuery.length) {
-			return [];
+			return new FuzzySearcherBuilder({
+				results: [] as Array<Result<T>>,
+				startTime,
+				endTime: startTime,
+			}).build();
 		}
 
-		for (const [element, texts] of preprocessedCollection) {
+		for (const [element, texts] of normalizedTexts) {
 			let bestScore = MAX_SAFE_INTEGER;
 			const matches: Matches = [];
 			for (let i = 0, len = texts.length; i < len; i += 1) {
@@ -119,7 +123,7 @@ export function fuzzySearch<T>(
 					queryWords,
 				);
 				if (result) {
-					bestScore = Math.min(bestScore, result[0]); // take the lowest score of any match
+					bestScore = Math.min(bestScore, result[0]);
 					matches.push(result[1]);
 				} else {
 					matches.push(null);
@@ -134,9 +138,11 @@ export function fuzzySearch<T>(
 
 		const endTime = Date.now();
 
-		const time = endTime - startTime;
-
-		const built = new FuzzySearcherBuilder(results, time).build();
+		const built = new FuzzySearcherBuilder({
+			results,
+			startTime,
+			endTime,
+		}).build();
 
 		if (debug) {
 			// Group of logs with the info of the search
@@ -145,11 +151,13 @@ export function fuzzySearch<T>(
 			console.log("Normalized Query:", normalizedQuery);
 			console.log("Results Length:", built.length);
 			console.log("Results:", built.results);
-			console.log("Preprocessed Collection:", preprocessedCollection);
+			console.log("Preprocessed Collection:", normalizedTexts);
 			console.log("Time:", built.time, "ms");
 			console.groupEnd();
 		}
 
 		return built;
 	};
+
+	return res;
 }

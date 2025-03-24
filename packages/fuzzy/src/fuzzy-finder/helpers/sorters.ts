@@ -1,6 +1,6 @@
-import type { FuzzyResult, Range } from "../types";
+import type { Result, Range } from "../types";
 
-export const sortByScore = <T>(a: FuzzyResult<T>, b: FuzzyResult<T>): number =>
+export const sortByScore = <T>(a: Result<T>, b: Result<T>): number =>
 	a.score - b.score;
 
 type SortRangeTuple = (a: Range, b: Range) => number;

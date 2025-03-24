@@ -81,6 +81,5 @@ export function findFuzzyMatches(
 		}
 	}
 
-	// eslint-disable-next-line no-unreachable
 	return null;
 }
