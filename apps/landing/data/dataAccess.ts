@@ -40,6 +40,7 @@ class DataAccess {
 		// 	return nameMatch && categoryMatch;
 		// });
 		const fuzzySearch = fuzzy(this.data.utils, {
+			debug: true,
 			// search by `name` property
 			// key: "name",
 
@@ -53,7 +54,7 @@ class DataAccess {
 		// 	return nameMatch && categoryMatch;
 		// });
 		const filtered = q
-			? fuzzySearch(q)
+			? fuzzySearch(q).results
 			: this.data.utils.map((util) => {
 					return { item: util, score: 0, matches: [] };
 				});

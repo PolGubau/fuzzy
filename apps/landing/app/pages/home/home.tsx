@@ -1,8 +1,8 @@
 import { Card } from "components/card";
-import { Content } from "components/content";
 import { CopySnipped } from "components/copy-snipped";
 import { Header } from "components/header";
 import { Links } from "components/home/links";
+import { GettingStarted } from "data/documentation/getting-started";
 
 export function Homepage() {
 	return (
@@ -14,7 +14,7 @@ export function Homepage() {
 			</Card>
 
 			<Card>
-				<Content />
+				<GettingStarted />
 				<div className="py-4">
 					<Links />
 				</div>

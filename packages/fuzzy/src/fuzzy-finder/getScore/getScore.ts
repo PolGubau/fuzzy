@@ -28,10 +28,6 @@ export function getFuzzyMatchScore(
 	}
 
 	// contains query (starting at word boundary)
-	// NOTE: It would be more correct to do a regex search, than to check previous character, since
-	// it could be that the item found does _not_ start at a word boundary, but there is another match
-	// that does. However, this is faster and should rarely be a problem, while fuzzy search will still
-	// find other matches (just ranked lower)
 	const exactContainsIdx = item.indexOf(query);
 	if (
 		exactContainsIdx > -1 &&

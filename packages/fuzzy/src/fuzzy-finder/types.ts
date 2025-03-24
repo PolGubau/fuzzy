@@ -31,6 +31,22 @@ export type FuzzySearchOptions<T> = {
 	 * @default false
 	 */
 	debug?: boolean;
+
+	/**
+	 * The maximum number of results to return. If not specified, all results will be returned.
+	 * @description The lower the number, the more results will be filtered out.
+	 * @default Number.MAX_SAFE_INTEGER
+	 * @example 10
+	 */
+	limit?: number;
+
+	/**
+	 * The max score to return. If not specified, all results will be returned.
+	 * @default 100
+	 * @example 2.5
+	 * @description The lower the score, the better the match.
+	 */
+	maxScore?: number;
 };
 
 export type FuzzySearchResponse<T> = {
@@ -43,6 +59,31 @@ export type FuzzySearchResponse<T> = {
 	 * The time it took to run the search in milliseconds
 	 */
 	time: number;
+
+	/**
+	 * The query that was used to search
+	 * @default ""
+	 */
+	normalizedQuery: string;
+
+	/**
+	 * True if the query was an exact match to the item
+	 * @default false
+	 */
+	hasExactMatch: boolean;
+
+	/**
+	 * The best match found
+	 */
+	bestMatch: Result<T> | null;
+
+	/**
+	 * True if there were any results found
+	 * @default false
+	 * /
+	 * @example true
+	 **/
+	hasResults: boolean;
 };
 
 export type FuzzySearcher<T> = (query: string) => FuzzySearchResponse<T>;

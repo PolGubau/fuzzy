@@ -1,8 +1,8 @@
-import type { FuzzyResult, HighlightRanges } from "@polgubau/fuzzy";
+import type { Result, HighlightRanges } from "@polgubau/fuzzy";
 import { Link } from "react-router";
 import type { Util } from "~/assets/data.types";
 type ItemProps = {
-	data: FuzzyResult<Util>;
+	data: Result<Util>;
 };
 type Letter = {
 	char: string;

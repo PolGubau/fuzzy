@@ -1,8 +1,8 @@
-import type { FuzzyResult } from "@polgubau/fuzzy";
+import type { Result } from "@polgubau/fuzzy";
 import type { Util } from "~/assets/data.types";
 import { Item } from "./item";
 type ListProps = {
-	data: FuzzyResult<Util>[];
+	data: Result<Util>[];
 };
 export const List = (props: ListProps) => {
 	const { data } = props;

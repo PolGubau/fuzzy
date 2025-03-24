@@ -1,5 +1,7 @@
-import { CopySnipped } from "./copy-snipped";
-export const Content = () => {
+import Link from "next/link";
+import { CopySnipped } from "../copy-snipped";
+
+export const GettingStarted = () => {
 	return (
 		<section className="prose prose-invert max-md:prose-sm prose-h2:text-primary prose-code:text-yellow-50 p-1 max-md:max-w-[90vw]">
 			<h1 className="text-balance">Framework agnostic Fuzzy finder 🔍</h1>
@@ -43,13 +45,6 @@ export const Content = () => {
 			<h2>Installation</h2>
 			<p>Install the library using your package manager of choice:</p>
 			<CopySnipped />
-			<h2>Usage</h2>
-			<p>Import the utilities you need from the package:</p>
-			<pre>
-				<code>{`import { fuzzy } from "@polgubau/fuzzy";`}</code>
-			</pre>
-			<h2>Usage</h2>
-			<h3>Simple string array</h3>
 			<pre>
 				<code>
 					{`import fuzzy from '@polgubau/fuzzy';
@@ -63,23 +58,10 @@ const results = fuzzySearch(queryText)
 `}
 				</code>
 			</pre>
-			<p>
-				Returns an array of results sorted by how well they match the query
-				(descending order). Only the matching items will be returned. This code
-				will return the following results:
-				<pre>
-					<code>{`[{
-	"item": "apple",
-	"score": 0.5,
-	"matches": [[[0, 1]]]
-},
-{
-	"item": "grape",
-	"score": 2,
-	"matches": [[[2, 3]]]
-}]`}</code>
-				</pre>
-			</p>
+			<div>
+				Check <Link href="/docs">the documentation</Link> for more examples and
+				details on how to use the library.
+			</div>
 			<h2>TypeScript Support</h2>
 			<p>
 				As it should always be, this library includes full TypeScript support

@@ -1,3 +1,4 @@
+import { FuzzySearcherBuilder } from "./builders/searcher.builder";
 import { getFuzzyMatchScore } from "./getScore/getScore";
 import { sortByScore } from "./helpers/sorters";
 import normalizeText from "./normalizeText";
@@ -10,32 +11,6 @@ import type {
 } from "./types";
 
 const { MAX_SAFE_INTEGER } = Number;
-
-class FuzzySearcherBuilder<T> {
-	private results: Array<Result<T>>;
-	private time: number;
-
-	constructor({
-		results,
-		startTime = Date.now(),
-		endTime = Date.now(),
-	}: {
-		results?: Array<Result<T>>;
-		startTime?: number;
-		endTime?: number;
-	}) {
-		this.time = endTime - startTime;
-		this.results = results ?? [];
-	}
-
-	public build(): FuzzySearchResponse<T> {
-		return {
-			results: this.results,
-			length: this.results.length,
-			time: this.time,
-		};
-	}
-}
 
 export function findFuzzyMatch(
 	text: string,
@@ -65,7 +40,12 @@ export function fuzzySearch<T>(
 	collection: T[],
 	options: FuzzySearchOptions<T> = {},
 ): FuzzySearcher<T> {
-	const { getText, debug } = options;
+	const {
+		getText,
+		debug,
+		limit = Number.MAX_SAFE_INTEGER,
+		maxScore = 100,
+	} = options;
 
 	const normalizedTexts: [T, [string, string, Set<string>][]][] =
 		collection.map((element: T) => {
@@ -106,6 +86,7 @@ export function fuzzySearch<T>(
 				results: [] as Array<Result<T>>,
 				startTime,
 				endTime: startTime,
+				normalizedQuery,
 			}).build();
 		}
 
@@ -134,7 +115,16 @@ export function fuzzySearch<T>(
 			}
 		}
 
-		results.sort(sortByScore);
+		// Filter the max score and then the filters
+		results
+			.sort(sortByScore)
+			.filter((result) => {
+				if (maxScore && result.score > maxScore) {
+					return false;
+				}
+				return true;
+			})
+			.slice(0, limit);
 
 		const endTime = Date.now();
 
@@ -142,6 +132,7 @@ export function fuzzySearch<T>(
 			results,
 			startTime,
 			endTime,
+			normalizedQuery,
 		}).build();
 
 		if (debug) {

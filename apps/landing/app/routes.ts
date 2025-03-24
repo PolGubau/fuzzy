@@ -13,7 +13,7 @@ export default [
 		index("routes/home.tsx"),
 		...prefix("docs", [
 			index(`${paths.docs}/list.tsx`),
-			route(":util", `${paths.docs}/details.tsx`),
+			// route(":util", `${paths.docs}/details.tsx`),
 		]),
 	]),
 ] satisfies RouteConfig;
