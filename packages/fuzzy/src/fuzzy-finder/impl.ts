@@ -2,8 +2,8 @@ import { getFuzzyMatchScore } from "./getScore/getScore";
 import { sortByScore } from "./helpers/sorters";
 import normalizeText from "./normalizeText";
 import type {
-	FuzzyMatches,
-	FuzzyResult,
+	Matches,
+	Result,
 	FuzzySearchOptions,
 	FuzzySearcher,
 } from "./types";
@@ -13,7 +13,7 @@ const { MAX_SAFE_INTEGER } = Number;
 export function fuzzyMatchImpl(
 	text: string,
 	query: string,
-): FuzzyResult<string> | null {
+): Result<string> | null {
 	const normalizedQuery = normalizeText(query);
 	const queryWords = normalizedQuery.split(" ");
 
@@ -27,7 +27,6 @@ export function fuzzyMatchImpl(
 		query,
 		normalizedQuery,
 		queryWords,
-		"smart",
 	);
 	if (result) {
 		return { item: text, score: result[0], matches: [result[1]] };
@@ -39,7 +38,7 @@ export function createFuzzySearchImpl<Element>(
 	collection: Element[],
 	options: FuzzySearchOptions<Element> = {},
 ): FuzzySearcher<Element> {
-	const { strategy = "smart", getText } = options;
+	const { getText } = options;
 
 	const preprocessedCollection: [Element, [string, string, Set<string>][]][] =
 		collection.map((element: Element) => {
@@ -72,7 +71,7 @@ export function createFuzzySearchImpl<Element>(
 	return (query: string) => {
 		// DEBUG
 		// const b4 = Date.now()
-		const results: Array<FuzzyResult<Element>> = [];
+		const results: Array<Result<Element>> = [];
 		const normalizedQuery = normalizeText(query);
 		const queryWords = normalizedQuery.split(" ");
 
@@ -82,7 +81,7 @@ export function createFuzzySearchImpl<Element>(
 
 		for (const [element, texts] of preprocessedCollection) {
 			let bestScore = MAX_SAFE_INTEGER;
-			const matches: FuzzyMatches = [];
+			const matches: Matches = [];
 			for (let i = 0, len = texts.length; i < len; i += 1) {
 				const [item, normalizedItem, itemWords] = texts[i];
 				const result = getFuzzyMatchScore(
@@ -92,7 +91,6 @@ export function createFuzzySearchImpl<Element>(
 					query,
 					normalizedQuery,
 					queryWords,
-					strategy,
 				);
 				if (result) {
 					bestScore = Math.min(bestScore, result[0]); // take the lowest score of any match

@@ -2,7 +2,7 @@ import { isValidWordBoundary } from "../helpers/isValidBoundary";
 import { scoreConsecutiveLetters } from "../scores/consecutive";
 import type { HighlightRanges } from "../types";
 
-export function experimentalSmartFuzzyMatch(
+export function findFuzzyMatches(
 	normalizedItem: string,
 	normalizedQuery: string,
 ): [number, HighlightRanges] | null {

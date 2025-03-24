@@ -1,8 +1,7 @@
 import { isValidWordBoundary } from "../helpers/isValidBoundary";
 import { sortRangeTuple } from "../helpers/sorters";
-import { aggressiveFuzzyMatch } from "../strategies/agressive";
-import { experimentalSmartFuzzyMatch } from "../strategies/smart";
-import type { FuzzySearchStrategy, HighlightRanges, Range } from "../types";
+import { findFuzzyMatches } from "../algorithm/findFuzzyMatches";
+import type { HighlightRanges, Range } from "../types";
 
 export function getFuzzyMatchScore(
 	item: string,
@@ -11,7 +10,6 @@ export function getFuzzyMatchScore(
 	query: string,
 	normalizedQuery: string,
 	queryWords: string[],
-	strategy: FuzzySearchStrategy = "smart",
 ): [number, HighlightRanges] | null {
 	// quick matches
 	if (item === query) {
@@ -73,12 +71,5 @@ export function getFuzzyMatchScore(
 		return [2, [[containsIdx, containsIdx + queryLen - 1]]];
 	}
 
-	// Match by consecutive letters (fuzzy)
-	if (strategy === "aggressive") {
-		return aggressiveFuzzyMatch(normalizedItem, normalizedQuery);
-	}
-	if (strategy === "smart") {
-		return experimentalSmartFuzzyMatch(normalizedItem, normalizedQuery);
-	}
-	return null;
+	return findFuzzyMatches(normalizedItem, normalizedQuery);
 }

@@ -1,4 +1,4 @@
-import type { FuzzyResult } from "data/ff";
+import type { FuzzyResult } from "@polgubau/fuzzy";
 import type { Util } from "~/assets/data.types";
 import { Item } from "./item";
 type ListProps = {

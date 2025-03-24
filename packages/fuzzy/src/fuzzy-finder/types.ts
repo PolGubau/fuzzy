@@ -12,28 +12,20 @@ export type HighlightRanges = Range[];
  * List of fuzzy search matches (ranges of matching characters) for an item. This usually has one item, but can have more if `getText`
  * was used to return multiple strings for an item.
  */
-export type FuzzyMatches = Array<HighlightRanges | null>;
+export type Matches = Array<HighlightRanges | null>;
 
 /**
- * Result of fuzzy matching `queryText` against an item.
+ * Result of fuzzy against an item.
  *
- * `score` - lower = better match (think "error level")
+ * `item` - the item that was matched
+ * `score` - Difference between the query and the item. The lower the score, the better the match.
+ * `matches` - list of matches for the item. Each match is a list of ranges of characters that should be highlighted in the item.
  */
-export type FuzzyResult<T> = { item: T; score: number; matches: FuzzyMatches };
-
-/**
- * Strategy for fuzzy search
- *
- * 'off'        - no fuzzy search, only matches if item contains/starts with query/contains query words
- * 'smart'      - (default) matches letters in order, but poor quality matches are ignored
- * 'aggressive' - matches letters in order with no restrictions (classic fuzzy search)
- */
-export type FuzzySearchStrategy = "off" | "smart" | "aggressive";
+export type Result<T> = { item: T; score: number; matches: Matches };
 
 export type FuzzySearchOptions<T> = {
 	key?: keyof T;
 	getText?: (item: T) => Array<string | null>;
-	strategy?: FuzzySearchStrategy;
 };
 
-export type FuzzySearcher<T> = (query: string) => Array<FuzzyResult<T>>;
+export type FuzzySearcher<T> = (query: string) => Array<Result<T>>;

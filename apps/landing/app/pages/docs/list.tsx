@@ -1,7 +1,7 @@
 import { Card } from "components/card";
 import { List } from "components/util-list/list";
 import { dataAccess } from "data/dataAccess";
-import type { FuzzyResult } from "data/ff";
+import type { FuzzyResult } from "@polgubau/fuzzy";
 import { useState } from "react";
 import { Link } from "react-router";
 import {
