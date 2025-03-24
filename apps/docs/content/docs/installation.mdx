@@ -1,0 +1,47 @@
+---
+title: Installation
+description: Installation instructions for @polgubau/fuzzy
+---
+
+## Installation
+
+Install the library using your package manager of choice:
+
+<Tabs groupId="language" items={['Javascript', 'Rust']} persist>
+  <Tab value="Javascript">Javascript is weird</Tab>
+  <Tab value="Rust">Rust is fast</Tab>
+</Tabs>
+
+```sh  
+npm install @polgubau/fuzzy
+# or
+yarn add @polgubau/fuzzy
+# or
+pnpm add @polgubau/fuzzy
+# or
+bun add @polgubau/fuzzy
+```
+
+## Getting Started
+
+Import the library and use it with a simple list:
+
+```ts
+import fuzzy from '@polgubau/fuzzy';
+
+const list = ["apple", "banana", "orange", "grape"];
+const queryText = "ap"; // The search term
+const fuzzySearch = fuzzy(list);
+
+// Run this whenever the search term changes
+const results = fuzzySearch(queryText);
+
+console.log(results); 
+{/* // Example output: [{ item: "apple", score: 0.9, matches: [0,1] }] */}
+```
+
+## How It Works
+
+- **Initialize the fuzzy finder** with your list of items.
+- **Call the returned function** with a search term to get ranked results.
+- **Each result includes** the matched item, its score, and matched positions.

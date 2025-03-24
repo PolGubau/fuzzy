@@ -8,7 +8,9 @@ import {
 import { notFound } from "next/navigation";
 import defaultMdxComponents, { createRelativeLink } from "fumadocs-ui/mdx";
 import { Popup, PopupContent, PopupTrigger } from "fumadocs-twoslash/ui";
-import { TypeTable } from 'fumadocs-ui/components/type-table';
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { createTypeTable } from "fumadocs-typescript/ui";
 
 export default async function Page(props: {
 	params: Promise<{ slug?: string[] }>;
@@ -18,6 +20,7 @@ export default async function Page(props: {
 	if (!page) notFound();
 
 	const MDXContent = page.data.body;
+	const { AutoTypeTable } = createTypeTable();
 
 	return (
 		<DocsPage toc={page.data.toc} full={page.data.full}>
@@ -28,8 +31,12 @@ export default async function Page(props: {
 					components={{
 						...defaultMdxComponents,
 						Popup,
+						Tab,
+						Tabs,
 						PopupContent,
-						PopupTrigger,TypeTable,
+						PopupTrigger,
+						TypeTable,
+						AutoTypeTable,
 						// this allows you to link to other pages with relative file paths
 						a: createRelativeLink(source, page),
 						// you can add other MDX components here

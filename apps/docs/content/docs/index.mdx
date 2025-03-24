@@ -1,16 +1,48 @@
 ---
-title: Hello World
-description: Your first document
+title: Fuzzy
+description: Fast, simple but complete fuzzy finder algorithm
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+# Framework agnostic Fuzzy finder🔍
 
-## What is Next?
+## What and why
 
-```ts twoslash
-console.log('Hello World');
-```
+After losing some afternoons trying to create a **fuzzy finder** for a side project, I decided to export it  
+as an open-source library that could help me (and other devs) with filters in the future.
+
+I wanted to create a library that fits perfectly for filters, selects,  
+autocompletes, navigate commands, etc. 
+
+The main goal was to create a library that is:
+- Easy to use.
+- Framework-agnostic without dependencies.
+- Fast, should filter thousands of items in milliseconds.
+- Lightweight. Less than 2kb.
+- Case-insensitive and diacritics-insensitive.
+- Returns the matched positions and points of each result.
+
+This is how **@polgubau/fuzzy** ended up being an optimized  
+library designed with TypeScript from the roots. You just need to type  
+one command and call one function to get a fuzzy finder for your project.
+
+### What this is NOT ⚠️
+
+- A library that tries to do everything.
+- A monolithic package with a lot of features you don't need.
+- A complete Filter library.
+
+### What this IS ✅
+
+- A small direct library that solves a specific problem.
+- A helper for your filters and lists.
+- A library that is easy to use and understand.
+- Open source without a pricing tag in the navbar.
+
+
+## Next steps
+Now that you know what **@polgubau/fuzzy** is, let's get started with the installation.
+
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+  <Card title="Installation guide" href="/docs/installation" />
+  <Card title="Usage examples" href="/docs/examples" />
 </Cards>
