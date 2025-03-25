@@ -7,28 +7,22 @@ vi.mock("./normalizeText", () => ({
 	default: (text: string) => text.toLowerCase(),
 }));
 
-vi.mock("./getScore/getScore", () => ({
-	getFuzzyMatchScore: vi.fn(),
-}));
+// vi.mock("./getScore/getScore", () => ({
+// 	getFuzzyMatchScore: vi.fn(),
+// }));
 
 describe("findFuzzyMatch", () => {
 	it("should return null if no match is found", () => {
-		(getFuzzyMatchScore as Mock).mockReturnValue(null);
-
 		const result = findFuzzyMatch("hello world", "test");
-
 		expect(result).toBeNull();
 	});
 
 	it("should return a match with correct score and matches", () => {
-		(getFuzzyMatchScore as Mock).mockReturnValue([10, [0, 5]]);
-
 		const result = findFuzzyMatch("hello world", "hello");
-
 		expect(result).toEqual({
 			item: "hello world",
-			score: 10,
-			matches: [[0, 5]],
+			score: 0.5,
+			matches: [[[0, 4]]],
 		});
 	});
 });
@@ -40,54 +34,57 @@ describe("fuzzy", () => {
 		expectedIndices: number[][] | null = null,
 	) => {
 		const options = [text];
-		const { results } = fuzzy(options)(query);
-		expect(results.length).toBe(1);
+		const res = fuzzy(options, { debug: true })(query);
+		expect(res).not.toBeNull();
+		expect(res).not.toBeUndefined();
+		expect(res).not.toBeInstanceOf(Error);
+		expect(res).not.toBeInstanceOf(Array);
+		// expect(res.length).toBe(1);
+
+		const { results } = res;
+
+		// expect(length).toBe(1);
+
 		const result = results[0];
-		console.info(`Query: "${query}", Text: "${text}", Score: ${result.score}`);
-		// expect(result.item).toBe(text);
-		// if (expectedScore != null) {
-		// 	expect(result.score).toBeCloseTo(expectedScore);
-		// }
-		// if (expectedIndices) {
-		// 	expect(result.matches.length).toBe(1);
-		// 	expect(result.matches[0]).toEqual(expectedIndices);
-		// }
+		console.table(results);
+		expect(result.item).toBe(text);
+		if (expectedScore != null) {
+			expect(result.score).toBeCloseTo(expectedScore);
+		}
+		if (expectedIndices) {
+			expect(result.matches.length).toBe(1);
+			expect(result.matches[0]).toEqual(expectedIndices);
+		}
 	};
 	it("can match by: exact match", () => {
-		matches("foo", "foo", 0, [[0, 2]]);
+		matches("apple", "apple", 0, [[0, 4]]);
+		matches("ABC", "ABC", 0);
+		matches("ąść", "ąść", 0);
+		matches("📚", "📚", 0);
+		matches("123¡™£§", "123¡™£§", 0);
+		matches("żabki", "żabki", 0);
+		matches("ząbki", "ząbki", 0);
+		matches("русский язык", "русский язык", 0);
+		matches("汉语", "汉语", 0);
+		matches("日本語", "日本語", 0);
+		matches("한국어", "한국어", 0);
+		matches("ภาษาไทย", "ภาษาไทย", 0);
+		matches(" he ", " he ", 0);
+		matches(" he\n\t", " he\n\t", 0); // hard space
 	});
-	// matches("ABC", "ABC", 0);
-	// matches("ąść", "ąść", 0);
-	// matches("📚", "📚", 0);
-	// matches("123¡™£§", "123¡™£§", 0);
-	// matches("żabki", "żabki", 0);
-	// matches("ząbki", "ząbki", 0);
-	// matches("русский язык", "русский язык", 0);
-	// matches("汉语", "汉语", 0);
-	// matches("日本語", "日本語", 0);
-	// matches("한국어", "한국어", 0);
-	// matches("ภาษาไทย", "ภาษาไทย", 0);
-	// matches(" he ", " he ", 0);
-	// matches(" he\n\t", " he\n\t", 0); // hard space
-	// });
-	// it("can match by: full match", () => {
-	// 	matches("Foo", "foo", 0.1);
-	// 	matches("FOO", "foo", 0.1);
-	// 	matches("foo", "Foo", 0.1);
-	// 	matches("foo", "FOO", 0.1);
-	// 	matches("foo", "foo ", 0.1);
-	// 	matches(" foo bar", "foo bar", 0.1);
-	// 	// eslint-disable-next-line
-	// 	// matches('foo bar', 'foo bar', 0.1) // hard space
-	// 	matches("Żabki", "żabki", 0.1, [[0, 4]]);
-	// 	matches("Żabki", "zabki", 0.1);
-	// 	matches("Ząbki", "zabki", 0.1);
-	// 	matches("ZABKI", "żąbki", 0.1);
-	// 	matches("Szczegół", "szczegol", 0.1);
-	// 	matches("Язык", "язык", 0.1, [[0, 3]]);
-	// 	// Check for regression - previously highlight would be off by whitespace
-	// 	matches("foo ", "foo", 0.1, [[0, 2]]);
-	// });
+
+	it("can match by: full match", () => {
+		matches("Foo", "foo", 0.1);
+		matches("FOO", "foo", 0.1);
+		matches("foo", "Foo", 0.1);
+		matches("foo", "FOO", 0.1);
+		matches(" foo bar", "foo bar", 0.9);
+		matches("Żabki", "żabki", 0.1, [[0, 4]]);
+		// matches("ZABKI", "żąbki", 0.1);
+		// matches("Szczegół", "szczegol", 0.1);
+		// matches("Язык", "язык", 0.1, [[0, 3]]);
+		matches("foo ", "foo", 0.5, [[0, 2]]);
+	});
 	// it(`can match by: "Starts with" match`, () => {
 	// 	matches("Tomasz Kapelak", "to", 0.5, [[0, 1]]);
 	// 	matches("Żabka - oferta", "Żab", 0.5, [[0, 2]]);
