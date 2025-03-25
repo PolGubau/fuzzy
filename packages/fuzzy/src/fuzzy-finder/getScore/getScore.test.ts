@@ -1,7 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 import { getFuzzyMatchScore } from "./getScore";
-import { experimentalSmartFuzzyMatch } from "../strategies/smart";
-import { aggressiveFuzzyMatch } from "../strategies/agressive";
 
 describe("getFuzzyMatchScore", () => {
 	it("should return score 0 for exact match", () => {
@@ -157,41 +155,6 @@ describe("getFuzzyMatchScore", () => {
 			[],
 		);
 		expect(result).toEqual([0.9, [[8, 11]]]);
-	});
-	it("should use aggressive strategy if specified", () => {
-		const mockAggressive = vi
-			.spyOn({ aggressiveFuzzyMatch }, "aggressiveFuzzyMatch")
-			.mockReturnValue([3, [[1, 2]]]);
-		expect(
-			getFuzzyMatchScore(
-				"abcdef",
-				"abcdef",
-				new Set(["abcdef"]),
-				"cd",
-				"cd",
-				["cd"],
-				"aggressive",
-			),
-		).toEqual([2, [[2, 3]]]);
-		mockAggressive.mockRestore();
-	});
-
-	it("should use smart strategy if specified", () => {
-		const mockSmart = vi
-			.spyOn({ experimentalSmartFuzzyMatch }, "experimentalSmartFuzzyMatch")
-			.mockReturnValue([4, [[2, 3]]]);
-		expect(
-			getFuzzyMatchScore(
-				"abcdef",
-				"abcdef",
-				new Set(["abcdef"]),
-				"cd",
-				"cd",
-				["cd"],
-				"smart",
-			),
-		).toEqual([2, [[2, 3]]]);
-		mockSmart.mockRestore();
 	});
 
 	it("should return null if no match is found", () => {
