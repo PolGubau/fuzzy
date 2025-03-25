@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: packages/utils
+        working-directory: packages/fuzzy
     steps:
       - uses: actions/checkout@v4
 
@@ -28,12 +28,12 @@ jobs:
           branches: main
           badges-icon: vitest
           coverage-summary-path: |
-              ./packages/utils/coverage/coverage-summary.json
+              ./packages/fuzzy/coverage/coverage-summary.json
 
       - run: pnpm build
       
       - run: |
-          if npm view @polgubau/utils@$(node -p "require('./package.json').version") > /dev/null 2>&1; then
+          if npm view @polgubau/fuzzy@$(node -p "require('./package.json').version") > /dev/null 2>&1; then
             echo "La versión ya está publicada. Saliendo..."
             exit 0
           fi
