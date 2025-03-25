@@ -13,6 +13,9 @@ importers:
       '@polgubau/animated':
         specifier: ^1.0.12
         version: 1.0.12
+      '@polgubau/fuzzy':
+        specifier: ^1.0.3
+        version: 1.0.3(@types/react@19.0.12)(react@19.0.0)
       '@polgubau/utils':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1216,6 +1219,13 @@ packages:
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@biomejs/biome': '>=1.9.0'
+
+  '@polgubau/fuzzy@1.0.3':
+    resolution: {integrity: sha512-E9C/Eu5k3DYWc1F2lghyvn372WKimRpgG/nCpfJQqHUOE4QEBdrhZHsqjzQObnV3rNZAyV0aQukjAINryzftSg==}
+    engines: {node: '>= 22', npm: Please use pnpm instead of yarn to install dependencies, pnpm: '>= 9', yarn: Please use pnpm instead of yarn to install dependencies}
+    peerDependencies:
+      '@types/react': ^19.0.0
+      react: ^19.0.0
 
   '@polgubau/utils@1.0.3':
     resolution: {integrity: sha512-ytYN8mwy/EeNwAVlxW0wm1wtqpGxtyWAmGD/GeSAHJHpw8EFY+fbN0s4yN/E4sjBGmRlBlbttSrBzZEvrzXwtw==}
@@ -6111,6 +6121,11 @@ snapshots:
   '@polgubau/biome-config@1.0.0(@biomejs/biome@1.9.4)':
     dependencies:
       '@biomejs/biome': 1.9.4
+
+  '@polgubau/fuzzy@1.0.3(@types/react@19.0.12)(react@19.0.0)':
+    dependencies:
+      '@types/react': 19.0.12
+      react: 19.0.0
 
   '@polgubau/utils@1.0.3': {}
 

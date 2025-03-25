@@ -30,27 +30,69 @@ Install the library using your package manager of choice:
   </Tab>
 </Tabs>
 
+<Accordions type="single">
+  <Accordion title="Using CDN?" value="cdn" id="cdn">
+  To use the library via CDN, include the following script in your HTML:
+  ``` html
+<script src="https://cdn.jsdelivr.net/npm/@polgubau/fuzzy"></script>
+```
+   </Accordion>
+</Accordions>
 
-## Getting Started
+{/* https://cdn.jsdelivr.net/npm/@polgubau/fuzzy */}
+
+## Basic Usage
 
 Import the library and use it with a simple list:
 
-```ts
+```ts twoslash 
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
 import fuzzy from '@polgubau/fuzzy';
 
-const list = ["apple", "banana", "orange", "grape"];
-const queryText = "appl"; // The search term
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+const queryText = "volv"; // The search term
 const fuzzySearch = fuzzy(list);
 
 // Run this whenever the search term changes
-const results = fuzzySearch(queryText);
-
-console.log(results); 
-/* Example output: [{ item: "apple", score: 0.9, matches: [0,3] }] */
+const fuzzedList = fuzzySearch(queryText);
+console.log(fuzzedList); 
 ```
 
-## How It Works
+This code would return the list of results but also multiple metadata about the search.
+<AutoTypeTable path="./src/types/lib.ts" name="FuzzySearchResponse" />
 
-- **Initialize the fuzzy finder** with your list of items.
-- **Call the returned function** with a search term to get ranked results.
-- **Each result includes** the matched item, its score, and matched positions.
+  

@@ -52,11 +52,16 @@ export type FuzzySearchOptions<T> = {
 export type FuzzySearchResponse<T> = {
 	results: Array<Result<T>>;
 	/**
-	 * The number of results found
+	 * @description The number of results found
+ 	 * @default []
+	 * @example [{ item: "foo", score: 0, matches: [] }, { item: "bar", score: 1, matches: [] }]
 	 */
 	length: number;
 	/**
 	 * The time it took to run the search in milliseconds
+	 * @default 0
+	 * @description The time it took to run the search in milliseconds
+	 * @example 0.8
 	 */
 	time: number;
 
@@ -67,20 +72,23 @@ export type FuzzySearchResponse<T> = {
 	normalizedQuery: string;
 
 	/**
-	 * True if the query was an exact match to the item
+	 * @description True if the query was an exact match to the item
 	 * @default false
+	 * @example true
 	 */
 	hasExactMatch: boolean;
 
 	/**
-	 * The best match found
+	 * @description The best match found
+	 * @default null
+	 * @example { item: "foo", score: 0, matches: [] }
+	 * @example null
 	 */
 	bestMatch: Result<T> | null;
 
 	/**
-	 * True if there were any results found
+	 * @description True if there were any results found
 	 * @default false
-	 * /
 	 * @example true
 	 **/
 	hasResults: boolean;

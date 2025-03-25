@@ -11,7 +11,9 @@ import { Popup, PopupContent, PopupTrigger } from "fumadocs-twoslash/ui";
 import { TypeTable } from "fumadocs-ui/components/type-table";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { createTypeTable } from "fumadocs-typescript/ui";
-
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+ 
 export default async function Page({
 	params,
 }: {
@@ -33,8 +35,12 @@ export default async function Page({
 					components={{
 						...defaultMdxComponents,
 						Popup,
+						Accordion,
+						Accordions,
 						Tab,
 						Tabs,
+						Step,
+						Steps,
 						PopupContent,
 						PopupTrigger,
 						TypeTable,

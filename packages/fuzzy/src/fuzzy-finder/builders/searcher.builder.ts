@@ -6,7 +6,7 @@ export class FuzzySearcherBuilder<T> {
 	private normalizedQuery: string;
 
 	constructor({
-		results,
+		results = [],
 		startTime = Date.now(),
 		endTime = Date.now(),
 		normalizedQuery = "",
