@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { DynamicLink } from "fumadocs-core/dynamic-link";
-import type{ Lang } from "@/types/base";
+import type { Locale } from "@/types/base";
 
 type Props = {
-	lang: Lang;
+	lang: Locale;
 };
 
-const dictionary: Record<Lang, string> = {
+const dictionary: Record<Locale, string> = {
 	en: "Go to Docs",
 	es: "Ir a la docu",
-	ca: "Veure docs",
+	cat: "Veure docs",
 	de: "Zu den Docs",
 };
 

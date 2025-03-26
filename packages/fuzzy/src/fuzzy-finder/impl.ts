@@ -41,7 +41,7 @@ export function fuzzySearch<T>(
 	options: FuzzySearchOptions<T> = {},
 ): FuzzySearcher<T> {
 	const {
-		getText,
+		getKey,
 		debug,
 		limit = Number.MAX_SAFE_INTEGER,
 		maxScore = 100,
@@ -51,8 +51,8 @@ export function fuzzySearch<T>(
 		collection.map((element: T) => {
 			let texts: (string | null)[];
 
-			if (getText) {
-				texts = getText(element);
+			if (getKey) {
+				texts = getKey(element);
 			} else {
 				texts = [
 					options.key

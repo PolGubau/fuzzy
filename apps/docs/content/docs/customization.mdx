@@ -1,0 +1,284 @@
+---
+title: Customization
+description: Customizing the behavior of the library.
+---
+
+## Fuzzy list options
+
+To customize the search, it accepts an object with the following options:
+```ts   
+const fuzzySearch = fuzzy(list, {
+  key: "name", // This is the key to search for in the item. 
+  getKey: (item) => [item.name, item.author.fullname],  // search by multiple properties
+  debug: true, // Add any additional options here
+  limit: 10, // The maximum number of results to return
+  maxScore: 2.5, // The maximum score for the results
+});
+```
+### `Key` and `getKey`
+
+In case the data sent are objects, you can use the `key` and `getKey` options to specify which property to search for.
+
+```ts twoslash
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
+const list = [
+  { name: "volvo", year: 2020 },
+  { name: "seat", year: 2019 },
+  { name: "mercedes", year: 2021 },
+  { name: "audi", year: 2022 },
+  { name: "bmw", year: 2023 },
+];
+
+const fuzzySearch = fuzzy(list, {
+  key: "name" 
+//^^^
+});
+
+// Run this whenever the search term changes
+const fuzzedList = fuzzySearch("volv");
+console.log(fuzzedList); 
+```
+
+In the same way, you can use the `getKey` option to search by multiple or/and nested properties.
+
+```ts twoslash
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
+const list = [
+  { name: "volvo", year: 2020, owner: { fullname: "John Doe" } },
+  { name: "seat", year: 2019, owner: { fullname: "Jane Doe" } },
+  { name: "mercedes", year: 2021, owner: { fullname: "John Smith" } },
+]
+
+const fuzzySearch = fuzzy(list, {
+  getKey: (item) => [item.owner.fullname, item.name], // search by multiple properties
+//^^^^^^
+})
+
+```
+
+
+### The `limit` option
+The `limit` option allows you to limit the number of results returned by the search. 
+
+This could be useful if you have a large list and only want to show the top results, or you have a fixed UI as a grid.
+
+```ts twoslash
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+
+const fuzzySearch = fuzzy(list, {
+   limit: 5, // limit the number of results returned
+// ^^^^^
+})
+```
+The length of the response will be **as maximum** 5 items.
+
+### The `maxScore` option
+The `maxScore` option allows you to set the maximum score for the results.
+
+Remember that the score is a number starting from 0 (exact match), and it increases as the match gets worse. Think about it as a **distance** from the best match.
+
+```ts twoslash
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+
+const fuzzySearch = fuzzy(list, {
+   maxScore: 2, // Items with a score greater than 2 will be ignored (only similar items will be returned)
+// ^^^^^^^^
+})
+```
+
+
+#### Filtering sort
+When using both `limit` and `maxScore`, the algorithm will first filter the results by score and then limit the number of results returned.
+
+
+### The `debug` option
+
+The `debug` option allows you to log details about the search to the **browser console** as a table for each item or the time it took to run the search.
+
+```ts twoslash
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
+const list = ["volvo", "seat", "mercedes"];
+
+const fuzzySearch = fuzzy(list, {
+   debug: true, // Enable debug mode, which will log details about the search to the console
+// ^^^^^
+})
+```
+
+
+## Summary
+
+<AutoTypeTable path="./src/types/lib.ts" name="FuzzySearchOptions" />
+

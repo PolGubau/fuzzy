@@ -1,15 +1,18 @@
-import { memo, Fragment, type FunctionComponent } from "react";
-import type { HighlightRanges } from "../../fuzzy-finder/types";
+import {
+	memo,
+	Fragment,
+	type FC,
+	type CSSProperties,
+} from "react";
+import type { HighlightRanges } from "../fuzzy-finder/types";
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-type Style = Record<string, any> | null | undefined;
-type ClassName = string | undefined;
+type Style = CSSProperties;
 
 type Props = {
 	text: string;
 	ranges: HighlightRanges | null;
 	style?: Style;
-	className?: ClassName;
+	className?: string;
 };
 
 const fullSelection: HighlightRanges = [[0, Number.MAX_VALUE]];
@@ -17,7 +20,7 @@ const defaultStyle: Style = { backgroundColor: "rgba(245,220,0,.25)" };
 
 type HighlightProps = Props;
 
-const Highlight: React.FC<HighlightProps> = ({
+const TextHighlighter: React.FC<HighlightProps> = ({
 	text,
 	ranges,
 	style,
@@ -70,28 +73,29 @@ const Highlight: React.FC<HighlightProps> = ({
 	return <>{nodes}</>;
 };
 
-interface HighlightExport extends FunctionComponent<Props> {
+interface HighlightExport extends FC<Props> {
 	FullSelection: typeof fullSelection;
 }
 
-const ExportedHighlight: HighlightExport = Object.assign(
-	memo(Highlight) as FunctionComponent<Props>,
+
+
+export const Highlight: HighlightExport = Object.assign(
+	memo(TextHighlighter) as FC<Props>,
 	{
 		FullSelection: fullSelection,
 	},
 );
 
-export default ExportedHighlight;
 export function createHighlightComponent(
 	customStyle: Style,
-	customClassName: ClassName,
+	customClassName: string,
 ): HighlightExport {
 	const HighlightComponent: React.FC<Props> = ({
 		style,
 		className,
 		...props
 	}) => (
-		<Highlight
+		<TextHighlighter
 			{...props}
 			style={style ?? customStyle}
 			className={className ?? customClassName}

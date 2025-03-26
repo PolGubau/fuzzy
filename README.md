@@ -53,41 +53,19 @@ pnpm add @polgubau/fuzzy
 
 ## Usage
 
-Import the utilities you need from the package:
+```ts
+import fuzzy from '@polgubau/fuzzy';
 
-```js
-import { copyToClipboard } from "@polgubau/fuzzy";
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+const queryText = "volv"; // The search term
+const fuzzySearch = fuzzy(list);
+
+// Run this whenever the search term changes
+const fuzzedList = fuzzySearch(queryText);
+console.log(fuzzedList); 
+
 ```
-
-For even better optimization, you can import specific modules or functions as needed:
-
-```js
-import { copyToClipboard } from "@polgubau/fuzzy/functions";
-import { shuffle } from "@polgubau/fuzzy/arrays";
-```
-
-## Available Modules
-
-- **Storage**: Utilities for working with `localStorage` and `sessionStorage`.
-- **Accessibility**: Helpers to improve web accessibility.
-- **Arrays**: Functions to manipulate arrays efficiently.
-- **Comparators**: Utility functions for sorting and comparing data.
-- **Functions**: Higher-order functions and utility methods.
-- **Numbers**: Mathematical and number-related utilities.
-- **Objects**: Object manipulation and transformation helpers.
-- **Parsers**: Functions for parsing different types of data as JSON.
-- **Texts**: String and text processing utilities.
-
-## Example
-
-Using the arrays module:
-
-```js
-import { limitArray } from "@polgubau/fuzzy/arrays"; 
-const { limitedArray } = limitArray([1, 2, 3, 4, 5]); 
-console.log(limitedArray); // [1, 2]
-```
-
+ 
 ## TypeScript Support
 
 As it should always be, this library includes full TypeScript support with type definitions included.
@@ -105,10 +83,21 @@ pnpm dev
 ```
 in the root directory. This will start a watch build for the package and start a local server to preview the documentation page.
 
-## 📜 License
+### Running tests
+> **Note:** The tests are written in TypeScript and use [Vitest](https://vitest.dev/) as the testing framework.
+Run the command inside the `packages/fuzzy` directory to run the tests.
+```sh
+pnpm test
+```
 
-This project is licensed under the **MIT** License.  
 
 ---
-
+## Author and license
 Made with ❤️ by [Pol Gubau Amores](https://polgubau.com)
+
+This project is based on *microfuzz*, which was created by [@Nozbe](https://github.com/Nozbe), some improvements were made to the original code, and it was rewritten in TypeScript.
+
+[See all contributors](https://github.com/PolGubau/fuzzy/graphs/contributors).
+
+This project is available under the MIT license. See the [LICENSE file](https://github.com/PolGubau/fuzzy/LICENSE) for more info.
+

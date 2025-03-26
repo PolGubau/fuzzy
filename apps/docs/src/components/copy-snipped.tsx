@@ -1,12 +1,35 @@
 "use client";
 
+import type { Locale } from "@/types/base";
 import { copyToClipboard } from "@polgubau/utils";
 import { useState } from "react";
+
+const labels: Record<Locale, { pending: string; success: string }> = {
+	en: {
+		pending: "Copy",
+		success: "Copied!",
+	},
+	es: {
+		pending: "Copiar",
+		success: "Copiado!",
+	},
+	de: {
+		pending: "Kopieren",
+		success: "Kopiert!",
+	},
+	cat: {
+		pending: "Copiar",
+		success: "Copiat!",
+	},
+};
+
 type CopySnippedProps = {
 	text?: string;
+	lang: Locale;
 };
 export const CopySnipped = ({
 	text = "pnpm add @polgubau/fuzzy",
+	lang,
 }: CopySnippedProps) => {
 	const [isCopied, setIsCopied] = useState(false);
 
@@ -29,7 +52,7 @@ export const CopySnipped = ({
 			<code className="not-prose">{text}</code>
 
 			<span className="text-xs text-neutral-200/60 min-w-[45px] text-right">
-				{isCopied ? "Copied!" : "Copy"}
+				{isCopied ? labels?.[lang]?.success : labels?.[lang]?.pending}
 			</span>
 		</button>
 	);

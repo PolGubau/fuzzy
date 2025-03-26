@@ -1,0 +1,50 @@
+---
+title: Basic strings  
+description: Fuzzy example with basic strings
+---
+
+## Summary
+This is a simple example of how to use the fuzzy library with an array of strings.
+
+This is considered a basic case as you don't need to specify any compulsory options.
+
+```ts twoslash
+// @noErrors
+type FuzzySearcher<T> = (query: string) => {
+    results: Array<Result<T>>;
+    /**
+     * The number of results found
+     */
+    length: number;
+    /**
+     * The time it took to run the search in milliseconds
+     */
+    time: number;
+    /**
+     * The query that was used to search
+     * @default ""
+     */
+    normalizedQuery: string;
+    /**
+     * True if the query was an exact match to the item
+     * @default false
+     */
+    hasExactMatch: boolean;
+    /**
+     * The best match found
+     */
+    bestMatch: Result<T> | null;
+    /**
+     * True if there were any results found
+     * @default false
+     * /
+     * @example true
+     **/
+    hasResults: boolean;
+}
+function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+// ---cut---
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+
+const fuzzySearch = fuzzy(list)
+```

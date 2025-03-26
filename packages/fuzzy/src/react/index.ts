@@ -1,4 +1,2 @@
-export { default as Highlight, createHighlightComponent } from "./Highlight";
-export { default as useFuzzySearchList } from "./useFuzzySearchList";
-
-export type { UseFuzzySearchListOptions } from "./useFuzzySearchList";
+export { Highlight, createHighlightComponent } from "./Highlight";
+export { useFuzzy, type useFuzzyOptions } from "./useFuzzy";

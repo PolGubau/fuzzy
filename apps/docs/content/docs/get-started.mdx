@@ -90,7 +90,8 @@ const fuzzedList = fuzzySearch(queryText);
 console.log(fuzzedList); 
 ```
 
+## Response Structure
 This code would return the list of results but also multiple metadata about the search.
 <AutoTypeTable path="./src/types/lib.ts" name="FuzzySearchResponse" />
 
-  
+To modify the search behavior, you can pass a set of options to the `fuzzy` function. See [Options](./customization) for more details.

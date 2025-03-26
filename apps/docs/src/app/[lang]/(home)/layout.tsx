@@ -2,13 +2,13 @@ import { Background } from "@/components/bg";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import type { ReactNode } from "react";
 import { baseOptions } from "../../layout.config";
-import type { Lang } from "@/types/base";
+import type { Locale } from "@/types/base";
 
 export default async function Layout({
 	params,
 	children,
 }: {
-	params: Promise<{ lang: Lang }>;
+	params: Promise<{ lang: Locale }>;
 	children: ReactNode;
 }) {
 	const { lang } = await params;

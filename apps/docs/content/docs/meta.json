@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "get-started",
+    "customization",
+    "usage",
+    "---Frameworks---",
+    "react",
+    "---Examples---",
+    "examples"
+  ]
+}

@@ -45,7 +45,7 @@ class DataAccess {
 			// key: "name",
 
 			// search by multiple properties:
-			getText: (item) => [item.name, item.description],
+			getKey: (item) => [item.name, item.description],
 		});
 		// return this.data.utils.filter((util) => {
 		// 	const nameMatch = q ? fuzzySearch(util.name).length > 0 : true;

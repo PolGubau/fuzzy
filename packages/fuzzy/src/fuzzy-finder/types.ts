@@ -9,7 +9,7 @@ export type Range = [number, number];
 export type HighlightRanges = Range[];
 
 /**
- * List of fuzzy search matches (ranges of matching characters) for an item. This usually has one item, but can have more if `getText`
+ * List of fuzzy search matches (ranges of matching characters) for an item. This usually has one item, but can have more if `getKey`
  * was used to return multiple strings for an item.
  */
 export type Matches = Array<HighlightRanges | null>;
@@ -25,7 +25,7 @@ export type Result<T> = { item: T; score: number; matches: Matches };
 
 export type FuzzySearchOptions<T> = {
 	key?: keyof T;
-	getText?: (item: T) => Array<string | null>;
+	getKey?: (item: T) => Array<string | null>;
 	/**
 	 * If true, will log debug information to the console
 	 * @default false
@@ -53,7 +53,7 @@ export type FuzzySearchResponse<T> = {
 	results: Array<Result<T>>;
 	/**
 	 * @description The number of results found
- 	 * @default []
+	 * @default []
 	 * @example [{ item: "foo", score: 0, matches: [] }, { item: "bar", score: 1, matches: [] }]
 	 */
 	length: number;

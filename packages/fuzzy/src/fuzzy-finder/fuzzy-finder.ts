@@ -51,12 +51,12 @@ Note:
  * // search by `text` property
  * { key: 'text' }
  * // OR:
- * { getText: (item) => [item.text] }
+ * { getKey: (item) => [item.text] }
  * // search by multiple properties:
- * { getText: (item) => [item.text, item.otherText] }
+ * { getKey: (item) => [item.text, item.otherText] }
  * ```
  *
- * If you use React, use `useFuzzySearchList` hook for convenience.
+ * If you use React, use `useFuzzy` hook for convenience.
  */
 export function fuzzy<T>(
 	list: T[],

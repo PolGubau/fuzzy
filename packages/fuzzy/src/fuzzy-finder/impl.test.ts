@@ -240,7 +240,7 @@ describe("fuzzy", () => {
 	// 	const u4 = { name: "bar", alias: "bar" };
 	// 	expect(
 	// 		createFuzzySearch([u1, u2, u3, u4], {
-	// 			getText: (item) => [item.name, item.alias],
+	// 			getKey: (item) => [item.name, item.alias],
 	// 		})("foo"),
 	// 	).toMatchObject([
 	// 		{
@@ -287,7 +287,7 @@ describe("fuzzy", () => {
 	// 				{ name: "Jacob Tom Belinger", alias: "Jake" },
 	// 			],
 	// 			{
-	// 				getText: (item) => [item.name, item.alias],
+	// 				getKey: (item) => [item.name, item.alias],
 	// 			},
 	// 		)("tom"),
 	// 	).toMatchObject([
