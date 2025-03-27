@@ -58,6 +58,7 @@ Note:
  *
  * If you use React, use `useFuzzy` hook for convenience.
  */
+
 export function fuzzy<T>(
 	list: T[],
 	options?: FuzzySearchOptions<T>,
