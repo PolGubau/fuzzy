@@ -2,10 +2,36 @@
 title: Fuzzy in React 
 description: When using React, you can use these helpers for writing less code.
 ---
-{/* // `useFuzzy` simply wraps `createFuzzySearch` with memoization built in
-// NOTE: For best performance, `getKey` and `mapResultItem` should be memoized by user */}
 
-```ts title="App.tsx"
+## Summary
+
+When using React, you can still use the library **as you would in a normal JavaScript project**, but to make it easier to use, we provide a few helpers.
+
+The mainly difference is that internally it uses `useMemo` and `useCallback` to memoize the results and the search function and also it provides a **easier** `API` to use.
+
+## Example
+
+With only a **few lines of code** you can create a fuzzy search function that will return the results based on the query and **highlight the matching characters**.
+
+```tsx title="App.tsx"
+import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
+const filteredList = useFuzzy({list: ["volvo", "seat", "mercedes", "audi", "bmw"], query: "volv"})
+
+filteredList.map(({ item, matches: [range] }) => (
+  <div key={item.key}>
+    <Highlight text={item} ranges={range} /> 
+  </div>
+))
+```
+
+## API
+### `useFuzzy`
+
+This is the main hook, it provides a performance optimized way to search through a list of items.
+
+The available options are the same as [the `fuzzy` function](/get-started), but with a few extra options:
+
+```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
 const filteredList = useFuzzy({
   list,
@@ -14,15 +40,12 @@ const filteredList = useFuzzy({
   // optional `getKey` or `key`, same as with `createFuzzySearch`
   getKey: (item) => [item.name],
   // arbitrary mapping function, takes `FuzzyResult<T>` as input
-  mapResultItem: ({ item, score, matches: [highlightRanges] }) => ({ item, highlightRanges })
+  mapResultItem: ({ item, score, matches: [nameRange] }) => ({ item, nameRange })
 })
 
 // Render `filteredList`'s labels with matching characters highlighted
-filteredList.map(({ item, highlightRanges }) => (
+filteredList.map(({ item, nameRange }) => (
   <Item key={item.key}>
-    <Label><Highlight text={item.name} ranges={highlightRanges} /></Label>
+    <Label><Highlight text={item.name} ranges={nameRange} /></Label>
   </Item>
 ))
-
-
-```

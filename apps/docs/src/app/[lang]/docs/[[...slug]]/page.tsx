@@ -15,6 +15,8 @@ import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { ExampleNotesSearchDisplay } from "@/components/examples/notes-search";
 import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+import { getGithubLastEdit } from "fumadocs-core/server";
 
 export default async function Page({
 	params,
@@ -25,13 +27,27 @@ export default async function Page({
 	const page = source.getPage(slug, lang);
 	if (!page) notFound();
 
+	const time = await getGithubLastEdit({
+		owner: "PolGubau",
+		repo: "fuzzy",
+		path: `content/docs/${page.file.path}`,
+	});
+
 	const MDXContent = page.data.body;
 	const { AutoTypeTable } = createTypeTable();
 
 	return (
 		<DocsPage toc={page.data.toc} full={page.data.full}>
 			<DocsTitle>{page.data.title}</DocsTitle>
-			<DocsDescription>{page.data.description}</DocsDescription>
+			<DocsDescription>
+				{page.data.description}{" "}
+				{time?.toLocaleString(lang ? lang.replace(/_/g, "-") : "en-US", {
+					year: "numeric",
+					month: "2-digit",
+					day: "2-digit",
+				}) && <p>Last updated on {time?.toLocaleString(lang)}</p>}
+			</DocsDescription>
+
 			<DocsBody>
 				<MDXContent
 					components={{
@@ -47,6 +63,9 @@ export default async function Page({
 						PopupTrigger,
 						TypeTable,
 						AutoTypeTable,
+						File,
+						Folder,
+						Files,
 						pre: ({ ref: _ref, ...props }) => (
 							<CodeBlock {...props}>
 								<Pre>{props.children}</Pre>
@@ -54,8 +73,9 @@ export default async function Page({
 						),
 						// this allows you to link to other pages with relative file paths
 						a: createRelativeLink(source, page),
+
+						// examples
 						ExampleNotesSearchDisplay,
-						// you can add other MDX components here
 					}}
 				/>
 			</DocsBody>
