@@ -1,22 +1,22 @@
+import { ExampleNotesSearchDisplay } from "@/components/examples/notes-search";
 import { source } from "@/lib/source";
+import { getGithubLastEdit } from "fumadocs-core/server";
+import { Popup, PopupContent, PopupTrigger } from "fumadocs-twoslash/ui";
+import { createTypeTable } from "fumadocs-typescript/ui";
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+import { File, Files, Folder } from "fumadocs-ui/components/files";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { TypeTable } from "fumadocs-ui/components/type-table";
+import defaultMdxComponents, { createRelativeLink } from "fumadocs-ui/mdx";
 import {
-	DocsPage,
 	DocsBody,
 	DocsDescription,
+	DocsPage,
 	DocsTitle,
 } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
-import defaultMdxComponents, { createRelativeLink } from "fumadocs-ui/mdx";
-import { Popup, PopupContent, PopupTrigger } from "fumadocs-twoslash/ui";
-import { TypeTable } from "fumadocs-ui/components/type-table";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { createTypeTable } from "fumadocs-typescript/ui";
-import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
-import { Step, Steps } from "fumadocs-ui/components/steps";
-import { ExampleNotesSearchDisplay } from "@/components/examples/notes-search";
-import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
-import { File, Folder, Files } from "fumadocs-ui/components/files";
-import { getGithubLastEdit } from "fumadocs-core/server";
 
 export default async function Page({
 	params,
@@ -27,26 +27,34 @@ export default async function Page({
 	const page = source.getPage(slug, lang);
 	if (!page) notFound();
 
-	const time = await getGithubLastEdit({
+	const githubInfo = {
 		owner: "PolGubau",
 		repo: "fuzzy",
-		path: `content/docs/${page.file.path}`,
-	});
+		token: `Bearer ${process.env.GIT_TOKEN}`,
+		path: `apps/docs/content/docs/${page.file.path}`,
+	};
+
+	const lastModifiedTime = await getGithubLastEdit(githubInfo);
 
 	const MDXContent = page.data.body;
 	const { AutoTypeTable } = createTypeTable();
 
 	return (
-		<DocsPage toc={page.data.toc} full={page.data.full}>
+		<DocsPage
+			lastUpdate={lastModifiedTime ?? undefined}
+			editOnGithub={{
+				...githubInfo,
+				sha: "main",
+			}}
+			tableOfContent={{
+				style: "clerk",
+				single: false,
+			}}
+			toc={page.data.toc}
+			full={page.data.full}
+		>
 			<DocsTitle>{page.data.title}</DocsTitle>
-			<DocsDescription>
-				{page.data.description}{" "}
-				{time?.toLocaleString(lang ? lang.replace(/_/g, "-") : "en-US", {
-					year: "numeric",
-					month: "2-digit",
-					day: "2-digit",
-				}) && <p>Last updated on {time?.toLocaleString(lang)}</p>}
-			</DocsDescription>
+			<DocsDescription>{page.data.description}</DocsDescription>
 
 			<DocsBody>
 				<MDXContent

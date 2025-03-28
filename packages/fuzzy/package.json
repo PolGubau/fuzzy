@@ -69,8 +69,9 @@
     "lint-fix": "biome check --write .",
     "pack": "npm pack --dry-run",
     "publish": "npm publish --access public",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage --root src/",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -85,6 +86,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@polgubau/biome-config": "^1.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@vitest/coverage-v8": "^3.0.8",

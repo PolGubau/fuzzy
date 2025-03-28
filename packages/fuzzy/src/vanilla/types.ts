@@ -23,8 +23,19 @@ export type Matches = Array<HighlightRanges | null>;
  */
 export type Result<T> = { item: T; score: number; matches: Matches };
 
-export type FuzzySearchOptions<T> = {
+export type FuzzySearchOptions<T, U = T> = {
+	/**
+	 * key to search for in the item. This is useful if the item is an object and you want to search for a specific property.
+	 * @default undefined
+	 * @example "name"
+	 */
 	key?: keyof T;
+	/**
+	 * Function that returns the string to search for in the item. This is useful if the item is an object and you want to search for a specific property.
+	 * @default undefined
+	 * @example (item) => [item.name]
+	 * @example (item) => [item.name, item.surname]
+	 */
 	getKey?: (item: T) => Array<string | null>;
 	/**
 	 * If true, will log debug information to the console
@@ -47,6 +58,13 @@ export type FuzzySearchOptions<T> = {
 	 * @description The lower the score, the better the match.
 	 */
 	maxScore?: number;
+
+	/**
+	 * Function that maps the result item to a new item. This is useful if you want to transform the result item before returning it.
+	 * @default (result) => result.item
+	 * @example (result) => ({ ...result.item, score: result.score })
+	 */
+	mapResultItem?: (result: T) => U;
 };
 
 export type FuzzySearchResponse<T> = {

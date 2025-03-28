@@ -1,31 +1,10 @@
-import { describe, it, expect, vi, type Mock } from "vitest";
-import { findFuzzyMatch } from "./impl";
-import { fuzzy } from "./fuzzy-finder";
-import { getFuzzyMatchScore } from "./getScore/getScore";
+import { describe, expect, it, vi } from "vitest";
+import { fuzzy } from "../fuzzy";
 
-vi.mock("./normalizeText", () => ({
+vi.mock("../normalizeText", () => ({
 	default: (text: string) => text.toLowerCase(),
 }));
 
-// vi.mock("./getScore/getScore", () => ({
-// 	getFuzzyMatchScore: vi.fn(),
-// }));
-
-describe("findFuzzyMatch", () => {
-	it("should return null if no match is found", () => {
-		const result = findFuzzyMatch("hello world", "test");
-		expect(result).toBeNull();
-	});
-
-	it("should return a match with correct score and matches", () => {
-		const result = findFuzzyMatch("hello world", "hello");
-		expect(result).toEqual({
-			item: "hello world",
-			score: 0.5,
-			matches: [[[0, 4]]],
-		});
-	});
-});
 describe("fuzzy", () => {
 	const matches = (
 		text: string,
@@ -85,6 +64,7 @@ describe("fuzzy", () => {
 		// matches("Язык", "язык", 0.1, [[0, 3]]);
 		matches("foo ", "foo", 0.5, [[0, 2]]);
 	});
+
 	// it(`can match by: "Starts with" match`, () => {
 	// 	matches("Tomasz Kapelak", "to", 0.5, [[0, 1]]);
 	// 	matches("Żabka - oferta", "Żab", 0.5, [[0, 2]]);
@@ -202,7 +182,7 @@ describe("fuzzy", () => {
 	// 	// matches('한국어', '한어', 2, [[0, 0], [2, 2]]) // FIXME: Fix highglighting for Hangul
 	// });
 	// const noMatch = (text, query) => {
-	// 	const results = createFuzzySearch([text])(query);
+	// 	const results = fuzzy([text])(query);
 	// 	expect(results.length).toBe(0);
 	// };
 	// it("can not match everything, okay :(", () => {
@@ -228,7 +208,7 @@ describe("fuzzy", () => {
 	// });
 	// it("can search by key", () => {
 	// 	expect(
-	// 		createFuzzySearch([{ t: "foo" }, { t: "foo2" }, { t: "bar" }], {
+	// 		fuzzy([{ t: "foo" }, { t: "foo2" }, { t: "bar" }], {
 	// 			key: "t",
 	// 		})("foo"),
 	// 	).toMatchObject([{ item: { t: "foo" } }, { item: { t: "foo2" } }]);
@@ -239,7 +219,7 @@ describe("fuzzy", () => {
 	// 	const u3 = { name: "bar", alias: "3foo" };
 	// 	const u4 = { name: "bar", alias: "bar" };
 	// 	expect(
-	// 		createFuzzySearch([u1, u2, u3, u4], {
+	// 		fuzzy([u1, u2, u3, u4], {
 	// 			getKey: (item) => [item.name, item.alias],
 	// 		})("foo"),
 	// 	).toMatchObject([
@@ -253,7 +233,7 @@ describe("fuzzy", () => {
 	// });
 	// it("sorts searches by score", () => {
 	// 	expect(
-	// 		createFuzzySearch([
+	// 		fuzzy([
 	// 			"[Marketing] Żabka etc.",
 	// 			"Zabawny Katar",
 	// 			"Żal Betoniarka",
@@ -278,7 +258,7 @@ describe("fuzzy", () => {
 	// });
 	// it("sorts searches by score for many keys", () => {
 	// 	expect(
-	// 		createFuzzySearch(
+	// 		fuzzy(
 	// 			[
 	// 				{ name: "Matt", alias: "Matthias Obst-Mölinger" },
 	// 				{ name: "Marco Couto", alias: null },
@@ -300,7 +280,7 @@ describe("fuzzy", () => {
 	// 	]);
 	// });
 	// it("returns empty array for empty query", () => {
-	// 	expect(createFuzzySearch(["a", "b", "c", "d"])("")).toEqual([]);
+	// 	expect(fuzzy(["a", "b", "c", "d"])("")).toEqual([]);
 	// });
 	// const matchesNew = (text, query, ...expectedIndices) => {
 	// 	const result = experimentalSmartFuzzyMatch(

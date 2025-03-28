@@ -1,10 +1,5 @@
-import {
-	memo,
-	Fragment,
-	type FC,
-	type CSSProperties,
-} from "react";
-import type { HighlightRanges } from "../fuzzy-finder/types";
+import { memo, Fragment, type FC, type CSSProperties } from "react";
+import type { HighlightRanges } from "../vanilla/types";
 
 type Style = CSSProperties;
 
@@ -77,8 +72,27 @@ interface HighlightExport extends FC<Props> {
 	FullSelection: typeof fullSelection;
 }
 
-
-
+/**
+ * A React component that highlights text based on the provided props.
+ *
+ * This component is memoized for performance optimization and includes an additional
+ * static property `FullSelection` for handling full text selection functionality.
+ *
+ * @component
+ * @template Props - The props type for the `TextHighlighter` component.
+ *
+ * @property {FC<Props>} Highlight - The main text highlighter component.
+ * @property {typeof fullSelection} FullSelection - A static property for full text selection.
+ *
+ * @example
+ * ```tsx
+ * import { Highlight } from './Highlight';
+ *
+ * const App = () => (
+ *   <Highlight someProp="value" />
+ * );
+ * ```
+ */
 export const Highlight: HighlightExport = Object.assign(
 	memo(TextHighlighter) as FC<Props>,
 	{

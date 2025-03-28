@@ -1,1 +1,1 @@
-export * from "./fuzzy-finder";
+export * from "./vanilla";
