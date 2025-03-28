@@ -13,7 +13,9 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { createTypeTable } from "fumadocs-typescript/ui";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Step, Steps } from "fumadocs-ui/components/steps";
- 
+import { ExampleNotesSearchDisplay } from "@/components/examples/notes-search";
+import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
+
 export default async function Page({
 	params,
 }: {
@@ -45,8 +47,14 @@ export default async function Page({
 						PopupTrigger,
 						TypeTable,
 						AutoTypeTable,
+						pre: ({ ref: _ref, ...props }) => (
+							<CodeBlock {...props}>
+								<Pre>{props.children}</Pre>
+							</CodeBlock>
+						),
 						// this allows you to link to other pages with relative file paths
 						a: createRelativeLink(source, page),
+						ExampleNotesSearchDisplay,
 						// you can add other MDX components here
 					}}
 				/>

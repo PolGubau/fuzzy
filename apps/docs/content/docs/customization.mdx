@@ -6,7 +6,7 @@ description: Customizing the behavior of the library.
 ## Fuzzy list options
 
 To customize the search, it accepts an object with the following options:
-```ts   
+```ts title="index.ts"
 const fuzzySearch = fuzzy(list, {
   key: "name", // This is the key to search for in the item. 
   getKey: (item) => [item.name, item.author.fullname],  // search by multiple properties
@@ -19,7 +19,7 @@ const fuzzySearch = fuzzy(list, {
 
 In case the data sent are objects, you can use the `key` and `getKey` options to specify which property to search for.
 
-```ts twoslash
+```ts twoslash title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;
@@ -75,7 +75,7 @@ console.log(fuzzedList);
 
 In the same way, you can use the `getKey` option to search by multiple or/and nested properties.
 
-```ts twoslash
+```ts twoslash  title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;
@@ -130,7 +130,7 @@ The `limit` option allows you to limit the number of results returned by the sea
 
 This could be useful if you have a large list and only want to show the top results, or you have a fixed UI as a grid.
 
-```ts twoslash
+```ts twoslash title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;
@@ -180,7 +180,7 @@ The `maxScore` option allows you to set the maximum score for the results.
 
 Remember that the score is a number starting from 0 (exact match), and it increases as the match gets worse. Think about it as a **distance** from the best match.
 
-```ts twoslash
+```ts twoslash title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;
@@ -233,7 +233,7 @@ When using both `limit` and `maxScore`, the algorithm will first filter the resu
 
 The `debug` option allows you to log details about the search to the **browser console** as a table for each item or the time it took to run the search.
 
-```ts twoslash
+```ts twoslash title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;

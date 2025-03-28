@@ -8,7 +8,7 @@ description: Fuzzy finding in objects array
 ### By direct property
 If you want to filter by a **direct key of an object**, you can use the `key` option.
 
-```ts
+```ts title="index.ts"
 const list = [
   { name: "volvo", year: 2020 },
   { name: "seat", year: 2019 },
@@ -24,7 +24,7 @@ const fuzzySearch = fuzzy(list, {
 ### By nested property
 If you want to filter by a nested property of an object, you can use the `getKey` option.
 
-```ts
+```ts title="index.ts"
 const list = [
   { name: "volvo", year: 2020, owner: { fullname: "John Doe" } },
   { name: "seat", year: 2019, owner: { fullname: "Jane Doe" } },
@@ -40,7 +40,7 @@ const fuzzySearch = fuzzy(list, {
 ### By multiple properties
 If you want to filter by multiple properties of an object, you can use the `getKey` option. 
 
-```ts
+```ts title="index.ts"
 const list = [
   { name: "volvo", year: 2020, owner: { fullname: "John Doe" } },
   { name: "seat", year: 2019, owner: { fullname: "Jane Doe" } },
@@ -52,3 +52,7 @@ const fuzzySearch = fuzzy(list, {
   getKey: (item) => [item.name, item.owner.fullname],
 })
 ```
+Now you are ready to search with any other string.
+
+
+For further examples check the **Examples** section.

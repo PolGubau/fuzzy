@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@polgubau/animated": "^1.0.12",
-    "@polgubau/fuzzy": "workspaces:*",
+    "@polgubau/fuzzy": "workspace:*",
     "@polgubau/utils": "^1.0.3",
     "fumadocs-core": "15.1.2",
     "fumadocs-mdx": "11.5.7",

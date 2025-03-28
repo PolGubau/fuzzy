@@ -2,15 +2,15 @@
 title: Fuzzy in React 
 description: When using React, you can use these helpers for writing less code.
 ---
+{/* // `useFuzzy` simply wraps `createFuzzySearch` with memoization built in
+// NOTE: For best performance, `getKey` and `mapResultItem` should be memoized by user */}
 
-```ts
+```ts title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
-// `useFuzzy` simply wraps `createFuzzySearch` with memoization built in
-// NOTE: For best performance, `getKey` and `mapResultItem` should be memoized by user
 const filteredList = useFuzzy({
   list,
-  // If `queryText` is blank, `list` is returned in whole
-  queryText,
+  // If `query` is blank, `list` is returned in whole
+  query,
   // optional `getKey` or `key`, same as with `createFuzzySearch`
   getKey: (item) => [item.name],
   // arbitrary mapping function, takes `FuzzyResult<T>` as input

@@ -33,7 +33,7 @@ Install the library using your package manager of choice:
 <Accordions type="single">
   <Accordion title="Using CDN?" value="cdn" id="cdn">
   To use the library via CDN, include the following script in your HTML:
-  ``` html
+  ``` html title="index.html"
 <script src="https://cdn.jsdelivr.net/npm/@polgubau/fuzzy"></script>
 ```
    </Accordion>
@@ -43,7 +43,7 @@ Install the library using your package manager of choice:
 
 Import the library and use it with a simple list:
 
-```ts twoslash 
+```ts twoslash title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;

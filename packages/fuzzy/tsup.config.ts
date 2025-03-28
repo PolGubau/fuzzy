@@ -5,7 +5,7 @@ import { type Options, defineConfig } from "tsup";
 export default defineConfig((options) => {
 	const commonOptions: Partial<Options> = {
 		entry: [
-			"src/**/*.[jt]s",
+			"src/**/*.[jt]s?(x)",
 			"!./src/**/*.d.ts",
 			"!./src/**/*.spec.[jt]s",
 			"!./src/**/*.test.[jt]s",

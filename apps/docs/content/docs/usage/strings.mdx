@@ -8,7 +8,7 @@ This is a simple example of how to use the fuzzy library with an array of string
 
 This is considered a basic case as you don't need to specify any compulsory options.
 
-```ts twoslash
+```ts twoslash title="index.ts"
 // @noErrors
 type FuzzySearcher<T> = (query: string) => {
     results: Array<Result<T>>;
@@ -48,3 +48,9 @@ const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 
 const fuzzySearch = fuzzy(list)
 ```
+
+Now you are ready to search with any other string.
+
+For further examples check the **Examples** section.
+
+
