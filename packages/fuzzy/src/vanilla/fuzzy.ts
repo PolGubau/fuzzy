@@ -86,7 +86,7 @@ export function fuzzy<T, U = T>(
 
 			const preprocessedTexts: [string, string, Set<string>][] = texts.map(
 				(text) => {
-					const item = text || "";
+					const item = String(text);
 					const normalizedItem = normalizeText(item);
 					const itemWords = new Set(normalizedItem.split(" "));
 
