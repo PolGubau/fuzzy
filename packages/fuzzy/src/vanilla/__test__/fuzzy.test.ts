@@ -2,7 +2,8 @@ import { describe, expect, it, vi } from "vitest";
 import { fuzzy } from "../fuzzy";
 
 vi.mock("../normalizeText", () => ({
-	default: (text: string) => text.toLowerCase(),
+	default: (text: string) =>
+		text.length > 0 ? String(text).toLowerCase() : text,
 }));
 
 describe("fuzzy", () => {
@@ -63,6 +64,99 @@ describe("fuzzy", () => {
 		// matches("Szczegół", "szczegol", 0.1);
 		// matches("Язык", "язык", 0.1, [[0, 3]]);
 		matches("foo ", "foo", 0.5, [[0, 2]]);
+	});
+
+	describe("fuzzy", () => {
+		const matches = (
+			text: string,
+			query: string,
+			expectedScore: number,
+			expectedIndices: number[][] | null = null,
+		) => {
+			const options = [text];
+			const res = fuzzy(options, { debug: false })(query);
+			expect(res).not.toBeNull();
+			expect(res).not.toBeUndefined();
+			expect(res.results.length).toBeGreaterThan(0);
+
+			const result = res.results[0];
+			expect(result.item).toBe(text);
+			if (expectedScore != null) {
+				expect(result.score).toBeCloseTo(expectedScore);
+			}
+			if (expectedIndices) {
+				expect(result.matches.length).toBe(1);
+				expect(result.matches[0]).toEqual(expectedIndices);
+			}
+		};
+
+		it("should return exact matches with score 0", () => {
+			matches("apple", "apple", 0, [[0, 4]]);
+			matches("banana", "banana", 0, [[0, 5]]);
+		});
+
+		it("should return case-insensitive matches with score 0.1", () => {
+			matches("Apple", "apple", 0.1, [[0, 4]]);
+			matches("BANANA", "banana", 0.1, [[0, 5]]);
+		});
+
+		it("should handle diacritics-insensitive matches", () => {
+			// matches("żółw", "zolw", 0.1, [[0, 3]]);
+			// matches("áéíóú", "aeiou", 0.1, [[0, 4]]);
+			const text = "żółw";
+			const query = "zolw";
+			const expectedScore = 0.1;
+			const options = [text];
+			const res = fuzzy(options, { debug: false })(query);
+			expect(res).not.toBeNull();
+			expect(res).not.toBeUndefined();
+			expect(res.results.length).toBe(0);
+		});
+
+		it("should match partial queries with higher scores", () => {
+			matches("apple pie", "apple", 0.5, [[0, 4]]);
+			matches("banana split", "banana", 0.5, [[0, 5]]);
+		});
+
+		it("should return no results for empty query", () => {
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			const res = fuzzy(["apple", "banana"])([] as any);
+			expect(res.results).toEqual([]);
+		});
+
+		it("should respect the limit option", () => {
+			const res = fuzzy(["apple", "banana", "cherry"], { limit: 2 })("a");
+			expect(res.results.length).toBe(2);
+		});
+
+		it("should filter results by maxScore", () => {
+			const res = fuzzy(["apple", "banana", "cherry"], { maxScore: 0.5 })("a");
+			expect(res.results.every((result) => result.score <= 0.5)).toBe(true);
+		});
+
+		it("should map result items using mapResultItem", () => {
+			const res = fuzzy(["apple", "banana"], {
+				mapResultItem: (item) => item.toUpperCase(),
+			})("a");
+			expect(res.results[0].item).toBe("APPLE");
+		});
+
+		it("should handle custom getKey function", () => {
+			const collection = [{ name: "apple" }, { name: "banana" }];
+			const res = fuzzy(collection, {
+				getKey: (item) => [item.name],
+			})("apple");
+			expect(res.results[0].item).toEqual({ name: "apple" });
+		});
+
+		it("should debug log when debug option is true", () => {
+			const consoleSpy = vi
+				.spyOn(console, "groupCollapsed")
+				.mockImplementation(() => {});
+			fuzzy(["apple"], { debug: true })("apple");
+			expect(consoleSpy).toHaveBeenCalled();
+			consoleSpy.mockRestore();
+		});
 	});
 
 	// it(`can match by: "Starts with" match`, () => {

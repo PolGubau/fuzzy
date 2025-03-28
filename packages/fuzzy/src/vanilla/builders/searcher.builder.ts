@@ -17,7 +17,7 @@ export class FuzzySearcherBuilder<T> {
 		normalizedQuery?: string;
 	}) {
 		this.time = endTime - startTime;
-		this.results = results ?? [];
+		this.results = results;
 		this.normalizedQuery = normalizedQuery;
 	}
 

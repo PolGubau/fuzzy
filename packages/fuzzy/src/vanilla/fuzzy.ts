@@ -101,7 +101,6 @@ export function fuzzy<T, U = T>(
 		const startTime = Date.now();
 		const results: Array<Result<T>> = [];
 		const normalizedQuery = normalizeText(query);
-		const queryWords = normalizedQuery.split(" ");
 
 		if (!normalizedQuery.length) {
 			return new FuzzySearcherBuilder<U>({
@@ -111,6 +110,7 @@ export function fuzzy<T, U = T>(
 				normalizedQuery,
 			}).build();
 		}
+		const queryWords = normalizedQuery.split(" ");
 
 		for (const [element, texts] of normalizedTexts) {
 			let bestScore = Number.MAX_SAFE_INTEGER;
