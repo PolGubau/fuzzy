@@ -1,6 +1,7 @@
 import React from "react";
 import { type FuzzyOptions, type FuzzyResponse, fuzzy } from "../index";
 import { unsortedResponse } from "../vanilla/helpers/transformers";
+import { defaults } from "../vanilla/constants";
 
 export type useFuzzyOptions<T, U = T> = {
 	/**
@@ -34,9 +35,9 @@ export function useFuzzy<T, U = T>({
 	const {
 		key,
 		getKey,
-		debug = false,
-		limit = Number.MAX_SAFE_INTEGER,
-		maxScore = Number.MAX_SAFE_INTEGER,
+		debug = defaults.debug,
+		limit = defaults.limit,
+		maxScore = defaults.maxScore,
 		mapResultItem,
 	} = options;
 

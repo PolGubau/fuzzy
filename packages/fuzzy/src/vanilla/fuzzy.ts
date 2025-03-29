@@ -1,6 +1,11 @@
 import { FuzzyBuilder } from "./builders/searcher.builder";
+import { defaults } from "./constants";
 import { getFuzzyMatchScore } from "./getScore/getScore";
-import { filterResults, getMapResultItem, parseResults } from "./helpers/filters";
+import {
+	filterResults,
+	getMapResultItem,
+	parseResults,
+} from "./helpers/filters";
 import { sortByScore } from "./helpers/sorters";
 import { emptyResponse } from "./helpers/transformers";
 import normalizeText from "./normalizeText";
@@ -76,9 +81,9 @@ export function fuzzy<T, U = T>(
 ): Fuzzy<U> {
 	const {
 		getKey,
-		debug,
-		limit = Number.MAX_SAFE_INTEGER,
-		maxScore = 100,
+		debug = defaults.debug,
+		limit = defaults.limit,
+		maxScore = defaults.maxScore,
 		mapResultItem,
 	} = options;
 
@@ -138,8 +143,7 @@ export function fuzzy<T, U = T>(
 
 		// `results` is the array of results, sorted by score, now we filter and transform it
 
-		 
-		const parsedResults = parseResults(results, maxScore,limit, mapResultItem);
+		const parsedResults = parseResults(results, maxScore, limit, mapResultItem);
 
 		const endTime = Date.now();
 
