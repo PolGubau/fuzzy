@@ -23,7 +23,7 @@ export interface Result<T> {
 	score: number;
 	matches: Matches;
 }
-export interface FuzzySearchOptions<T> {
+export interface FuzzyOptions<T> {
 	/**
 	 * The query to search for. This is the string that will be searched for in the items.
 	 * @default ""
@@ -58,7 +58,7 @@ export interface FuzzySearchOptions<T> {
 	 */
 	maxScore?: number;
 }
-export type FuzzySearchResponse<T> = {
+export type FuzzyResponse<T> = {
 	/**
 	 * The array of results found
 	 * @default []
@@ -106,4 +106,4 @@ export type FuzzySearchResponse<T> = {
 	 **/
 	hasResults: boolean;
 };
-export type FuzzySearcher<T> = (query: string) => FuzzySearchResponse<T>;
+export type Fuzzy<T> = (query: string) => FuzzyResponse<T>;

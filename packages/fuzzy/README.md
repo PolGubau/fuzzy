@@ -9,6 +9,8 @@
 ![Version](https://img.shields.io/npm/v/%40polgubau%2Futils?logo=npm&label=version)
 ![License](https://img.shields.io/github/license/PolGubau/utils?logo=github&label=license)
 ![Downloads](https://img.shields.io/npm/dt/%40polgubau%2Futils?logo=npm&label=downloads)
+[![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
+
 
 # @polgubau/utils
 

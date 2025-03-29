@@ -25,7 +25,7 @@ Import the library and use it with a simple list:
 
 ```ts twoslash title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -57,7 +57,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 import fuzzy from '@polgubau/fuzzy';
 
@@ -72,6 +72,6 @@ console.log(fuzzedList);
 
 ## Response Structure
 This code would return the list of results but also multiple metadata about the search.
-<AutoTypeTable path="./src/types/lib.ts" name="FuzzySearchResponse" />
+<AutoTypeTable path="./src/types/lib.ts" name="FuzzyResponse" />
 
 To modify the search behavior, you can pass a set of options to the `fuzzy` function. See [Options](./customization) for more details.

@@ -11,20 +11,19 @@ describe("useFuzzy", () => {
 	];
 
 	it("returns the full list when query is empty", () => {
-		const { result } = renderHook(() =>
+		const { result: res } = renderHook(() =>
 			useFuzzy({
 				list: mockList,
 				query: "",
 				getKey: (item) => [item.name],
 			}),
 		);
-
-		expect(result.current).toHaveLength(mockList.length);
-		expect(result.current.map((res) => res.item)).toEqual(mockList);
+		expect(res.current.length).toBe(mockList.length);
+		expect(res.current.results.map((res) => res.item)).toEqual(mockList);
 	});
 
 	it("returns filtered results based on the query", async () => {
-		const { result } = renderHook(() =>
+		const { result: res } = renderHook(() =>
 			useFuzzy({
 				list: mockList,
 				query: "ap",
@@ -32,8 +31,8 @@ describe("useFuzzy", () => {
 			}),
 		);
 		await waitFor(() => {
-			expect(result.current).toHaveLength(2);
-			expect(result.current.map((res) => res.item.name)).toEqual([
+			expect(res.current.results).toHaveLength(2);
+			expect(res.current.results.map((res) => res.item.name)).toEqual([
 				"apple",
 				"grape",
 			]);
@@ -41,7 +40,7 @@ describe("useFuzzy", () => {
 	});
 
 	it("applies the mapResultItem function to the results", () => {
-		const { result } = renderHook(() =>
+		const { result: res } = renderHook(() =>
 			useFuzzy({
 				list: mockList,
 				query: "ap",
@@ -54,13 +53,13 @@ describe("useFuzzy", () => {
 			}),
 		);
 
-		expect(result.current).toHaveLength(2);
-		expect(result.current[0].item.matched).toBe(true);
-		expect(result.current[1].item.matched).toBe(true);
+		expect(res.current.results).toHaveLength(2);
+		expect(res.current.results[0].item.matched).toBe(true);
+		expect(res.current.results[1].item.matched).toBe(true);
 	});
 
 	it("returns an empty array when no matches are found", () => {
-		const { result } = renderHook(() =>
+		const { result: res } = renderHook(() =>
 			useFuzzy({
 				list: mockList,
 				query: "xyz",
@@ -68,11 +67,11 @@ describe("useFuzzy", () => {
 			}),
 		);
 
-		expect(result.current).toHaveLength(0);
+		expect(res.current.results).toHaveLength(0);
 	});
 
 	it("respects the limit option", () => {
-		const { result } = renderHook(() =>
+		const { result: res } = renderHook(() =>
 			useFuzzy({
 				list: mockList,
 				query: "a",
@@ -81,6 +80,6 @@ describe("useFuzzy", () => {
 			}),
 		);
 
-		expect(result.current).toHaveLength(1);
+		expect(res.current.results).toHaveLength(1);
 	});
 });

@@ -1,11 +1,13 @@
-import { FuzzySearcherBuilder } from "./builders/searcher.builder";
+import { FuzzyBuilder } from "./builders/searcher.builder";
 import { getFuzzyMatchScore } from "./getScore/getScore";
+import { filterResults, getMapResultItem, parseResults } from "./helpers/filters";
 import { sortByScore } from "./helpers/sorters";
+import { emptyResponse } from "./helpers/transformers";
 import normalizeText from "./normalizeText";
 import type {
-	FuzzySearchOptions,
-	FuzzySearchResponse,
-	FuzzySearcher,
+	FuzzyOptions,
+	FuzzyResponse,
+	Fuzzy,
 	Matches,
 	Result,
 } from "./types";
@@ -58,7 +60,7 @@ Note:
  * @param options.maxScore - The maximum score a result can have to be included in the results. Defaults to `100`.
  * @param options.mapResultItem - A function to map each result item to a different type.
  *
- * @returns A function that takes a query string and returns a `FuzzySearchResponse` containing the search results.
+ * @returns A function that takes a query string and returns a `FuzzyResponse` containing the search results.
  *
  * @example
  * ```typescript
@@ -70,8 +72,8 @@ Note:
  */
 export function fuzzy<T, U = T>(
 	collection: T[],
-	options: FuzzySearchOptions<T, U> = {},
-): FuzzySearcher<U> {
+	options: FuzzyOptions<T, U> = {},
+): Fuzzy<U> {
 	const {
 		getKey,
 		debug,
@@ -97,18 +99,13 @@ export function fuzzy<T, U = T>(
 			return [element, preprocessedTexts];
 		});
 
-	const res: FuzzySearcher<U> = (query: string): FuzzySearchResponse<U> => {
+	const res: Fuzzy<U> = (query: string): FuzzyResponse<U> => {
 		const startTime = Date.now();
 		const results: Array<Result<T>> = [];
 		const normalizedQuery = normalizeText(query);
 
 		if (!normalizedQuery.length) {
-			return new FuzzySearcherBuilder<U>({
-				results: [],
-				startTime,
-				endTime: startTime,
-				normalizedQuery,
-			}).build();
+			return emptyResponse(normalizedQuery);
 		}
 		const queryWords = normalizedQuery.split(" ");
 
@@ -139,22 +136,15 @@ export function fuzzy<T, U = T>(
 			}
 		}
 
-		const filteredResults = results
-			.sort(sortByScore)
-			.filter((result) => result.score <= maxScore)
-			.slice(0, limit);
+		// `results` is the array of results, sorted by score, now we filter and transform it
 
-		const mappedResults = mapResultItem
-			? filteredResults.map(({ item, ...rest }) => ({
-					...rest,
-					item: mapResultItem(item),
-				}))
-			: (filteredResults as unknown as Result<U>[]);
+		 
+		const parsedResults = parseResults(results, maxScore,limit, mapResultItem);
 
 		const endTime = Date.now();
 
-		const built = new FuzzySearcherBuilder<U>({
-			results: mappedResults,
+		const built = new FuzzyBuilder<U>({
+			results: parsedResults,
 			startTime,
 			endTime,
 			normalizedQuery,
@@ -165,7 +155,7 @@ export function fuzzy<T, U = T>(
 			console.log("Query:", query);
 			console.log("Normalized Query:", normalizedQuery);
 			console.log("Results Length:", built.results.length);
-			console.log("Results:", built.results);
+			console.table(built.results);
 			console.log("Preprocessed Collection:", normalizedTexts);
 			console.log("Time:", built.time, "ms");
 			console.groupEnd();

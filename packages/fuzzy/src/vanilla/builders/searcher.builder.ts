@@ -1,6 +1,6 @@
-import type { FuzzySearchResponse, Result } from "../types";
+import type { FuzzyResponse, Result } from "../types";
 
-export class FuzzySearcherBuilder<T> {
+export class FuzzyBuilder<T> {
 	private results: Array<Result<T>>;
 	private time: number;
 	private normalizedQuery: string;
@@ -21,7 +21,7 @@ export class FuzzySearcherBuilder<T> {
 		this.normalizedQuery = normalizedQuery;
 	}
 
-	public build(): FuzzySearchResponse<T> {
+	public build(): FuzzyResponse<T> {
 		return {
 			results: this.results,
 			length: this.results.length,

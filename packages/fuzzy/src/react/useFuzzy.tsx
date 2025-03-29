@@ -1,5 +1,6 @@
 import React from "react";
-import { fuzzy, type FuzzySearchOptions, type Result } from "../index";
+import { type FuzzyOptions, type FuzzyResponse, fuzzy } from "../index";
+import { unsortedResponse } from "../vanilla/helpers/transformers";
 
 export type useFuzzyOptions<T, U = T> = {
 	/**
@@ -13,7 +14,7 @@ export type useFuzzyOptions<T, U = T> = {
 	 * @example "foo"
 	 */
 	query: string;
-} & FuzzySearchOptions<T, U>;
+} & FuzzyOptions<T, U>;
 
 /**
  * Hook for fuzzy searching `list` against `query` and mapping the results with `mapResultItem`.
@@ -24,41 +25,49 @@ export type useFuzzyOptions<T, U = T> = {
  *
  * For best performance, `getKey` and `mapResultItem` functions should be memoized by the user.
  */
+
 export function useFuzzy<T, U = T>({
 	list,
 	query,
-	mapResultItem,
 	...options
-}: useFuzzyOptions<T, U>): Result<U>[] {
+}: useFuzzyOptions<T, U>): FuzzyResponse<U> {
 	const {
 		key,
 		getKey,
 		debug = false,
 		limit = Number.MAX_SAFE_INTEGER,
-		maxScore = 100,
+		maxScore = Number.MAX_SAFE_INTEGER,
+		mapResultItem,
 	} = options;
 
-	const executeFuzzy = React.useMemo(
-		() => fuzzy(list, { key, getKey, debug, limit, maxScore }),
-		[list, key, getKey, debug, limit, maxScore],
+	// Memoriza las opciones para evitar recreaciones innecesarias
+	const memoizedOptions = React.useMemo(
+		() => ({ key, getKey, debug, limit, maxScore, mapResultItem }),
+		[key, getKey, debug, limit, maxScore, mapResultItem],
 	);
 
-	const searchResults = React.useMemo(() => {
-		const results = query
-			? executeFuzzy(query).results
-			: list.map((item) => ({
-					item,
-					score: Number.POSITIVE_INFINITY,
-					matches: [],
-				}));
+	// Memoiza la lista para evitar cambios en cada render (si la recibe como prop)
+	const stableList = React.useMemo(() => list, [list]);
 
-		return mapResultItem
-			? results.map(({ item, ...rest }) => ({
-					...rest,
-					item: mapResultItem(item),
-				}))
-			: (results as unknown as Result<U>[]);
-	}, [list, mapResultItem, executeFuzzy, query]);
+	// Crea la función fuzzy solo cuando cambian lista u opciones
+	const executeFuzzy = React.useMemo(
+		() => fuzzy(stableList, memoizedOptions),
+		[stableList, memoizedOptions],
+	);
 
-	return searchResults;
+	// Devuelve los resultados filtrados o la lista original ordenada si no hay query
+	const results = React.useMemo(() => {
+		if (!query) {
+			return unsortedResponse(
+				stableList,
+				maxScore,
+				limit,
+				mapResultItem,
+				query,
+			);
+		}
+		return executeFuzzy(query);
+	}, [stableList, maxScore, limit, mapResultItem, query, executeFuzzy]);
+
+	return results;
 }

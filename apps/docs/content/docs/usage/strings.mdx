@@ -10,7 +10,7 @@ This is considered a basic case as you don't need to specify any compulsory opti
 
 ```ts twoslash title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -42,7 +42,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 

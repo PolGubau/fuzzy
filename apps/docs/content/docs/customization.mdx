@@ -21,7 +21,7 @@ In case the data sent are objects, you can use the `key` and `getKey` options to
 
 ```ts twoslash title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -53,7 +53,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 const list = [
   { name: "volvo", year: 2020 },
@@ -77,7 +77,7 @@ In the same way, you can use the `getKey` option to search by multiple or/and ne
 
 ```ts twoslash  title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -109,7 +109,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 const list = [
   { name: "volvo", year: 2020, owner: { fullname: "John Doe" } },
@@ -132,7 +132,7 @@ This could be useful if you have a large list and only want to show the top resu
 
 ```ts twoslash title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -164,7 +164,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 
@@ -182,7 +182,7 @@ Remember that the score is a number starting from 0 (exact match), and it increa
 
 ```ts twoslash title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -214,7 +214,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 
@@ -235,7 +235,7 @@ The `debug` option allows you to log details about the search to the **browser c
 
 ```ts twoslash title="index.ts"
 // @noErrors
-type FuzzySearcher<T> = (query: string) => {
+type Fuzzy<T> = (query: string) => {
     results: Array<Result<T>>;
     /**
      * The number of results found
@@ -267,7 +267,7 @@ type FuzzySearcher<T> = (query: string) => {
      **/
     hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzySearchOptions<T>): FuzzySearcher<T>;
+function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes"];
 
@@ -280,5 +280,5 @@ const fuzzySearch = fuzzy(list, {
 
 ## Summary
 
-<AutoTypeTable path="./src/types/lib.ts" name="FuzzySearchOptions" />
+<AutoTypeTable path="./src/types/lib.ts" name="FuzzyOptions" />
 
