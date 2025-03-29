@@ -1,5 +1,5 @@
 import { FuzzyBuilder } from "../builders/searcher.builder";
-import type { FuzzyResponse, Result } from "../types";
+import type { FuzzyResponse, MapResult, Result } from "../types";
 import { parseResults } from "./filters";
 
 export const unmatchedItem = <T>(item: T): Result<T> => {
@@ -29,11 +29,11 @@ export const unsortedResponse = <T, U = T>(
 	items: T[],
 	maxScore: number,
 	limit: number,
-	mapResultItem?: (item: T) => U,
+	mapResult?: MapResult<T, U>,
 	normalizedQuery = "",
 ): FuzzyResponse<U> => {
 	const itemsWithResult = unmatchedItems(items);
-	const results = parseResults(itemsWithResult, maxScore, limit, mapResultItem);
+	const results = parseResults(itemsWithResult, maxScore, limit, mapResult);
 	return new FuzzyBuilder<U>({
 		results,
 		normalizedQuery,

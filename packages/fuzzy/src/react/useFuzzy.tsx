@@ -18,13 +18,13 @@ export type useFuzzyOptions<T, U = T> = {
 } & FuzzyOptions<T, U>;
 
 /**
- * Hook for fuzzy searching `list` against `query` and mapping the results with `mapResultItem`.
+ * Hook for fuzzy searching `list` against `query` and mapping the results with `mapResult`.
  *
  * If `query` is blank, `list` is returned in whole.
  *
  * See `createFuzzySearch` for more details. This hook simply wraps it (with memoization) in a React hook.
  *
- * For best performance, `getKey` and `mapResultItem` functions should be memoized by the user.
+ * For best performance, `getKey` and `mapResult` functions should be memoized by the user.
  */
 
 export function useFuzzy<T, U = T>({
@@ -38,13 +38,13 @@ export function useFuzzy<T, U = T>({
 		debug = defaults.debug,
 		limit = defaults.limit,
 		maxScore = defaults.maxScore,
-		mapResultItem,
+		mapResult,
 	} = options;
 
 	// Memoriza las opciones para evitar recreaciones innecesarias
 	const memoizedOptions = React.useMemo(
-		() => ({ key, getKey, debug, limit, maxScore, mapResultItem }),
-		[key, getKey, debug, limit, maxScore, mapResultItem],
+		() => ({ key, getKey, debug, limit, maxScore, mapResult }),
+		[key, getKey, debug, limit, maxScore, mapResult],
 	);
 
 	// Memoiza la lista para evitar cambios en cada render (si la recibe como prop)
@@ -59,16 +59,10 @@ export function useFuzzy<T, U = T>({
 	// Devuelve los resultados filtrados o la lista original ordenada si no hay query
 	const results = React.useMemo(() => {
 		if (!query) {
-			return unsortedResponse(
-				stableList,
-				maxScore,
-				limit,
-				mapResultItem,
-				query,
-			);
+			return unsortedResponse(stableList, maxScore, limit, mapResult, query);
 		}
 		return executeFuzzy(query);
-	}, [stableList, maxScore, limit, mapResultItem, query, executeFuzzy]);
+	}, [stableList, maxScore, limit, mapResult, query, executeFuzzy]);
 
 	return results;
 }

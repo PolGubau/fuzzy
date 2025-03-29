@@ -39,13 +39,13 @@ describe("useFuzzy", () => {
 		});
 	});
 
-	it("applies the mapResultItem function to the results", () => {
+	it("applies the mapResult function to the results", () => {
 		const { result: res } = renderHook(() =>
 			useFuzzy({
 				list: mockList,
 				query: "ap",
 				getKey: (item) => [item.name],
-				mapResultItem: (item) => ({
+				mapResult: (item) => ({
 					...item,
 					// Add a custom property to the result item
 					matched: true,

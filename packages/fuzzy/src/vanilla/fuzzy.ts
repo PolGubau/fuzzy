@@ -63,7 +63,7 @@ Note:
  * @param options.debug - If `true`, logs debug information about the search process to the console.
  * @param options.limit - The maximum number of results to return. Defaults to `Number.MAX_SAFE_INTEGER`.
  * @param options.maxScore - The maximum score a result can have to be included in the results. Defaults to `100`.
- * @param options.mapResultItem - A function to map each result item to a different type.
+ * @param options.mapResult - A function to map each result item to a different type.
  *
  * @returns A function that takes a query string and returns a `FuzzyResponse` containing the search results.
  *
@@ -84,7 +84,7 @@ export function fuzzy<T, U = T>(
 		debug = defaults.debug,
 		limit = defaults.limit,
 		maxScore = defaults.maxScore,
-		mapResultItem,
+		mapResult,
 	} = options;
 
 	const normalizedTexts: [T, [string, string, Set<string>][]][] =
@@ -143,7 +143,7 @@ export function fuzzy<T, U = T>(
 
 		// `results` is the array of results, sorted by score, now we filter and transform it
 
-		const parsedResults = parseResults(results, maxScore, limit, mapResultItem);
+		const parsedResults = parseResults(results, maxScore, limit, mapResult);
 
 		const endTime = Date.now();
 

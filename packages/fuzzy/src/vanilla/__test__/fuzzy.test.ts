@@ -100,12 +100,10 @@ describe("fuzzy", () => {
 			matches("BANANA", "banana", 0.1, [[0, 5]]);
 		});
 
-		it("Should transform types when using mapResultItem", () => {
+		it("Should transform types when using mapResult", () => {
 			const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 
-			const res = fuzzy(list, { mapResultItem: (item) => item.length })(
-				"volvo",
-			);
+			const res = fuzzy(list, { mapResult: (item) => item.length })("volvo");
 			const firstItem = res.results[0].item;
 			expect(res.results.length).toBe(1);
 			expect(firstItem).toBe(5);
@@ -133,9 +131,9 @@ describe("fuzzy", () => {
 			expect(res.results.every((result) => result.score <= 0.5)).toBe(true);
 		});
 
-		it("should map result items using mapResultItem", () => {
+		it("should map result items using mapResult", () => {
 			const res = fuzzy(["apple", "banana"], {
-				mapResultItem: (item) => item.toUpperCase(),
+				mapResult: (item) => item.toUpperCase(),
 			})("a");
 			expect(res.results[0].item).toBe("APPLE");
 		});

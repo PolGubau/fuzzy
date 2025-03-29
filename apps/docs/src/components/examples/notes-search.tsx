@@ -47,7 +47,7 @@ const Search: React.FC = () => {
 		// optional `getText` or `key`, same as with `createFuzzySearch`
 		getKey: (item) => [item.title, item.content],
 		// arbitrary mapping function, takes `FuzzyResult<T>` as input
-		mapResultItem: ({ item, score, matches: [nameRanges, contentRanges] }) => ({
+		mapResult: ({ item, score, matches: [nameRanges, contentRanges] }) => ({
 			item,
 			nameRanges,
 			contentRanges,

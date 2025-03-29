@@ -40,7 +40,7 @@ const filteredList = useFuzzy({
   // optional `getKey` or `key`, same as with `createFuzzySearch`
   getKey: (item) => [item.name],
   // arbitrary mapping function, takes `FuzzyResult<T>` as input
-  mapResultItem: ({ item, score, matches: [nameRange] }) => ({ item, nameRange })
+  mapResult: ({ item, score, matches: [nameRange] }) => ({ item, nameRange })
 })
 
 // Render `filteredList`'s labels with matching characters highlighted

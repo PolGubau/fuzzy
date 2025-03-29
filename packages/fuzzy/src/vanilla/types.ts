@@ -23,6 +23,12 @@ export type Matches = Array<HighlightRanges | null>;
  */
 export type Result<T> = { item: T; score: number; matches: Matches };
 
+export type MapResult<T, U = T> = (
+	value: T,
+	index: number,
+	array: Result<T>[],
+) => U;
+
 export type FuzzyOptions<T, U = T> = {
 	/**
 	 * key to search for in the item. This is useful if the item is an object and you want to search for a specific property.
@@ -64,11 +70,11 @@ export type FuzzyOptions<T, U = T> = {
 	 * @default (result) => result.item
 	 * @example (result) => ({ ...result.item, score: result.score })
 	 */
-	mapResultItem?: (result: T) => U;
+	mapResult?: MapResult<T, U>;
 };
 
 export type FuzzyResponse<T> = {
-	results: Array<Result<T>>;
+	results: Result<T>[];
 	/**
 	 * @description The number of results found
 	 * @default 0

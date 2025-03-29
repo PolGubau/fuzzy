@@ -1,4 +1,4 @@
-import type { Result } from "../types";
+import type { MapResult, Result } from "../types";
 
 /**
  * Filters and sorts an array of results based on a maximum score and a limit.
@@ -28,35 +28,35 @@ export const filterResults = <T>(
  * @template U - The type of the output items in the results after mapping.
  *
  * @param results - An array of `Result<T>` objects to be transformed.
- * @param mapResultItem - An optional function that maps an item of type `T` to type `U`.
+ * @param mapResult - An optional function that maps an item of type `T` to type `U`.
  *                         If not provided, the original results are returned as `Result<U>[]`.
  *
- * @returns An array of `Result<U>` objects. If `mapResultItem` is not provided, the original
+ * @returns An array of `Result<U>` objects. If `mapResult` is not provided, the original
  *          results are returned with their type cast to `Result<U>[]`.
  */
 export const getMapResultItem = <T, U>(
 	results: Result<T>[],
-	mapResultItem?: (item: T) => U | undefined,
+	mapResult?: MapResult<T, U>,
 ): Result<U>[] => {
-	// if mapResultItem is not provided, return the original results
-	if (!mapResultItem) {
+	// if mapResult is not provided, return the original results
+	if (!mapResult) {
 		return results as unknown as Result<U>[];
 	}
 
 	// otherwise, map the results using the provided function
-	return results.map(({ item, ...rest }) => ({
+	return results.map(({ item, ...rest }, i, array) => ({
 		...rest,
-		item: mapResultItem(item),
-	})) as unknown as Result<U>[];
+		item: mapResult(item, i, array),
+	}));
 };
 
 export const parseResults = <T, U>(
 	results: Result<T>[],
 	maxScore: number,
 	limit: number,
-	mapResultItem?: (item: T) => U,
+	mapResult?: MapResult<T, U>,
 ): Result<U>[] => {
 	const filteredResults = filterResults(results, maxScore, limit);
 
-	return getMapResultItem(filteredResults, mapResultItem);
+	return getMapResultItem(filteredResults, mapResult);
 };
