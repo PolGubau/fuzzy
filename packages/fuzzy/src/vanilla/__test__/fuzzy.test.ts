@@ -100,17 +100,16 @@ describe("fuzzy", () => {
 			matches("BANANA", "banana", 0.1, [[0, 5]]);
 		});
 
-		it("should handle diacritics-insensitive matches", () => {
-			// matches("żółw", "zolw", 0.1, [[0, 3]]);
-			// matches("áéíóú", "aeiou", 0.1, [[0, 4]]);
-			const text = "żółw";
-			const query = "zolw";
-			const expectedScore = 0.1;
-			const options = [text];
-			const res = fuzzy(options, { debug: false })(query);
-			expect(res).not.toBeNull();
-			expect(res).not.toBeUndefined();
-			expect(res.results.length).toBe(0);
+		it("Should transform types when using mapResultItem", () => {
+			const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+
+			const res = fuzzy(list, { mapResultItem: (item) => item.length })(
+				"volvo",
+			);
+			const firstItem = res.results[0].item;
+			expect(res.results.length).toBe(1);
+			expect(firstItem).toBe(5);
+			expect(typeof firstItem).toBe("number");
 		});
 
 		it("should match partial queries with higher scores", () => {

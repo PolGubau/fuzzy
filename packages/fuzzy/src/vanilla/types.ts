@@ -60,7 +60,7 @@ export type FuzzyOptions<T, U = T> = {
 	maxScore?: number;
 
 	/**
-	 * Function that maps the result item to a new item. This is useful if you want to transform the result item before returning it.
+	 * Function that maps the result item to a new item. Mostly used to transform the result item to a different type.
 	 * @default (result) => result.item
 	 * @example (result) => ({ ...result.item, score: result.score })
 	 */

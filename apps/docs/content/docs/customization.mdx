@@ -13,6 +13,7 @@ const fuzzySearch = fuzzy(list, {
   debug: true, // Add any additional options here
   limit: 10, // The maximum number of results to return
   maxScore: 2.5, // The maximum score for the results
+  mapResultItem: (item) => item, // A function to map the result item to a new object
 });
 ```
 ### `Key` and `getKey`
@@ -78,38 +79,23 @@ In the same way, you can use the `getKey` option to search by multiple or/and ne
 ```ts twoslash  title="index.ts"
 // @noErrors
 type Fuzzy<T> = (query: string) => {
-    results: Array<Result<T>>;
-    /**
-     * The number of results found
-     */
-    length: number;
-    /**
-     * The time it took to run the search in milliseconds
-     */
-    time: number;
-    /**
-     * The query that was used to search
-     * @default ""
-     */
-    normalizedQuery: string;
-    /**
-     * True if the query was an exact match to the item
-     * @default false
-     */
-    hasExactMatch: boolean;
-    /**
-     * The best match found
-     */
-    bestMatch: Result<T> | null;
-    /**
-     * True if there were any results found
-     * @default false
-     * /
-     * @example true
-     **/
-    hasResults: boolean;
+  results: Array<{ item: T; score: number; matches: Matches }>;
+  length: number;
+  time: number;
+  normalizedQuery: string;
+  hasExactMatch: boolean;
+  bestMatch: { item: T; score: number; matches: Matches } | null;
+  hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
+export type FuzzyOptions<T, U = T> = {
+  key?: keyof T;
+  getKey?: (item: T) => Array<string | null>;
+  debug?: boolean;
+  limit?: number;
+  maxScore?: number;
+  mapResultItem?: (result: T) => U;
+};
+function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
 // ---cut---
 const list = [
   { name: "volvo", year: 2020, owner: { fullname: "John Doe" } },
@@ -133,38 +119,23 @@ This could be useful if you have a large list and only want to show the top resu
 ```ts twoslash title="index.ts"
 // @noErrors
 type Fuzzy<T> = (query: string) => {
-    results: Array<Result<T>>;
-    /**
-     * The number of results found
-     */
-    length: number;
-    /**
-     * The time it took to run the search in milliseconds
-     */
-    time: number;
-    /**
-     * The query that was used to search
-     * @default ""
-     */
-    normalizedQuery: string;
-    /**
-     * True if the query was an exact match to the item
-     * @default false
-     */
-    hasExactMatch: boolean;
-    /**
-     * The best match found
-     */
-    bestMatch: Result<T> | null;
-    /**
-     * True if there were any results found
-     * @default false
-     * /
-     * @example true
-     **/
-    hasResults: boolean;
+  results: Array<{ item: T; score: number; matches: Matches }>;
+  length: number;
+  time: number;
+  normalizedQuery: string;
+  hasExactMatch: boolean;
+  bestMatch: { item: T; score: number; matches: Matches } | null;
+  hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
+export type FuzzyOptions<T, U = T> = {
+  key?: keyof T;
+  getKey?: (item: T) => Array<string | null>;
+  debug?: boolean;
+  limit?: number;
+  maxScore?: number;
+  mapResultItem?: (result: T) => U;
+};
+function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 
@@ -183,38 +154,23 @@ Remember that the score is a number starting from 0 (exact match), and it increa
 ```ts twoslash title="index.ts"
 // @noErrors
 type Fuzzy<T> = (query: string) => {
-    results: Array<Result<T>>;
-    /**
-     * The number of results found
-     */
-    length: number;
-    /**
-     * The time it took to run the search in milliseconds
-     */
-    time: number;
-    /**
-     * The query that was used to search
-     * @default ""
-     */
-    normalizedQuery: string;
-    /**
-     * True if the query was an exact match to the item
-     * @default false
-     */
-    hasExactMatch: boolean;
-    /**
-     * The best match found
-     */
-    bestMatch: Result<T> | null;
-    /**
-     * True if there were any results found
-     * @default false
-     * /
-     * @example true
-     **/
-    hasResults: boolean;
+  results: Array<{ item: T; score: number; matches: Matches }>;
+  length: number;
+  time: number;
+  normalizedQuery: string;
+  hasExactMatch: boolean;
+  bestMatch: { item: T; score: number; matches: Matches } | null;
+  hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
+export type FuzzyOptions<T, U = T> = {
+  key?: keyof T;
+  getKey?: (item: T) => Array<string | null>;
+  debug?: boolean;
+  limit?: number;
+  maxScore?: number;
+  mapResultItem?: (result: T) => U;
+};
+function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
 
@@ -236,38 +192,23 @@ The `debug` option allows you to log details about the search to the **browser c
 ```ts twoslash title="index.ts"
 // @noErrors
 type Fuzzy<T> = (query: string) => {
-    results: Array<Result<T>>;
-    /**
-     * The number of results found
-     */
-    length: number;
-    /**
-     * The time it took to run the search in milliseconds
-     */
-    time: number;
-    /**
-     * The query that was used to search
-     * @default ""
-     */
-    normalizedQuery: string;
-    /**
-     * True if the query was an exact match to the item
-     * @default false
-     */
-    hasExactMatch: boolean;
-    /**
-     * The best match found
-     */
-    bestMatch: Result<T> | null;
-    /**
-     * True if there were any results found
-     * @default false
-     * /
-     * @example true
-     **/
-    hasResults: boolean;
+  results: Array<{ item: T; score: number; matches: Matches }>;
+  length: number;
+  time: number;
+  normalizedQuery: string;
+  hasExactMatch: boolean;
+  bestMatch: { item: T; score: number; matches: Matches } | null;
+  hasResults: boolean;
 }
-function fuzzy<T>(collection: T[], options?: FuzzyOptions<T>): Fuzzy<T>;
+export type FuzzyOptions<T, U = T> = {
+  key?: keyof T;
+  getKey?: (item: T) => Array<string | null>;
+  debug?: boolean;
+  limit?: number;
+  maxScore?: number;
+  mapResultItem?: (result: T) => U;
+};
+function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
 // ---cut---
 const list = ["volvo", "seat", "mercedes"];
 
@@ -277,6 +218,82 @@ const fuzzySearch = fuzzy(list, {
 })
 ```
 
+
+
+### The `mapResultItem` option
+
+Function called internally before the response that maps the result item to a new item. Mostly used to transform the result item to a different type.
+
+```ts twoslash title="index.ts"
+// @noErrors
+type Fuzzy<T> = (query: string) => {
+  results: Array<{ item: T; score: number; matches: Matches }>;
+  length: number;
+  time: number;
+  normalizedQuery: string;
+  hasExactMatch: boolean;
+  bestMatch: { item: T; score: number; matches: Matches } | null;
+  hasResults: boolean;
+}
+export type FuzzyOptions<T, U = T> = {
+  key?: keyof T;
+  getKey?: (item: T) => Array<string | null>;
+  debug?: boolean;
+  limit?: number;
+  maxScore?: number;
+  mapResultItem?: (result: T) => U;
+};
+function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
+// ---cut---
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+
+const fuzzySearch = fuzzy(list, {
+   mapResultItem: (item) => item.toUpperCase(), // Map the result item to a new item
+// ^^^^^^^^^^^^^
+});
+  const result = fuzzySearch("volvo");
+  console.log(result.results[0].item); // "VOLVO"
+
+```
+The ouput will return the result item as a string in uppercase.
+
+#### Typescript generics
+Fuzzy uses internally two generics, one for the input (the list) and one for the output (the result item), this one will default to the input type unless `mapResultItem` modifies the type.
+
+```ts twoslash title="index.ts"
+// @noErrors
+type Fuzzy<T> = (query: string) => {
+  results: Array<{ item: T; score: number; matches: Matches }>;
+  length: number;
+  time: number;
+  normalizedQuery: string;
+  hasExactMatch: boolean;
+  bestMatch: { item: T; score: number; matches: Matches } | null;
+  hasResults: boolean;
+}
+export type FuzzyOptions<T, U = T> = {
+  key?: keyof T;
+  getKey?: (item: T) => Array<string | null>;
+  debug?: boolean;
+  limit?: number;
+  maxScore?: number;
+  mapResultItem?: (result: T) => U;
+};
+function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
+// ---cut---
+const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+
+const res = fuzzy(list, { mapResultItem: (item) => item.length })("volvo");
+
+const firstItem = res.results[0].item;
+
+console.log(firstItem); // 5
+//          ^?
+```
+
+The `mapResultItem` function will return the length of the string, so the type of the result item will be `number`.
+
+The input type will be `string` and the output type will be `number`.
 
 ## Summary
 
