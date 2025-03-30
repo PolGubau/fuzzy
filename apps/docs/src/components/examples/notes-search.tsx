@@ -105,3 +105,23 @@ export const ExampleNotesSearchDisplay = () => {
 		</div>
 	);
 };
+
+
+
+const App: React.FC = () => {
+  const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+  const query = "volv";
+  const filteredList = useFuzzy({ list, query });
+
+  return (
+      <ul>
+        {filteredList.map(({ item, matches: [nameRanges, contentRanges] }) => (
+          <li key={item.id}>
+            <h3>
+              <Highlight text={item.title} ranges={nameRanges} />
+            </h3>
+          </li>
+        ))}
+      </ul>
+  );
+};

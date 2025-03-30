@@ -9,6 +9,7 @@ import { File, Files, Folder } from "fumadocs-ui/components/files";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { TypeTable } from "fumadocs-ui/components/type-table";
+import { Callout } from "fumadocs-ui/components/callout";
 import defaultMdxComponents, { createRelativeLink } from "fumadocs-ui/mdx";
 import {
 	DocsBody,
@@ -61,6 +62,7 @@ export default async function Page({
 					components={{
 						...defaultMdxComponents,
 						Popup,
+						Callout,
 						Accordion,
 						Accordions,
 						Tab,
