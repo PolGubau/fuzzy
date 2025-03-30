@@ -36,13 +36,13 @@ export function getFuzzyMatchScore(
 		return [0.9, [[exactContainsIdx, exactContainsIdx + queryLen - 1]]];
 	}
 
-	const containsIdx = normalizedItem.indexOf(normalizedQuery);
-	if (
-		containsIdx > -1 &&
-		isValidWordBoundary(normalizedItem[containsIdx - 1])
-	) {
-		return [1, [[containsIdx, containsIdx + queryLen - 1]]];
-	}
+	/**
+	 * Finds the starting index of the first occurrence of the normalized query string
+	 * within the normalized item string. If the query is not found, it returns -1.
+	 *
+	 * @type {number}
+	 */
+	const containsIdx: number = normalizedItem.indexOf(normalizedQuery);
 
 	// Match by words included
 	// Score: 1.5 + 0.2*words (so that it's better than two non-word chunks)

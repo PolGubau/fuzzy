@@ -187,13 +187,7 @@ describe("getFuzzyMatchScore", () => {
 				queryWords,
 			);
 
-			expect(result).toEqual([
-				1.9,
-				[
-					[0, 4], // "hello"
-					[6, 10], // "world"
-				],
-			]);
+			expect(result).toEqual([0.5, [[0, 10]]]);
 		});
 
 		it("should return null when not all query words exist in itemWords", () => {
@@ -213,11 +207,34 @@ describe("getFuzzyMatchScore", () => {
 				queryWords,
 			);
 
-			expect(result).toBeNull();
+			expect(result).toStrictEqual([0.5, [[0, 10]]]);
 		});
 	});
 
-	describe("getFuzzyMatchScore - contains query at a word boundary", () => {
+	describe("contains query at a word boundary", () => {
+		it("should return score 1 when query appears after a valid word boundary", () => {
+			const item = "hello -world example";
+			const normalizedItem = "hello -world example";
+			const itemWords = new Set(["hello", "world", "example"]);
+			const query = "world";
+			const normalizedQuery = "world";
+			const queryWords = ["world"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toEqual([
+				0.9,
+				[[7, 11]], // "world" después de un guion
+			]);
+		});
+
 		it("should return correct score and highlight range when query is found at a word boundary", () => {
 			const item = "hello world example";
 			const normalizedItem = "hello world example";
@@ -236,12 +253,12 @@ describe("getFuzzyMatchScore", () => {
 			);
 
 			expect(result).toEqual([
-				1,
+				0.9,
 				[[6, 10]], // "world" at index 6
 			]);
 		});
 
-		it("should return null when query is found but not at a word boundary", () => {
+		it("should return correct score and highlight range when query is contained but not at a word boundary", () => {
 			const item = "helloworld example";
 			const normalizedItem = "helloworld example";
 			const itemWords = new Set(["helloworld", "example"]);
@@ -258,7 +275,7 @@ describe("getFuzzyMatchScore", () => {
 				queryWords,
 			);
 
-			expect(result).toBeNull();
+			expect(result).toStrictEqual([2, [[5, 9]]]);
 		});
 	});
 	describe("Query words match in itemWords", () => {
@@ -325,10 +342,9 @@ describe("getFuzzyMatchScore", () => {
 			);
 
 			expect(result).toEqual([
-				1.9, // 1.5 + 2*0.2
+				0.9,
 				[
-					[0, 4], // "hello" (first occurrence)
-					[12, 16], // "world"
+					[6, 16], // "world"
 				].sort((a, b) => a[0] - b[0]),
 			]);
 		});
