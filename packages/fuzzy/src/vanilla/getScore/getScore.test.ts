@@ -169,4 +169,168 @@ describe("getFuzzyMatchScore", () => {
 			),
 		).toBeNull();
 	});
+	describe("query words contained in itemWords", () => {
+		it("should return correct score and highlight ranges when all query words exist in itemWords", () => {
+			const item = "hello world example";
+			const normalizedItem = "hello world example";
+			const itemWords = new Set(["hello", "world", "example"]);
+			const query = "hello world";
+			const normalizedQuery = "hello world";
+			const queryWords = ["hello", "world"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toEqual([
+				1.9,
+				[
+					[0, 4], // "hello"
+					[6, 10], // "world"
+				],
+			]);
+		});
+
+		it("should return null when not all query words exist in itemWords", () => {
+			const item = "hello world example";
+			const normalizedItem = "hello world example";
+			const itemWords = new Set(["hello", "example"]);
+			const query = "hello world";
+			const normalizedQuery = "hello world";
+			const queryWords = ["hello", "world"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toBeNull();
+		});
+	});
+
+	describe("getFuzzyMatchScore - contains query at a word boundary", () => {
+		it("should return correct score and highlight range when query is found at a word boundary", () => {
+			const item = "hello world example";
+			const normalizedItem = "hello world example";
+			const itemWords = new Set(["hello", "world", "example"]);
+			const query = "world";
+			const normalizedQuery = "world";
+			const queryWords = ["world"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toEqual([
+				1,
+				[[6, 10]], // "world" at index 6
+			]);
+		});
+
+		it("should return null when query is found but not at a word boundary", () => {
+			const item = "helloworld example";
+			const normalizedItem = "helloworld example";
+			const itemWords = new Set(["helloworld", "example"]);
+			const query = "world";
+			const normalizedQuery = "world";
+			const queryWords = ["world"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toBeNull();
+		});
+	});
+	describe("Query words match in itemWords", () => {
+		it("should return correct score and ranges when all query words are in itemWords", () => {
+			const item = "hello world example";
+			const normalizedItem = "hello world example";
+			const itemWords = new Set(["hello", "world", "example"]);
+			const query = "world hello";
+			const normalizedQuery = "world hello";
+			const queryWords = ["world", "hello"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toEqual([
+				1.9, // 1.5 + 2*0.2 (because queryWords.length is 2)
+				[
+					[6, 10], // "world"
+					[0, 4], // "hello"
+				].sort((a, b) => a[0] - b[0]),
+			]);
+		});
+
+		it("should return null if not all query words are in itemWords", () => {
+			const item = "hello world";
+			const normalizedItem = "hello world";
+			const itemWords = new Set(["hello", "world"]);
+			const query = "world missing";
+			const normalizedQuery = "world missing";
+			const queryWords = ["world", "missing"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+			expect(result).toBeNull();
+		});
+
+		it("should handle repeated words correctly", () => {
+			const item = "hello hello world";
+			const normalizedItem = "hello hello world";
+			const itemWords = new Set(["hello", "world"]);
+			const query = "hello world";
+			const normalizedQuery = "hello world";
+			const queryWords = ["hello", "world"];
+
+			const result = getFuzzyMatchScore(
+				item,
+				normalizedItem,
+				itemWords,
+				query,
+				normalizedQuery,
+				queryWords,
+			);
+
+			expect(result).toEqual([
+				1.9, // 1.5 + 2*0.2
+				[
+					[0, 4], // "hello" (first occurrence)
+					[12, 16], // "world"
+				].sort((a, b) => a[0] - b[0]),
+			]);
+		});
+	});
 });
