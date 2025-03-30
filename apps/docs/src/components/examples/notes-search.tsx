@@ -36,22 +36,12 @@ const Search: React.FC = () => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setQuery(value);
-		// const { results } = fuzzySearch(value);
-		// setResults(results.length ? results : unsortedResults);
 	};
 
-	const filteredList = useFuzzy({
+	const { results } = useFuzzy({
 		list: notes,
-		// If `queryText` is blank, `list` is returned in whole
 		query,
-		// optional `getText` or `key`, same as with `createFuzzySearch`
 		getKey: (item) => [item.title, item.content],
-		// arbitrary mapping function, takes `FuzzyResult<T>` as input
-		mapResult: ({ item, score, matches: [nameRanges, contentRanges] }) => ({
-			item,
-			nameRanges,
-			contentRanges,
-		}),
 	});
 
 	return (
@@ -67,10 +57,10 @@ const Search: React.FC = () => {
 				placeholder="Search notes..."
 			/>
 			<ul>
-				{filteredList.map(({ item, nameRanges, contentRanges }) => (
+				{results.map(({ item, matches: [titleRanges, contentRanges] }) => (
 					<li key={item.id}>
 						<h3>
-							<Highlight text={item.title} ranges={nameRanges} />
+							<Highlight text={item.title} ranges={titleRanges} />
 						</h3>
 						<p>
 							<Highlight text={item.content} ranges={contentRanges} />
@@ -106,22 +96,20 @@ export const ExampleNotesSearchDisplay = () => {
 	);
 };
 
-
-
 const App: React.FC = () => {
-  const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
-  const query = "volv";
-  const filteredList = useFuzzy({ list, query });
+	const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+	const query = "volv";
+	const { results } = useFuzzy({ list, query });
 
-  return (
-      <ul>
-        {filteredList.map(({ item, matches: [nameRanges, contentRanges] }) => (
-          <li key={item.id}>
-            <h3>
-              <Highlight text={item.title} ranges={nameRanges} />
-            </h3>
-          </li>
-        ))}
-      </ul>
-  );
+	return (
+		<ul>
+			{results.map(({ item, matches }) => (
+				<li key={item}>
+					<h3>
+						<Highlight text={item} ranges={matches[0]} />
+					</h3>
+				</li>
+			))}
+		</ul>
+	);
 };

@@ -3,7 +3,7 @@ import type { HighlightRanges } from "../vanilla/types";
 
 type Style = CSSProperties;
 
-type Props = {
+type HighlightProps = {
 	text: string;
 	ranges: HighlightRanges | null;
 	style?: Style;
@@ -12,8 +12,6 @@ type Props = {
 
 const fullSelection: HighlightRanges = [[0, Number.MAX_VALUE]];
 const defaultStyle: Style = { backgroundColor: "rgba(245,220,0,.25)" };
-
-type HighlightProps = Props;
 
 const TextHighlighter: React.FC<HighlightProps> = ({
 	text,
@@ -68,7 +66,7 @@ const TextHighlighter: React.FC<HighlightProps> = ({
 	return <>{nodes}</>;
 };
 
-interface HighlightExport extends FC<Props> {
+interface HighlightExport extends FC<HighlightProps> {
 	FullSelection: typeof fullSelection;
 }
 
@@ -79,9 +77,9 @@ interface HighlightExport extends FC<Props> {
  * static property `FullSelection` for handling full text selection functionality.
  *
  * @component
- * @template Props - The props type for the `TextHighlighter` component.
+ * @template HighlightProps - The props type for the `TextHighlighter` component.
  *
- * @property {FC<Props>} Highlight - The main text highlighter component.
+ * @property {FC<HighlightProps>} Highlight - The main text highlighter component.
  * @property {typeof fullSelection} FullSelection - A static property for full text selection.
  *
  * @example
@@ -89,12 +87,12 @@ interface HighlightExport extends FC<Props> {
  * import { Highlight } from './Highlight';
  *
  * const App = () => (
- *   <Highlight someProp="value" />
+ *   <Highlight text="Hello, World!" ranges={[[0, 4]]} />
  * );
  * ```
  */
 export const Highlight: HighlightExport = Object.assign(
-	memo(TextHighlighter) as FC<Props>,
+	memo(TextHighlighter) as FC<HighlightProps>,
 	{
 		FullSelection: fullSelection,
 	},
@@ -104,7 +102,7 @@ export function createHighlightComponent(
 	customStyle: Style,
 	customClassName: string,
 ): HighlightExport {
-	const HighlightComponent: React.FC<Props> = ({
+	const HighlightComponent: React.FC<HighlightProps> = ({
 		style,
 		className,
 		...props

@@ -1,18 +1,13 @@
 import { FuzzyBuilder } from "./builders/searcher.builder";
 import { defaults } from "./constants";
 import { getFuzzyMatchScore } from "./getScore/getScore";
-import {
-	filterResults,
-	getMapResultItem,
-	parseResults,
-} from "./helpers/filters";
-import { sortByScore } from "./helpers/sorters";
+import { parseResults } from "./helpers/filters";
 import { emptyResponse } from "./helpers/transformers";
 import normalizeText from "./normalizeText";
 import type {
+	Fuzzy,
 	FuzzyOptions,
 	FuzzyResponse,
-	Fuzzy,
 	Matches,
 	Result,
 } from "./types";
