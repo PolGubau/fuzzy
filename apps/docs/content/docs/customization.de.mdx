@@ -1,26 +1,26 @@
 ---
-title: Customization
-description: Customizing the behavior of the library.
+title: Anpassung
+description: Anpassung des Verhaltens der Bibliothek.
 ---
 
-## Fuzzy List Options
+## Fuzzy-List-Optionen
 
-To customize the search behavior, provide an options object with the following parameters:
+Um das Suchverhalten anzupassen, geben Sie ein Optionsobjekt mit den folgenden Parametern an:
 
 ```ts title="index.ts"
 const fuzzySearch = fuzzy(list, {
-  key: "name", // Property to search in the items
-  getKey: (item) => [item.name, item.author.fullname], // Search multiple properties
-  debug: true, // Enable debugging
-  limit: 10, // Max number of results
-  maxScore: 2.5, // Max score threshold for results
-  mapResult: (item) => item, // Transform the result item
+  key: "name", // Eigenschaft, in der gesucht werden soll
+  getKey: (item) => [item.name, item.author.fullname], // Mehrere Eigenschaften durchsuchen
+  debug: true, // Debugging aktivieren
+  limit: 10, // Maximale Anzahl der Ergebnisse
+  maxScore: 2.5, // Maximaler Score-Schwellenwert für Ergebnisse
+  mapResult: (item) => item, // Ergebnisobjekt transformieren
 });
 ```
 
-### `key` and `getKey`
+### `key` und `getKey`
 
-If the dataset consists of objects, use `key` or `getKey` to specify which properties to search in.
+Wenn der Datensatz aus Objekten besteht, verwenden Sie `key` oder `getKey`, um die zu durchsuchenden Eigenschaften anzugeben.
 
 ```ts twoslash title="index.ts"
 // @noErrors
@@ -52,7 +52,7 @@ const fuzzedList = fuzzySearch("volv");
 console.log(fuzzedList);
 ```
 
-Similarly, `getKey` allows searching across multiple or nested properties.
+Ebenso ermöglicht `getKey` die Suche über mehrere oder verschachtelte Eigenschaften.
 
 ```ts twoslash title="index.ts"
 // @noErrors
@@ -67,9 +67,9 @@ const fuzzySearch = fuzzy(list, {
 });
 ```
 
-### `limit` Option
+### `limit`-Option
 
-Limits the number of search results returned. Useful for optimizing UI rendering.
+Begrenzt die Anzahl der zurückgegebenen Suchergebnisse. Nützlich für die Optimierung des UI-Renderings.
 
 ```ts twoslash title="index.ts"
 // @noErrors
@@ -78,25 +78,25 @@ const fuzzySearch = fuzzy(["volvo", "seat", "mercedes", "audi", "bmw"], {
 });
 ```
 
-The result set will contain a maximum of **5** items.
+Das Resultset enthält maximal **5** Einträge.
 
-### `maxScore` Option
+### `maxScore`-Option
 
-Filters results by score, which represents the distance from an exact match.
+Filtert Ergebnisse nach Score, der die Entfernung von einer exakten Übereinstimmung darstellt.
 
 ```ts twoslash title="index.ts"
 // @noErrors
 const fuzzySearch = fuzzy(["volvo", "seat", "mercedes", "audi", "bmw"], {
-  maxScore: 2, // Exclude results with a score above 2
+  maxScore: 2, // Ergebnisse mit einem Score über 2 ausschließen
 });
 ```
 
-#### Sorting Behavior
-When using both `limit` and `maxScore`, results are first filtered by score, then truncated to the `limit`.
+#### Sortierverhalten
+Wenn sowohl `limit` als auch `maxScore` verwendet werden, werden die Ergebnisse zuerst nach Score gefiltert und dann auf das `limit` gekürzt.
 
-### `debug` Option
+### `debug`-Option
 
-Enables logging of search execution details in the **console**.
+Aktiviert die Protokollierung von Suchausführungsdetails in der **Konsole**.
 
 ```ts twoslash title="index.ts"
 // @noErrors
@@ -105,9 +105,9 @@ const fuzzySearch = fuzzy(["volvo", "seat", "mercedes"], {
 });
 ```
 
-### `mapResult` Option
+### `mapResult`-Option
 
-Transforms result items before returning them.
+Transformiert Ergebnisobjekte, bevor sie zurückgegeben werden.
 
 ```ts twoslash title="index.ts"
 // @noErrors
@@ -119,11 +119,10 @@ const result = fuzzySearch("volvo");
 console.log(result.results[0].item); // "VOLVO"
 ```
 
-#### TypeScript Generics
-The library uses two generics: one for input type (list items) and another for output type (result items). If `mapResult` is used, the output type adapts accordingly.
+#### TypeScript-Generics
+Die Bibliothek verwendet zwei Generics: eines für den Eingabetyp (Listeneinträge) und eines für den Ausgabetyp (Ergebniseinträge). Wenn `mapResult` verwendet wird, passt sich der Ausgabetyp entsprechend an.
 
 ```ts twoslash title="index.ts"
 // @noErrors
 function fuzzy<T, U = T>(collection: T[], options?: FuzzyOptions<T, U>): Fuzzy<U>;
 ```
-
