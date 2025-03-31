@@ -29,8 +29,7 @@ jobs:
         with:
           branches: main
           badges-icon: vitest
-          coverage-summary-path: |
-              ./packages/fuzzy/coverage/coverage-summary.json
+          coverage-summary-path: ./packages/fuzzy/coverage/coverage-summary.json
 
       - run: pnpm build
       
