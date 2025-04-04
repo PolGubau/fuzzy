@@ -31,6 +31,7 @@ filteredList.map(({ item, matches: [range] }) => (
   </div>
 ))
 ```
+<Callout > Now you are using one step only, you don't need to create the `fuzzy` function and then call it with the query. You can just use `useFuzzy` and it will do it for you internally.</Callout>
 
 ## API
 ### `useFuzzy`
@@ -63,8 +64,7 @@ This is a helper component that will highlight the matching characters in the te
 
 You could perfectly recreate this component yourself, but it's provided for convenience.
 
-```tsx twoslash title="App.ts"
-// @noErrors 
+```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
 
 const App = () => {
@@ -77,7 +77,6 @@ const App = () => {
 			{results.map(({ item, matches }) => (
 				<li key={item}>
 						<Highlight text={item} ranges={matches[0]} />
-//           ^^^^^^^^^
 				</li>
 			))}
 		</ul>
@@ -94,8 +93,7 @@ const App = () => {
 
 ### Strings list
 
-```ts twoslash title="App.ts"
-// @noErrors
+```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
 
 const App = () => {
@@ -107,7 +105,6 @@ const App = () => {
 			{results.map(({ item, matches }) => (
 				<li key={item}>
 						<Highlight text={item} ranges={matches[0]} />
-//           ^^^^^^^^^
 				</li>
 			))}
 		</ul>
