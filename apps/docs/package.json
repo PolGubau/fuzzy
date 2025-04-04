@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "pnpm --filter @polgubau/fuzzy build && next build",
     "dev": "next dev --turbopack",
     "start": "next start",
-    "postinstall": "npx fumadocs-mdx && pnpm --filter @polgubau/fuzzy build"
+    "postinstall": "npx fumadocs-mdx"
   },
   "dependencies": {
     "@polgubau/animated": "^1.0.12",
