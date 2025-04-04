@@ -6,7 +6,7 @@
     "build": "next build",
     "dev": "next dev --turbopack",
     "start": "next start",
-    "postinstall": "npx fumadocs-mdx"
+    "postinstall": "npx fumadocs-mdx && pnpm --filter @polgubau/fuzzy build"
   },
   "dependencies": {
     "@polgubau/animated": "^1.0.12",
