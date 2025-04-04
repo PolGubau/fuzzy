@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "pnpm run /^dev:.*/",
     "dev:lib": "cd packages/fuzzy && pnpm build:watch",
-    "dev:app": "cd apps/landing && pnpm dev",
+    "dev:app": "cd apps/docs && pnpm dev",
     "build:lib": "cd packages/fuzzy && pnpm build",
     "build": "pnpm -r build"
   },

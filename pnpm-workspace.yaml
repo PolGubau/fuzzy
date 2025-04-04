@@ -1,5 +1,4 @@
 packages:
   - packages/fuzzy
-  - apps/landing
   - apps/docs
 
