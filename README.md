@@ -14,17 +14,6 @@
 
 A collection of modern typescript utilities. 
 
-## 📦 Installation
-
-Install the package via npm or pnpm:
-
-```sh
-npm install @polgubau/fuzzy
-# or
-pnpm add @polgubau/fuzzy
-```
-
-
 ## What and why
 
 Over the past few years, TypeScript has become almost my second mother tongue after Spanish.  
@@ -66,9 +55,22 @@ console.log(fuzzedList);
 
 ```
  
-## TypeScript Support
+## Documentation
+The documentation page is available at [fuzzy.polgubau.com](https://fuzzy.polgubau.com).
 
-As it should always be, this library includes full TypeScript support with type definitions included.
+The documentation is built using [Fumadocs](https://fumadocs.com) with some customizations.
+
+### I18n support
+
+The documentation is available in multiple languages. You can switch between them using the language selector in the top right corner of the page.
+Currently, the following languages are supported:
+
+| Language | Supported |
+| -------- | --------- |
+| English  | ✅       |
+| Spanish  | ✅       |
+| Catalan  | ✅       |
+| German   | ✅       |
 
 
 
