@@ -11,15 +11,13 @@
 ![Downloads](https://img.shields.io/npm/dt/%40polgubau%2Ffuzzy?logo=npm&label=downloads)
 
 # @polgubau/fuzzy
-
-A collection of modern typescript utilities. 
-
+**@polgubau/fuzzy** is an optimized fuzzy finder library designed with TypeScript from the roots. You just need to type one command and call one function to get a fuzzy finder for your project.
+ 
 ## What and why
+Filters in JavaScript are often slow and cumbersome. The native `Array.prototype.filter` method is not optimized for performance, especially when dealing with large datasets. This library provides a simple and efficient way to perform fuzzy searches on arrays of strings.
 
-Over the past few years, TypeScript has become almost my second mother tongue after Spanish.  
-I kept noticing how often I was rewriting the same utilities "debounce", "throttle", or "copy to clipboard" across different projects. Instead of reinventing the wheel every time, I decided to build a small library with the utilities I use the most in my daily work.
+It allows you to create a fuzzy search function that can be reused across your application, making it easy to filter lists based on user input.
 
-**@polgubau/fuzzy** is a lightweight utility library designed to simplify common JavaScript and TypeScript tasks. It's modular, framework-agnostic, tree-shakable, and optimized for performance.
 
 ### What this is NOT ⚠️
 - A catch-all library that solves every problem.
@@ -52,7 +50,24 @@ const fuzzySearch = fuzzy(list);
 // Run this whenever the search term changes
 const fuzzedList = fuzzySearch(queryText);
 console.log(fuzzedList); 
+```
 
+## Using React? 
+To simplify the integration of fuzzy search into your React applications, we provide a custom hook called `useFuzzy`.
+
+```tsx title="App.tsx"
+import { useFuzzy, Highlight } from '@polgubau/fuzzy/react' // Note: now importing from /react
+
+const filteredList = useFuzzy({
+  list: ["volvo", "seat", "mercedes", "audi", "bmw"],
+  query: "volv"
+})
+
+filteredList.map(({ item, matches: [range] }) => (
+  <div key={item}>
+    <Highlight text={item} ranges={range} />
+  </div>
+))
 ```
  
 ## Documentation
