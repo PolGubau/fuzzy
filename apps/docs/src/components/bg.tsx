@@ -145,8 +145,7 @@ export function Background({
 		const gl = renderer.gl;
 		gl.clearColor(0, 0, 0, 1); // Set the clear color to black, fully opaque
 
-		// biome-ignore lint/style/useConst: <explanation>
-		let program: Program;
+		let program: Program | null = null;
 
 		function resize() {
 			renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -195,7 +194,8 @@ export function Background({
 
 		function update(time: number) {
 			animationFrameId = requestAnimationFrame(update);
-			program.uniforms.iTime.value = time * 0.001;
+			// biome-ignore lint/style/noNonNullAssertion: <explanation>
+			program!.uniforms.iTime.value = time * 0.001;
 			renderer.render({ scene: mesh });
 		}
 		animationFrameId = requestAnimationFrame(update);
@@ -206,7 +206,8 @@ export function Background({
 			const rect = container.getBoundingClientRect();
 			const x = (e.clientX - rect.left) / rect.width;
 			const y = 1.0 - (e.clientY - rect.top) / rect.height;
-			program.uniforms.uMouse.value = [x, y];
+			// biome-ignore lint/style/noNonNullAssertion: <explanation>
+			program!.uniforms.uMouse.value = [x, y];
 		}
 		container.addEventListener("mousemove", handleMouseMove);
 
