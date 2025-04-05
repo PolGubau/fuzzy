@@ -6,6 +6,8 @@
     "build": "pnpm --filter @polgubau/fuzzy build && next build",
     "dev": "next dev --turbopack",
     "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --ignore-path .gitignore",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --ignore-path .gitignore --fix",
     "postinstall": "npx fumadocs-mdx"
   },
   "dependencies": {

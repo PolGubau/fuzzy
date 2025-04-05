@@ -7,8 +7,7 @@ import type { Locale } from "@/types/base";
 import { i18n } from "@/lib/i18n";
 import Link from "next/link";
 
-const texts = ["MadeBy", "Proudly", "version"] as const;
-type Text = (typeof texts)[number];
+type Text = "MadeBy" | "Proudly" | "version";
 const allLinksTranslations: Record<Text, Record<Locale, string>> = {
 	MadeBy: {
 		en: "Made by",

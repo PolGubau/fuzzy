@@ -11,8 +11,7 @@ import type { SearchLink } from "fumadocs-ui/components/dialog/search";
 const inter = Inter({
 	subsets: ["latin"],
 });
-const interestingLinks = ["Home", "Docs", "Examples"] as const;
-type InterestingLinks = (typeof interestingLinks)[number];
+type InterestingLinks = "Home" | "Docs" | "Examples";
 const allLinksTranslations: [InterestingLinks, Record<Locale, string>][] = [
 	["Home", { es: "Inicio", en: "Home", cat: "Inici", de: "Startseite" }],
 	[

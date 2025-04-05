@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const Header = () => {
 	return (
 		<header className="flex gap-4">
@@ -7,10 +9,10 @@ export const Header = () => {
 				rel="noreferrer"
 				aria-label="Pol Gubau's website"
 			>
-				<img
+				<Image
 					data-component="Avatar"
 					className="rounded-full w-[48px] h-[48px] border-2 border-neutral-500/50"
-					alt=""
+					alt="Pol Gubau's avatar"
 					width="48"
 					height="48"
 					src="https://avatars.githubusercontent.com/u/63197171?v=4&amp;size=64"

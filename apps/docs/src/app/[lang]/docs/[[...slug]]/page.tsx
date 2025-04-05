@@ -76,7 +76,7 @@ export default async function Page({
 						File,
 						Folder,
 						Files,
-						pre: ({ ref: _ref, ...props }) => (
+						pre: ({ ...props }) => (
 							<CodeBlock {...props}>
 								<Pre>{props.children}</Pre>
 							</CodeBlock>
