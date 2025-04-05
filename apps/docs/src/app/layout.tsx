@@ -48,7 +48,20 @@ export default async function RootLayout({
 			<body className="flex flex-col min-h-screen">
 				<I18nProvider
 					locale={lang}
-					locales={locales as unknown as LocaleItem[]}
+					locales={[
+						{
+							name: "English",
+							locale: "en",
+						},
+						{
+							name: "Español",
+							locale: "es",
+						},
+						{
+							name: "Deutsch",
+							locale: "de",
+						},
+					]}
 					translations={baseTranslations[lang]}
 				>
 					<RootProvider
