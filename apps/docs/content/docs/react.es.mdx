@@ -1,24 +1,24 @@
 ---
-title: Fuzzy in React
-description: Simplify your React code with these helpful fuzzy search utilities.
+title: Fuzzy en React
+description: Simplifica tu código de React con estas útiles utilidades de búsqueda difusa.
 ---
 
-## Summary
+## Resumen
 
-You can use this library in React **just like in a regular JavaScript project**, but we provide additional helpers to make integration easier.
+Puedes usar esta librería en React **igual que en un proyecto JavaScript normal**, pero proporcionamos ayudas adicionales para facilitar la integración.
 
-The key differences are:
-- Internal use of `useMemo` and `useCallback` for memoization
-- A more intuitive `API` designed specifically for React
+Las diferencias clave son:
+- Uso interno de `useMemo` y `useCallback` para la memorización
+- Una `API` más intuitiva diseñada específicamente para React
 
-The main concepts are `useFuzzy` and `Highlight`.
+Los conceptos principales son `useFuzzy` y `Highlight`.
 
-## Basic Example
+## Ejemplo básico
 
-With just **a few lines of code**, you can implement fuzzy search that returns matched results and **highlights matching characters**:
+Con solo **unas pocas líneas de código**, puedes implementar una búsqueda difusa que devuelve resultados coincidentes y **resalta los caracteres coincidentes**:
 
 ```tsx title="App.tsx"
-import { useFuzzy, Highlight } from '@polgubau/fuzzy/react' // Note: now importing from /react
+import { useFuzzy, Highlight } from '@polgubau/fuzzy/react' // Nota: ahora se importa desde /react
 
 const filteredList = useFuzzy({
   list: ["volvo", "seat", "mercedes", "audi", "bmw"],
@@ -31,38 +31,46 @@ filteredList.map(({ item, matches: [range] }) => (
   </div>
 ))
 ```
-<Callout title="Why we import from `/react`?">  Its a convention to separate the core library from the React library. This way, you can use the core library in other frameworks or even in vanilla JavaScript. With this approach the imported bundle is smaller and the code is more organized.</Callout>
+
+<Callout title="¿Por qué se importa desde `/react`?">
+Es una convención para separar la librería core de la de React. De esta forma, puedes usar la librería principal en otros frameworks o incluso con JavaScript puro. Así el bundle importado es más pequeño y el código más organizado.
+</Callout>
 
 ## API
+
 ### `useFuzzy`
 
-This is the main hook, providing a performance-optimized way to search through items.
+Este es el hook principal, que proporciona una forma optimizada para buscar elementos.
 
-It accepts the same props as the [`fuzzy` function](/get-started), plus some additional options:
+Acepta las mismas props que la [función `fuzzy`](/get-started), además de algunas opciones adicionales:
 
-1. list - The list of items to search through. <small>Required</small>.
-2. query - The query to search for. <small>Required</small>.
+1. list - La lista de elementos a buscar. <small>Obligatorio</small>.
+2. query - La búsqueda. <small>Obligatorio</small>.
 
-<Callout> Now you are using one step only, you don't need to create the `fuzzy` function and then call it with the query. You can just use `useFuzzy` and it will do it for you internally.</Callout>
+<Callout>
+Ahora solo necesitas un paso, no hace falta crear la función `fuzzy` y luego llamarla con la query. Puedes usar directamente `useFuzzy` y lo hará por ti internamente.
+</Callout>
 
-### All `useFuzzy` Options
+### Todas las opciones de `useFuzzy`
 
 ```tsx title="App.tsx"
 const filteredList = useFuzzy({
-  list, // required, the list of items to search through
-  query, // required, the query to search for (if empty, will return all items)
-  key: "name", // optional, the key if items are objects
-  getKey: (item) => [item.name, item.description], // optional, the key if items are objects (same as key but can be a function or multiple keys)
-  mapResult: (item) => ( item ),  // arbitrary mapping function, takes `Result<T>` as input
-  debug: true, // optional, if true will log the results to the console
-  limit: 10, // optional, the maximum number of results to return  
-  maxScore: 0.5, // optional, the maximum score to return 
+  list, // obligatorio, la lista de elementos a buscar
+  query, // obligatorio, la query (si está vacía, devuelve todos los elementos)
+  key: "name", // opcional, clave si los items son objetos
+  getKey: (item) => [item.name, item.description], // opcional, igual que key pero puede ser una función o múltiples claves
+  mapResult: (item) => ( item ),  // función de mapeo personalizada, recibe `Result<T>`
+  debug: true, // opcional, si es true, muestra resultados en consola
+  limit: 10, // opcional, número máximo de resultados
+  maxScore: 0.5, // opcional, puntuación máxima permitida
 })
 ```
-### Highlight
-This is a helper component that will highlight the matching characters in the text.
 
-You could perfectly recreate this component yourself, but it's provided for convenience.
+### Highlight
+
+Este es un componente de ayuda que resalta los caracteres coincidentes en el texto.
+
+Podrías recrearlo tú mismo sin problema, pero lo ofrecemos por comodidad.
 
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
@@ -76,7 +84,7 @@ const App = () => {
 		<ul>
 			{results.map(({ item, matches }) => (
 				<li key={item}>
-						<Highlight text={item} ranges={matches[0]} />
+					<Highlight text={item} ranges={matches[0]} />
 				</li>
 			))}
 		</ul>
@@ -84,14 +92,13 @@ const App = () => {
 };
 ```
 
-
-#### Reference
+#### Referencia 
 <AutoTypeTable path="./src/types/lib.ts" name="HighlightProps" />
 
 
-## Examples
+## Ejemplos
 
-### Static strings list
+### Lista de cadenas estáticas
 
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
@@ -112,7 +119,7 @@ const App = () => {
 };
 ```
 
-### Strings search from input
+### Buscando strings desde un input
 
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
@@ -138,7 +145,7 @@ const App = () => {
 };
 ```
 
-### Object search by one key
+### Búsqueda de objetos por una clave
 
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
@@ -172,7 +179,7 @@ const App = () => {
 };
 ```
 
-### Objects search by multiple keys
+### Búsqueda de objetos por múltiples claves
 
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
@@ -197,8 +204,8 @@ const App = () => {
 			<ul>
 				{results.map(({ item, matches: [nameMatch, countryMatch] }) => (
 					<li key={item.name}>
-						<p>Name: <Highlight text={item.name} ranges={nameMatch} /></p>
-						<p>Country: <Highlight text={item.country} ranges={countryMatch} /></p>
+						<p>Nombre: <Highlight text={item.name} ranges={nameMatch} /></p>
+						<p>País: <Highlight text={item.country} ranges={countryMatch} /></p>
 					</li>
 				))}
 			</ul>

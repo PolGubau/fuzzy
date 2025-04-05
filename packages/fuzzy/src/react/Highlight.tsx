@@ -4,9 +4,28 @@ import type { HighlightRanges } from "../vanilla/types";
 type Style = CSSProperties;
 
 type HighlightProps = {
+	/**
+	 * The text to be highlighted.
+	 * @default ""
+	 * @example "Hello, World!"
+	 */
 	text: string;
+
+	/**
+	 * The ranges of text to be highlighted.
+	 * @default null
+	 * @example [[0, 4], [7, 11]]
+	 */
 	ranges: HighlightRanges | null;
+	/**
+	 * The style to be applied to the highlighted text.
+	 * @default { backgroundColor: "rgba(245,220,0,.25)" }
+	 */
 	style?: Style;
+	/**
+	 * The class name to be applied to the highlighted text.
+	 * @default ""
+	 */
 	className?: string;
 };
 
@@ -16,7 +35,7 @@ const defaultStyle: Style = { backgroundColor: "rgba(245,220,0,.25)" };
 const TextHighlighter: React.FC<HighlightProps> = ({
 	text,
 	ranges,
-	style,
+	style = defaultStyle,
 	className,
 }) => {
 	if (!ranges || ranges.length === 0) {
@@ -45,11 +64,7 @@ const TextHighlighter: React.FC<HighlightProps> = ({
 		}
 
 		nodes.push(
-			<span
-				style={style ?? defaultStyle}
-				className={className}
-				key={`${start}-${end}`}
-			>
+			<span style={style} className={className} key={`${start}-${end}`}>
 				{text.slice(start, end + 1)}
 			</span>,
 		);
