@@ -52,7 +52,20 @@ const fuzzySearch = fuzzy(list, {
   getKey: (item) => [item.name, item.owner.fullname],
 })
 ```
-Now you are ready to search with any other string.
-
 
 For further examples check the **Examples** section.
+
+
+## References
+
+### Options
+The options object can have the following properties:
+<AutoTypeTable path="./src/types/lib.ts" name="FuzzyOptions" />
+
+### Response
+The result will be an object with the following properties:
+<AutoTypeTable path="./src/types/lib.ts" name="FuzzyResponse" />
+
+### Results
+<AutoTypeTable path="./src/types/lib.ts" name="Result" />
+

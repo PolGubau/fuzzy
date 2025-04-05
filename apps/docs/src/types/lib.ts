@@ -23,7 +23,27 @@ export type Matches = Array<HighlightRanges | null>;
  * `score` - Difference between the query and the item. The lower the score, the better the match.
  * `matches` - list of matches for the item. Each match is a list of ranges of characters that should be highlighted in the item.
  */
-export type Result<T> = { item: T; score: number; matches: Matches };
+export type Result<T> = {
+	/**
+	 * The item that was matched
+	 * @default null
+	 * @example "foo"
+	 */
+	item: T;
+	/**
+	 * The score of the match. The lower the score, the better the match.
+	 * @default 0
+	 * @example 0.5
+	 */
+	score: number;
+	/**
+	 * The ranges of text that should be highlighted in the item.
+	 * @default null
+	 * @example [[0, 4], [7, 11]]
+	 * @example null
+	 */
+	matches: Matches;
+};
 
 export type MapResult<T, U = T> = (
 	value: T,
@@ -76,9 +96,14 @@ export type FuzzyOptions<T, U = T> = {
 };
 
 export type FuzzyResponse<T> = {
+	/**
+	 * The original query that was used to search
+	 * @default ""
+	 * @example "foo"
+	 */
 	results: Result<T>[];
 	/**
-	 * @description The number of results found
+	 * The number of results found
 	 * @default 0
 	 * @example 0
 	 * @example 10
@@ -99,14 +124,14 @@ export type FuzzyResponse<T> = {
 	normalizedQuery: string;
 
 	/**
-	 * @description True if the query was an exact match to the item
+	 * True if the query was an exact match to the item
 	 * @default false
 	 * @example true
 	 */
 	hasExactMatch: boolean;
 
 	/**
-	 * @description The best match found
+	 * The best match found
 	 * @default null
 	 * @example { item: "foo", score: 0, matches: [] }
 	 * @example null
@@ -114,7 +139,7 @@ export type FuzzyResponse<T> = {
 	bestMatch: Result<T> | null;
 
 	/**
-	 * @description True if there were any results found
+	 * True if there were any results found
 	 * @default false
 	 * @example true
 	 **/
