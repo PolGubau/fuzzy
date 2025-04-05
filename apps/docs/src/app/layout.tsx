@@ -7,7 +7,32 @@ import { Inter } from "next/font/google";
 import type { LocaleItem } from "node_modules/fumadocs-ui/dist/contexts/i18n";
 import "./global.css";
 import type { SearchLink } from "fumadocs-ui/components/dialog/search";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+	title: "Fuzzy - Optimized and easy fuzzy finder library - Pol Gubau Amores",
+	description:
+		"A comprehensive library for fuzzy searching and matching, designed for performance and ease of use.",
+	keywords: [
+		"fuzzy",
+		"fuzzy search",
+		"fuzzy matching",
+		"fuzzy finder",
+		"fuzzy library",
+		"javascript",
+		"typescript",
+	],
+	authors: [{ name: "Pol Gubau Amores", url: "https://polgubau.com" }],
+	openGraph: {
+		title: "Fuzzy - Optimized and easy fuzzy finder library - Pol Gubau Amores",
+		description:
+			"A comprehensive library for fuzzy searching and matching, designed for performance and ease of use.",
+		url: "https://polgubau.com/fuzzy",
+	},
+	twitter: {
+		site: "@polgubau",
+	},
+};
 const inter = Inter({
 	subsets: ["latin"],
 });

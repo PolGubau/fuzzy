@@ -6,7 +6,12 @@ import { GithubInfo } from "fumadocs-ui/components/github-info";
 import type { Locale } from "@/types/base";
 import { i18n } from "@/lib/i18n";
 import Link from "next/link";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+	title:
+		"Docs - Fuzzy - Optimized and easy fuzzy finder library - Pol Gubau Amores",
+};
 type Text = "MadeBy" | "Proudly" | "version";
 const allLinksTranslations: Record<Text, Record<Locale, string>> = {
 	MadeBy: {

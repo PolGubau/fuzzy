@@ -3,7 +3,12 @@ import { HomeLayout } from "fumadocs-ui/layouts/home";
 import type { ReactNode } from "react";
 import { baseOptions } from "../../layout.config";
 import type { Locale } from "@/types/base";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+	title:
+		"Welcome to Fuzzy - Optimized and easy fuzzy finder library - Pol Gubau Amores",
+};
 export default async function Layout({
 	params,
 	children,

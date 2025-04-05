@@ -117,4 +117,3 @@ This project is based on *microfuzz*, which was created by [@Nozbe](https://gith
 [See all contributors](https://github.com/PolGubau/fuzzy/graphs/contributors).
 
 This project is available under the MIT license. See the [LICENSE file](https://github.com/PolGubau/fuzzy/LICENSE) for more info.
-
