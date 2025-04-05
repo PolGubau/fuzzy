@@ -12,19 +12,19 @@ const allLinksTranslations: Record<Text, Record<Locale, string>> = {
 	MadeBy: {
 		en: "Made by",
 		es: "Hecho por",
-		cat: "Fet per",
+		cn: "Fet per",
 		de: "Gemacht von",
 	},
 	Proudly: {
 		en: "Proudly",
 		es: "Totalmente",
-		cat: "Totalment",
+		cn: "Totalment",
 		de: "Stolz",
 	},
 	version: {
 		en: "Version",
 		es: "Versión",
-		cat: "Versió",
+		cn: "Versió",
 		de: "Version",
 	},
 };

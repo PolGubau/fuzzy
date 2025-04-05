@@ -17,7 +17,7 @@ const labels: Record<Locale, { pending: string; success: string }> = {
 		pending: "Kopieren",
 		success: "Kopiert!",
 	},
-	cat: {
+	cn: {
 		pending: "Copiar",
 		success: "Copiat!",
 	},

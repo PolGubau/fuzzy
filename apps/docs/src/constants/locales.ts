@@ -9,7 +9,7 @@ export const locales = [
 	},
 	{
 		name: "Català",
-		locale: "cat",
+		locale: "cn",
 	},
 	{
 		name: "Deutsch",

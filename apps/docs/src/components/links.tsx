@@ -9,7 +9,7 @@ type Props = {
 const dictionary: Record<Locale, string> = {
 	en: "Go to Docs",
 	es: "Ir a la docu",
-	cat: "Veure docs",
+	cn: "Veure docs",
 	de: "Zu den Docs",
 };
 

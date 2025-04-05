@@ -2,7 +2,7 @@ import type { Locale } from "@/types/base";
 import type { Translations } from "fumadocs-ui/i18n";
 
 export const baseTranslations: Record<Locale, Translations> = {
-	cat: {
+	cn: {
 		search: "Cercar",
 		searchNoResult: "Sense resultats",
 		toc: "Taula de continguts",

@@ -13,19 +13,19 @@ const inter = Inter({
 });
 type InterestingLinks = "Home" | "Docs" | "Examples";
 const allLinksTranslations: [InterestingLinks, Record<Locale, string>][] = [
-	["Home", { es: "Inicio", en: "Home", cat: "Inici", de: "Startseite" }],
+	["Home", { es: "Inicio", en: "Home", cn: "Inici", de: "Startseite" }],
 	[
 		"Docs",
 		{
 			es: "Documentación",
 			en: "Docs",
-			cat: "Documentació",
+			cn: "Documentació",
 			de: "Dokumentation",
 		},
 	],
 	[
 		"Examples",
-		{ es: "Ejemplos", en: "Examples", cat: "Exemples", de: "Beispiele" },
+		{ es: "Ejemplos", en: "Examples", cn: "Exemples", de: "Beispiele" },
 	],
 ];
 const getLinksByLang = (locale: Locale): SearchLink[] => {
@@ -48,20 +48,7 @@ export default async function RootLayout({
 			<body className="flex flex-col min-h-screen">
 				<I18nProvider
 					locale={lang}
-					locales={[
-						{
-							name: "English",
-							locale: "en",
-						},
-						{
-							name: "Español",
-							locale: "es",
-						},
-						{
-							name: "Deutsch",
-							locale: "de",
-						},
-					]}
+					locales={locales as unknown as LocaleItem[]}
 					translations={baseTranslations[lang]}
 				>
 					<RootProvider
