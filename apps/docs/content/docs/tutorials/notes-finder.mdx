@@ -61,6 +61,7 @@ In this example, we will build a simple notes app using the fuzzy library. The a
   ```tsx title="src/Search.tsx"
   import { useState } from "react";
   import { Highlight, useFuzzy } from "@polgubau/fuzzy/react";
+  import { notes } from "./notes";
 
   const Search: React.FC = () => {
 	const [query, setQuery] = useState("");

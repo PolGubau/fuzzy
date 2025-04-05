@@ -17,8 +17,8 @@ const allLinksTranslations: Record<Text, Record<Locale, string>> = {
 	},
 	Proudly: {
 		en: "Proudly",
-		es: "Orgullosamente",
-		cat: "Orgullosament",
+		es: "Totalmente",
+		cat: "Totalment",
 		de: "Stolz",
 	},
 	version: {
@@ -43,7 +43,7 @@ const docsOptions = (lang: Locale): DocsLayoutProps => {
 					<p>
 						{getText("MadeBy", lang)}{" "}
 						<Link
-							className="underline underline-offset-2 decoration-primary decoration-wavy"
+							className="underline underline-offset-2 decoration-primary"
 							href="https://polgubau.com"
 							target="_blank"
 							rel="noreferrer"
