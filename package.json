@@ -28,8 +28,7 @@
     "build:lib": "cd packages/fuzzy && pnpm build",
     "build": "pnpm -r build",
     "prepare": "husky install",
-    "lint-staged": "cd packages/fuzzy && pnpm lint-fix",
-    "copyReadme":"npx scripts/copy-readme.sh"
+    "lint-staged": "cd packages/fuzzy && pnpm lint-fix"
   },
   "repository": {
     "type": "git",

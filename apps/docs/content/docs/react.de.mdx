@@ -20,16 +20,21 @@ Mit nur **wenigen Codezeilen** kannst du eine Fuzzy-Suche implementieren, die pa
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react' // Hinweis: jetzt importieren von /react
 
-const filteredList = useFuzzy({
-  list: ["volvo", "seat", "mercedes", "audi", "bmw"],
-  query: "volv"
-})
+const App = () => {
+	const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+	const query = "volv";
+	const { results } = useFuzzy({ list, query });
 
-filteredList.map(({ item, matches: [range] }) => (
-  <div key={item}>
-    <Highlight text={item} ranges={range} />
-  </div>
-))
+	return (
+		<ul>
+			{results.map(({ item, matches }) => (
+				<li key={item}>
+						<Highlight text={item} ranges={matches[0]} />
+				</li>
+			))}
+		</ul>
+	);
+};
 ```
 
 <Callout title="Warum importieren wir aus `/react`?">

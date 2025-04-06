@@ -20,16 +20,21 @@ Amb només **unes poques línies de codi**, pots implementar un fuzzy finder que
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react' // Nota: ara s'importa des de /react
 
-const filteredList = useFuzzy({
-  list: ["volvo", "seat", "mercedes", "audi", "bmw"],
-  query: "volv"
-})
+const App = () => {
+	const list = ["volvo", "seat", "mercedes", "audi", "bmw"];
+	const query = "volv";
+	const { results } = useFuzzy({ list, query });
 
-filteredList.map(({ item, matches: [range] }) => (
-  <div key={item}>
-    <Highlight text={item} ranges={range} />
-  </div>
-))
+	return (
+		<ul>
+			{results.map(({ item, matches }) => (
+				<li key={item}>
+						<Highlight text={item} ranges={matches[0]} />
+				</li>
+			))}
+		</ul>
+	);
+};
 ```
 
 <Callout title="Per què importem des de `/react`?">
@@ -44,7 +49,7 @@ Aquest és el hook principal, que proporciona una manera optimitzada de cercar e
 
 Accepta les mateixes props que la [funció `fuzzy`](/get-started), més algunes opcions addicionals:
 
-1. list - La llista d’elements a cercar. <small>Obligatori</small>.
+1. list - La llista d'elements a cercar. <small>Obligatori</small>.
 2. query - El text a cercar. <small>Obligatori</small>.
 
 <Callout>
@@ -68,9 +73,9 @@ const filteredList = useFuzzy({
 
 ### Highlight
 
-Aquest és un component d’ajuda que ressalta els caràcters coincidents del text.
+Aquest és un component d'ajuda que ressalta els caràcters coincidents del text.
 
-El podries crear tu mateix, però l’incloem per comoditat.
+El podries crear tu mateix, però l'incloem per comoditat.
 
 ```tsx title="App.tsx"
 import { useFuzzy, Highlight } from '@polgubau/fuzzy/react'
