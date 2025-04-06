@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { JSX } from "react";
 import { baseOptions } from "@/app/layout.config";
 import { source } from "@/lib/source";
 import { DocsLayout, type DocsLayoutProps } from "fumadocs-ui/layouts/notebook";
@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 	title:
 		"Docs - Fuzzy - Optimized and easy fuzzy finder library - Pol Gubau Amores",
 };
+
 type Text = "MadeBy" | "Proudly" | "version";
 const allLinksTranslations: Record<Text, Record<Locale, string>> = {
 	MadeBy: {
@@ -91,7 +92,7 @@ export default async function Layout({
 	children,
 }: {
 	params: Promise<{ lang: Locale }>;
-	children: ReactNode;
+	children: JSX.Element;
 }) {
 	const { lang } = await params;
 	return <DocsLayout {...docsOptions(lang)}>{children}</DocsLayout>;
