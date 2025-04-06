@@ -1,7 +1,7 @@
 {
   "name": "@polgubau/fuzzy",
   "displayName": "fuzzy",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A small and lightweight fuzzy-finder for JavaScript and TypeScript. It is a simple and efficient library for searching and filtering data using fuzzy matching algorithms with optional support for React and Vue.",
   "type": "module",
   "keywords": [
