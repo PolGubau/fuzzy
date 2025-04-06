@@ -41,8 +41,8 @@
     "Pol Gubau Amores <gubaupol@gmail.com> (https://polgubau.com)"
   ],
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/esm/index.mjs",
+  "main": "./dist/core/index.js",
+  "module": "./dist/esm/core/index.mjs",
   "types": "./dist/esm/index.d.mts",
   "exports": {
     ".": {
