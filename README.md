@@ -53,8 +53,14 @@ const fuzzySearch = fuzzy(list);
 const fuzzedList = fuzzySearch(queryText);
 console.log(fuzzedList); 
 ```
+## Framework adapters
+The library core is available as a standalone package, but we also provide adapters for popular frameworks like React and Vue.
 
-## Using React? 
+> Notice how the core import is `@polgubau/fuzzy`, while the React and Vue adapters are imported from `@polgubau/fuzzy/react` and `@polgubau/fuzzy/vue` respectively.
+
+Using this import will allow you to use the library in a framework-agnostic way, while the framework-specific imports will provide additional functionality tailored to that framework. So you don't import vue or react bundles if you don't need them. 
+
+### Using React? 
 To simplify the integration of fuzzy search into your React applications, we provide a custom hook called `useFuzzy`.
 
 ```tsx title="App.tsx"
@@ -71,7 +77,43 @@ filteredList.map(({ item, matches: [range] }) => (
   </div>
 ))
 ```
- 
+
+### Using Vue?
+The same approach is available for Vue applications. We provide a composable called `useFuzzy` to simplify the integration of fuzzy search into your Vue applications.
+
+```vue title="App.vue"
+<template>
+  <div>
+    <input v-model="query" placeholder="Search for a fruit..." />
+    <ul>
+      <li v-for="fruit in fuzzyResponse.results" :key="fruit.id">{{ fruit.name }}</li>
+    </ul>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useFuzzy } from '@polgubau/fuzzy/vue'; // Note: now importing from /vue
+import type { Fruit } from './types';
+
+export default defineComponent({
+  name: 'FruitSearch',
+  setup() {
+    const fruits = ref<Fruit[]>([
+      { id: 1, name: 'Apple' },
+      { id: 2, name: 'Banana' },
+      { id: 3, name: 'Cherry' },
+      { id: 4, name: 'Grape' },
+     ]);
+
+    const query = ref('');
+    const fuzzyResponse = useFuzzy(fruits, query, { threshold: 0.3 });
+
+    return { query, fuzzyResponse };
+  },
+});
+</script>
+```
 ## Documentation
 The documentation page is available at [fuzzy.polgubau.com](https://fuzzy.polgubau.com).
 

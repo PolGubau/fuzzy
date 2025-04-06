@@ -1,7 +1,11 @@
 "use client";
 import type { Locale } from "@/types/base";
-import { useFuzzy } from "@polgubau/fuzzy/react";
+import { Highlight, useFuzzy } from "@polgubau/fuzzy/react";
 import { useParams } from "next/navigation";
+import type {
+	FuzzyResponse,
+	Result,
+} from "node_modules/@polgubau/fuzzy/dist/esm/types.mjs";
 import React from "react";
 
 type Fruit = {
@@ -187,16 +191,6 @@ const fruits: Fruit[] = [
 		labels: { en: "Peas", es: "Guisantes", cn: "Pèsols", de: "Erbsen" },
 	},
 	{
-		color: "yellow",
-		emoji: "🍌",
-		labels: {
-			en: "Plantain",
-			es: "Plátano macho",
-			cn: "Plàtan mascle",
-			de: "Kochbanane",
-		},
-	},
-	{
 		color: "green",
 		emoji: "🫒",
 		labels: { en: "Olive", es: "Aceituna", cn: "Oliva", de: "Olive" },
@@ -331,10 +325,17 @@ export const UsageExample = () => {
 	const { lang } = useParams();
 	const locale = lang as Locale;
 	const [query, setQuery] = React.useState<string>("");
+	const [render, setRender] = React.useState<"ui" | "json">("ui");
 
 	const [vanillaFiltered, setVanillaFiltered] = React.useState<Fruit[]>([]);
 
-	const response = useFuzzy<Fruit>({ list: fruits, query });
+	const response = useFuzzy<Fruit>({
+		list: fruits,
+		query,
+		getKey(item) {
+			return [item.labels.en, item.labels.es, item.labels.cn, item.labels.de];
+		},
+	});
 
 	React.useEffect(() => {
 		const coreSearchFn = (query: string, items: Fruit[]): Fruit[] => {
@@ -366,8 +367,8 @@ export const UsageExample = () => {
 			heading: "Try searching: ",
 			headingOptions: [
 				{ name: "Apple", value: "apple" },
-				{ name: "Banann", value: "bananan" },
-				{ name: "Oraaange", value: "oraaange" },
+				{ name: "Banaa", value: "banaa" },
+				{ name: "Oange", value: "oange" },
 				{ name: "Graps", value: "graps" },
 			],
 			placeholder: "Search for a fruit even with errors...",
@@ -381,7 +382,7 @@ export const UsageExample = () => {
 			heading: "Prueba a buscar: ",
 			headingOptions: [
 				{ name: "Manzana", value: "manzana" },
-				{ name: "Bananna", value: "bananna" },
+				{ name: "Platano", value: "platano" },
 				{ name: "Naraja", value: "naraja" },
 				{ name: "Uvs", value: "uvs" },
 			],
@@ -398,7 +399,7 @@ export const UsageExample = () => {
 				{ name: "Poma", value: "poma" },
 				{ name: "Platan", value: "platan" },
 				{ name: "Tarnja", value: "tarnja" },
-				{ name: "Raïmm", value: "raïmm" },
+				{ name: "Coo", value: "coo" },
 			],
 			placeholder: "Cerca una fruita fins i tot amb errors... ",
 			title: "Cercador de fruites",
@@ -411,7 +412,7 @@ export const UsageExample = () => {
 			heading: "Versuchen Sie zu suchen: ",
 			headingOptions: [
 				{ name: "Apfel", value: "apfel" },
-				{ name: "Bbanane", value: "bbanane" },
+				{ name: "Baana", value: "baana" },
 				{ name: "Orage", value: "orage" },
 				{ name: "Traen", value: "traen" },
 			],
@@ -447,9 +448,29 @@ export const UsageExample = () => {
 				<thead>
 					<tr>
 						<th colSpan={2}>
-							<h2 className="text-lg mt-0">{currentDictionary.title}</h2>
+							<header className="flex gap-2 items-center justify-between flex-wrap">
+								<h2 className="text-lg mt-0">{currentDictionary.title}</h2>
+								<nav className="flex gap-1">
+									<button
+										type="button"
+										className={`border border-primary/20 px-2 py-1 rounded-xl hover:bg-primary/10 transition-colors ${render === "ui" ? "bg-primary/20" : ""}`}
+										onClick={() => setRender("ui")}
+										disabled={render === "ui"}
+									>
+										UI
+									</button>
+									<button
+										type="button"
+										className={`border border-primary/20 px-2 py-1 rounded-xl hover:bg-primary/10 transition-colors ${render === "json" ? "bg-primary/20" : ""}`}
+										onClick={() => setRender("json")}
+										disabled={render === "json"}
+									>
+										JSON
+									</button>
+								</nav>
+							</header>
 							<input
-								type="text"
+								type="search"
 								value={query}
 								className="border-b border-primary/20 p-2 w-full"
 								onChange={(e) => setQuery(e.target.value)}
@@ -460,14 +481,14 @@ export const UsageExample = () => {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr className="grid grid-cols-2">
 						<td>
 							<h3 className="mt-0">{currentDictionary.titles.vanilla}</h3>
-							<FruitList list={vanillaFiltered} locale={locale} />
+							<FruitList list={vanillaFiltered} render={render} />
 						</td>
 						<td>
 							<h3 className="mt-0">{currentDictionary.titles.fuzzy}</h3>
-							<FruitList list={vanillaFiltered} locale={locale} />
+							<FuzzyFruitList list={response} render={render} />
 						</td>
 					</tr>
 				</tbody>
@@ -476,10 +497,9 @@ export const UsageExample = () => {
 	);
 };
 
-export const FruitUI = ({
-	fruit,
-	locale,
-}: { fruit: Fruit; locale: Locale }) => {
+export const FruitUI = ({ fruit }: { fruit: Fruit }) => {
+	const { lang } = useParams();
+	const locale = lang as Locale;
 	const label = fruit.labels[locale] || fruit.labels.en;
 	return (
 		<div className="flex gap-2 items-center p-0.5">
@@ -492,16 +512,65 @@ export const FruitUI = ({
 		</div>
 	);
 };
+export const FuzzyFruitUI = ({ fruit }: { fruit: Result<Fruit> }) => {
+	const { lang } = useParams();
+	const locale = lang as Locale;
+	const { item } = fruit;
+	const label = item.labels[locale] || item.labels.en;
+	const ordenLocales = ["en", "es", "cn", "de"];
+	const getLocaleIndex = (locale: Locale) => {
+		const index = ordenLocales.indexOf(locale);
+		return index !== -1 ? index : ordenLocales.length;
+	};
+	return (
+		<div className="flex gap-2 items-center p-0.5">
+			<div
+				className="w-2 h-2 rounded-full"
+				style={{ backgroundColor: item.color }}
+			/>
+			<span>
+				<Highlight
+					text={label}
+					ranges={fruit.matches[getLocaleIndex(locale)]}
+				/>
+			</span>
+
+			<span>{item.emoji}</span>
+		</div>
+	);
+};
 
 export const FruitList = ({
 	list,
-	locale,
-}: { list: Fruit[]; locale: Locale }) => {
+	render,
+}: { list: Fruit[]; render: "ui" | "json" }) => {
 	return (
-		<ul className="flex flex-col gap-2 h-[400px] overflow-y-auto">
-			{list.map((fruit) => (
-				<FruitUI fruit={fruit} locale={locale} key={fruit.labels.en} />
-			))}
-		</ul>
+		<div className=" h-[400px] overflow-y-auto">
+			{render === "json" && <pre>{JSON.stringify(list, null, 2)}</pre>}
+			{render === "ui" && (
+				<ul className="flex flex-col gap-2 h-[400px] overflow-y-auto">
+					{list.map((fruit) => (
+						<FruitUI fruit={fruit} key={fruit.labels.en} />
+					))}
+				</ul>
+			)}
+		</div>
+	);
+};
+export const FuzzyFruitList = ({
+	list,
+	render,
+}: { list: FuzzyResponse<Fruit>; render: "ui" | "json" }) => {
+	return (
+		<div className=" h-[400px] overflow-y-auto">
+			{render === "json" && <pre>{JSON.stringify(list, null, 2)}</pre>}
+			{render === "ui" && (
+				<ul className="flex flex-col gap-2">
+					{list.results.map((fruit) => (
+						<FuzzyFruitUI fruit={fruit} key={fruit.item.labels.en} />
+					))}
+				</ul>
+			)}
+		</div>
 	);
 };

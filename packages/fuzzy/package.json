@@ -1,8 +1,9 @@
 {
   "name": "@polgubau/fuzzy",
   "displayName": "fuzzy",
-  "version": "1.0.4",
-  "description": "A small and lightweight fuzzy-finder for JavaScript and TypeScript.",
+  "version": "1.0.5",
+  "description": "A small and lightweight fuzzy-finder for JavaScript and TypeScript. It is a simple and efficient library for searching and filtering data using fuzzy matching algorithms with optional support for React and Vue.",
+  "type": "module",
   "keywords": [
     "typescript",
     "fuzzy",
@@ -54,6 +55,11 @@
       "import": "./dist/esm/frameworks/react/index.mjs",
       "types": "./dist/esm/frameworks/react/index.d.mts",
       "require": "./dist/frameworks/react/index.js"
+    },
+    "./vue": {
+      "import": "./dist/esm/frameworks/vue/index.mjs",
+      "types": "./dist/esm/frameworks/vue/index.d.mts",
+      "require": "./dist/frameworks/vue/index.js"
     }
   },
   "scripts": {
@@ -76,7 +82,8 @@
   },
   "peerDependencies": {
     "@types/react": "^19.0.0",
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "vue": "^3.5.13"
   },
   "homepage": "https://github.com/polgubau.com/fuzzy",
   "publishConfig": {
@@ -97,7 +104,8 @@
     "react-dom": "^19.0.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
-    "vitest": "^3.0.8"
+    "vitest": "^3.0.8",
+    "vue": "^3.5.13"
   },
   "packageManager": "pnpm@10.6.1",
   "engines": {
