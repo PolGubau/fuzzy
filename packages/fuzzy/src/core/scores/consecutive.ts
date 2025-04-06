@@ -1,4 +1,4 @@
-import type { HighlightRanges } from "../types";
+import type { HighlightRanges } from "../../types";
 
 export function scoreConsecutiveLetters(
 	indices: HighlightRanges,

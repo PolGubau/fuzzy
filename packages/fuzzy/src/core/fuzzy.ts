@@ -1,8 +1,8 @@
-import { FuzzyBuilder } from "./builders/searcher.builder";
-import { defaults } from "./constants";
+import { FuzzyBuilder } from "../builders/searcher.builder";
+import { defaults } from "../constants";
 import { getFuzzyMatchScore } from "./getScore/getScore";
-import { parseResults } from "./helpers/filters";
-import { emptyResponse } from "./helpers/transformers";
+import { parseResults } from "../helpers/filters";
+import { emptyResponse } from "../helpers/transformers";
 import normalizeText from "./normalizeText";
 import type {
 	Fuzzy,
@@ -10,7 +10,7 @@ import type {
 	FuzzyResponse,
 	Matches,
 	Result,
-} from "./types";
+} from "../types";
 /*
 Based on https://github.com/Nozbe/microfuzz, but with some changes as direct tailwind support or more customization. Thanks to Nozbe for the original idea.
 

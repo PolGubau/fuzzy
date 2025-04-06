@@ -1,6 +1,6 @@
 import { getFuzzyMatchScore } from "./getScore/getScore";
 import normalizeText from "./normalizeText";
-import type { Result } from "./types";
+import type { Result } from "../types";
 
 /**
  * Finds a fuzzy match between a given text and a query string.
@@ -18,23 +18,26 @@ import type { Result } from "./types";
  * @returns A `Result<string>` object containing the match details if a match is found,
  *          or `null` if no match is found.
  */
-export function singleFuzzy(text: string, query: string): Result<string> | null {
-		const normalizedQuery = normalizeText(query);
-		const queryWords = normalizedQuery.split(" ");
+export function singleFuzzy(
+	text: string,
+	query: string,
+): Result<string> | null {
+	const normalizedQuery = normalizeText(query);
+	const queryWords = normalizedQuery.split(" ");
 
-		const normalizedText = normalizeText(text);
-		const itemWords = new Set(normalizedText.split(" "));
+	const normalizedText = normalizeText(text);
+	const itemWords = new Set(normalizedText.split(" "));
 
-		const result = getFuzzyMatchScore(
-			text,
-			normalizedText,
-			itemWords,
-			query,
-			normalizedQuery,
-			queryWords,
-		);
-		if (result) {
-			return { item: text, score: result[0], matches: [result[1]] };
-		}
-		return null;
+	const result = getFuzzyMatchScore(
+		text,
+		normalizedText,
+		itemWords,
+		query,
+		normalizedQuery,
+		queryWords,
+	);
+	if (result) {
+		return { item: text, score: result[0], matches: [result[1]] };
 	}
+	return null;
+}

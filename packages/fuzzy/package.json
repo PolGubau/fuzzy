@@ -47,13 +47,13 @@
     ".": {
       "browser": "./dist/browser/fuzzy.production.min.mjs",
       "types": "./dist/esm/index.d.mts",
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/esm/core/index.mjs",
+      "require": "./dist/core/index.js"
     },
     "./react": {
-      "import": "./dist/esm/react/index.mjs",
-      "types": "./dist/esm/react/index.d.mts",
-      "require": "./dist/react/index.js"
+      "import": "./dist/esm/frameworks/react/index.mjs",
+      "types": "./dist/esm/frameworks/react/index.d.mts",
+      "require": "./dist/frameworks/react/index.js"
     }
   },
   "scripts": {

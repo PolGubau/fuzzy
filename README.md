@@ -9,6 +9,8 @@
 ![Version](https://img.shields.io/npm/v/%40polgubau%2Ffuzzy?logo=npm&label=version)
 ![License](https://img.shields.io/github/license/PolGubau/fuzzy?logo=github&label=license)
 ![Downloads](https://img.shields.io/npm/dt/%40polgubau%2Ffuzzy?logo=npm&label=downloads)
+[![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
+
 
 # @polgubau/fuzzy
 **@polgubau/fuzzy** is an optimized fuzzy finder library designed with TypeScript from the roots. You just need to type one command and call one function to get a fuzzy finder for your project.

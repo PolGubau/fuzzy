@@ -1,7 +1,7 @@
-import { isValidWordBoundary } from "../helpers/isValidBoundary";
-import { sortRangeTuple } from "../helpers/sorters";
+import { isValidWordBoundary } from "../../helpers/isValidBoundary";
+import { sortRangeTuple } from "../../helpers/sorters";
 import { findFuzzyMatches } from "../algorithm/findFuzzyMatches";
-import type { HighlightRanges, Range } from "../types";
+import type { HighlightRanges, Range } from "../../types";
 
 export function getFuzzyMatchScore(
 	item: string,

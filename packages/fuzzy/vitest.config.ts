@@ -16,6 +16,7 @@ export default defineConfig({
 				functions: 0,
 				statements: 0,
 			},
+			reportsDirectory:"./.coverage",
 			reporter: ["json-summary", "text"],
 			reportOnFailure: true,
 			include: ["**/*.ts", "**/*.tsx"],

@@ -34,6 +34,7 @@ export default defineConfig((options) => {
 		// (this is consumed by ["exports" > "." > "import"] and ["exports > "." > "types"] in package.json)
 		{
 			...commonOptions,
+
 			format: ["esm"],
 			clean: true,
 			outDir: "./dist/esm/",
@@ -56,7 +57,7 @@ export default defineConfig((options) => {
 			// `bundle` should be true, so we get everything in one file.
 			bundle: true,
 			entry: {
-				"fuzzy.production.min": "src/index.ts",
+				"fuzzy.production.min": "src/core/index.ts",
 			},
 			platform: "browser",
 			format: ["esm"],
