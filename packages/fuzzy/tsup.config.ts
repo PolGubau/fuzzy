@@ -39,6 +39,7 @@ export default defineConfig((options) => {
 			clean: true,
 			outDir: "./dist/esm/",
 			esbuildPlugins: [esbuildPluginFilePathExtensions({ filter: /^\./ })],
+			outExtension: () => ({ js: ".mjs" }),
 			// Yes, bundle: true => https://github.com/favware/esbuild-plugin-file-path-extensions?tab=readme-ov-file#usage
 			bundle: true,
 			dts: {
