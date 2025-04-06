@@ -1,6 +1,6 @@
 import { getFuzzyMatchScore } from "./getScore/getScore";
 import normalizeText from "./normalizeText";
-import type { Result } from "../types";
+import type { Result } from "./types";
 
 /**
  * Finds a fuzzy match between a given text and a query string.

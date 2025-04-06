@@ -1,5 +1,5 @@
 import { FuzzyBuilder } from "../builders/searcher.builder";
-import type { FuzzyResponse, MapResult, Result } from "../types";
+import type { FuzzyResponse, MapResult, Result } from "../core/types";
 import { parseResults } from "./filters";
 
 export const unmatchedItem = <T>(item: T): Result<T> => {

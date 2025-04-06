@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "pnpm --filter @polgubau/fuzzy build && next build",
+    "build:app": "next build",
+    "build": "pnpm --filter @polgubau/fuzzy build && pnpm build:app",
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --ignore-path .gitignore",

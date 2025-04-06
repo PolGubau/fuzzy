@@ -2,10 +2,7 @@
 import type { Locale } from "@/types/base";
 import { Highlight, useFuzzy } from "@polgubau/fuzzy/react";
 import { useParams } from "next/navigation";
-import type {
-	FuzzyResponse,
-	Result,
-} from "node_modules/@polgubau/fuzzy/dist/esm/types.mjs";
+import type { FuzzyResponse, Result } from "@polgubau/fuzzy";
 import React from "react";
 
 type Fruit = {

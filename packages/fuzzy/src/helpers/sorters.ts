@@ -1,4 +1,4 @@
-import type { Result, Range } from "../types";
+import type { Result, Range } from "../core/types";
 
 export const sortByScore = <T>(a: Result<T>, b: Result<T>): number =>
 	a.score - b.score;

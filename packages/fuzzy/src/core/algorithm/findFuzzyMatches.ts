@@ -1,6 +1,6 @@
 import { isValidWordBoundary } from "../../helpers/isValidBoundary";
 import { scoreConsecutiveLetters } from "../scores/consecutive";
-import type { HighlightRanges } from "../../types";
+import type { HighlightRanges } from "../types";
 
 export function findFuzzyMatches(
 	normalizedItem: string,

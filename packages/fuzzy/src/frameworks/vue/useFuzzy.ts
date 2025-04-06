@@ -1,5 +1,5 @@
 import { ref, watch, type Ref } from "vue";
-import type { FuzzyOptions, FuzzyResponse } from "../../types";
+import type { FuzzyOptions, FuzzyResponse } from "../../core/types";
 import { fuzzy } from "../../core";
 
 /**

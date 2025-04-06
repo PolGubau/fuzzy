@@ -1,7 +1,7 @@
 import React from "react";
 import { unsortedResponse } from "../../helpers/transformers";
 import { defaults } from "../../constants";
-import type { FuzzyOptions, FuzzyResponse } from "../../types";
+import type { FuzzyOptions, FuzzyResponse } from "../../core/types";
 import { fuzzy } from "../../core";
 
 export type useFuzzyOptions<T, U = T> = {

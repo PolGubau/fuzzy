@@ -1,5 +1,5 @@
 import { memo, Fragment, type FC, type CSSProperties } from "react";
-import type { HighlightRanges } from "../../types";
+import type { HighlightRanges } from "../../core/types";
 
 type Style = CSSProperties;
 

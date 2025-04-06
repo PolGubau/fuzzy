@@ -1,4 +1,4 @@
-import type { FuzzyResponse, Result } from "../types";
+import type { FuzzyResponse, Result } from "../core/types";
 
 export class FuzzyBuilder<T> {
 	private results: Array<Result<T>>;

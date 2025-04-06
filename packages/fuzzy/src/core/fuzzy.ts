@@ -10,7 +10,7 @@ import type {
 	FuzzyResponse,
 	Matches,
 	Result,
-} from "../types";
+} from "./types";
 /*
 Based on https://github.com/Nozbe/microfuzz, but with some changes as direct tailwind support or more customization. Thanks to Nozbe for the original idea.
 

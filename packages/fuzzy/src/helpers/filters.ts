@@ -1,4 +1,4 @@
-import type { MapResult, Result } from "../types";
+import type { MapResult, Result } from "../core/types";
 
 /**
  * Filters and sorts an array of results based on a maximum score and a limit.

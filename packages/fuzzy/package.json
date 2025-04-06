@@ -43,22 +43,22 @@
   "sideEffects": false,
   "main": "./dist/core/index.js",
   "module": "./dist/esm/core/index.mjs",
-  "types": "./dist/esm/index.d.mts",
+  "types": "./dist/esm/core/index.d.ts",
   "exports": {
     ".": {
       "browser": "./dist/browser/fuzzy.production.min.mjs",
-      "types": "./dist/esm/index.d.mts",
+      "types": "./dist/esm/core/index.d.ts",
       "import": "./dist/esm/core/index.mjs",
       "require": "./dist/core/index.js"
     },
     "./react": {
       "import": "./dist/esm/frameworks/react/index.mjs",
-      "types": "./dist/esm/frameworks/react/index.d.mts",
+      "types": "./dist/esm/frameworks/react/index.d.ts",
       "require": "./dist/frameworks/react/index.js"
     },
     "./vue": {
       "import": "./dist/esm/frameworks/vue/index.mjs",
-      "types": "./dist/esm/frameworks/vue/index.d.mts",
+      "types": "./dist/esm/frameworks/vue/index.d.ts",
       "require": "./dist/frameworks/vue/index.js"
     }
   },
