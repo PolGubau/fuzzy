@@ -83,34 +83,34 @@ The same approach is available for Vue applications. We provide a composable cal
 ```vue title="App.vue"
 <template>
   <div>
-    <input v-model="query" placeholder="Search for a fruit..." />
+    <input v-model="query" placeholder="Search..." />
     <ul>
-      <li v-for="fruit in fuzzyResponse.results" :key="fruit.id">{{ fruit.name }}</li>
+      <li v-for="(result, index) in fuzzySearch.results" :key="index">
+        {{ result }}
+      </li>
     </ul>
   </div>
 </template>
-
+ 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { useFuzzy } from '@polgubau/fuzzy/vue'; // Note: now importing from /vue
-import type { Fruit } from './types';
-
-export default defineComponent({
-  name: 'FruitSearch',
+import { ref } from "vue";
+import { useFuzzy } from "@polgubau/fuzzy/vue";
+ 
+export default {
   setup() {
-    const fruits = ref<Fruit[]>([
-      { id: 1, name: 'Apple' },
-      { id: 2, name: 'Banana' },
-      { id: 3, name: 'Cherry' },
-      { id: 4, name: 'Grape' },
-     ]);
-
-    const query = ref('');
-    const fuzzyResponse = useFuzzy(fruits, query, { threshold: 0.3 });
-
-    return { query, fuzzyResponse };
+    // Lista de strings para la búsqueda
+    const items = ref<string[]>(["Apple", "Banana", "Cherry", "Grape", "Pineapple"]);
+    const query = ref("");
+ 
+    // Using the composable
+    const fuzzySearch = useFuzzy({ list: items, query });
+ 
+    return {
+      query,
+      fuzzySearch,
+    };
   },
-});
+};
 </script>
 ```
 ## Documentation

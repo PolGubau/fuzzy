@@ -11,7 +11,7 @@
 ![Downloads](https://img.shields.io/npm/dt/%40polgubau%2Ffuzzy?logo=npm&label=downloads)
 [![Formatted with Biome](https://img.shields.io/badge/Formatted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev/)
 
-# @polgubau/fuzzy
+# @polgubau/fuzzy 🔍
 **@polgubau/fuzzy** is an optimized fuzzy finder library designed with TypeScript from the roots. You just need to type one command and call one function to get a fuzzy finder for your project.
  
 ## What and why
@@ -52,8 +52,14 @@ const fuzzySearch = fuzzy(list);
 const fuzzedList = fuzzySearch(queryText);
 console.log(fuzzedList); 
 ```
+## Framework adapters
+The library core is available as a standalone package, but we also provide adapters for popular frameworks like React and Vue.
 
-## Using React? 
+> Notice how the core import is `@polgubau/fuzzy`, while the React and Vue adapters are imported from `@polgubau/fuzzy/react` and `@polgubau/fuzzy/vue` respectively.
+
+Using this import will allow you to use the library in a framework-agnostic way, while the framework-specific imports will provide additional functionality tailored to that framework. So you don't import vue or react bundles if you don't need them. 
+
+### Using React? 
 To simplify the integration of fuzzy search into your React applications, we provide a custom hook called `useFuzzy`.
 
 ```tsx title="App.tsx"
@@ -70,7 +76,43 @@ filteredList.map(({ item, matches: [range] }) => (
   </div>
 ))
 ```
+
+### Using Vue?
+The same approach is available for Vue applications. We provide a composable called `useFuzzy` to simplify the integration of fuzzy search into your Vue applications.
+
+```vue title="App.vue"
+<template>
+  <div>
+    <input v-model="query" placeholder="Search..." />
+    <ul>
+      <li v-for="(result, index) in fuzzySearch.results" :key="index">
+        {{ result }}
+      </li>
+    </ul>
+  </div>
+</template>
  
+<script lang="ts">
+import { ref } from "vue";
+import { useFuzzy } from "@polgubau/fuzzy/vue";
+ 
+export default {
+  setup() {
+    // Lista de strings para la búsqueda
+    const items = ref<string[]>(["Apple", "Banana", "Cherry", "Grape", "Pineapple"]);
+    const query = ref("");
+ 
+    // Using the composable
+    const fuzzySearch = useFuzzy({ list: items, query });
+ 
+    return {
+      query,
+      fuzzySearch,
+    };
+  },
+};
+</script>
+```
 ## Documentation
 The documentation page is available at [fuzzy.polgubau.com](https://fuzzy.polgubau.com).
 
@@ -118,4 +160,3 @@ This project is based on *microfuzz*, which was created by [@Nozbe](https://gith
 [See all contributors](https://github.com/PolGubau/fuzzy/graphs/contributors).
 
 This project is available under the MIT license. See the [LICENSE file](https://github.com/PolGubau/fuzzy/LICENSE) for more info.
-
