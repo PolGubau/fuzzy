@@ -7,7 +7,7 @@ import { Inter } from "next/font/google";
 import type { LocaleItem } from "node_modules/fumadocs-ui/dist/contexts/i18n";
 import "./global.css";
 import type { SearchLink } from "fumadocs-ui/components/dialog/search";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 type Props = {
 	params: Promise<{ lang: Locale }>;
 	children: React.ReactNode;
