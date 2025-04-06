@@ -8,7 +8,6 @@ import { i18n } from "@/lib/i18n";
 import Link from "next/link";
 import type { Metadata, ResolvingMetadata } from "next";
 
-
 type Props = {
 	params: Promise<{ lang: Locale }>;
 	children: React.ReactNode;
@@ -26,7 +25,7 @@ const metadataByLang: Record<Locale, Metadata> = {
 		description:
 			"A comprehensive library for fuzzy searching and matching, designed for performance and ease of use.",
 	},
-	cn: {
+	se: {
 		title:
 			"Fuzzy - Biblioteca de fuzzy finder optimitzada i fàcil d'usar - Pol Gubau Amores",
 		description:
@@ -75,19 +74,19 @@ const allLinksTranslations: Record<Text, Record<Locale, string>> = {
 	MadeBy: {
 		en: "Made by",
 		es: "Hecho por",
-		cn: "Fet per",
+		se: "Fet per",
 		de: "Gemacht von",
 	},
 	Proudly: {
 		en: "Proudly",
 		es: "Totalmente",
-		cn: "Totalment",
+		se: "Totalment",
 		de: "Stolz",
 	},
 	version: {
 		en: "Version",
 		es: "Versión",
-		cn: "Versió",
+		se: "Versió",
 		de: "Version",
 	},
 };

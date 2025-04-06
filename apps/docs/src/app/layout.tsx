@@ -14,6 +14,17 @@ type Props = {
 };
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://fuzzy.polgubau.com"),
+	alternates: {
+		canonical: "/",
+		languages: {
+			"en-US": "/en",
+			"de-DE": "/de",
+			"es-ES": "/es",
+			"ca-ES": "/ca",
+		},
+	},
+
 	title: "Fuzzy - Optimized and easy fuzzy finder library - Pol Gubau Amores",
 	description:
 		"A comprehensive library for fuzzy searching and matching, designed for performance and ease of use.",
@@ -25,6 +36,8 @@ export const metadata: Metadata = {
 		"fuzzy library",
 		"javascript",
 		"typescript",
+		"search",
+		"library",
 	],
 	authors: [{ name: "Pol Gubau Amores", url: "https://polgubau.com" }],
 	openGraph: {
@@ -32,6 +45,7 @@ export const metadata: Metadata = {
 		description:
 			"A comprehensive library for fuzzy searching and matching, designed for performance and ease of use.",
 		url: "https://polgubau.com/fuzzy",
+		images: ["/opengraph-image.png"],
 	},
 	twitter: {
 		site: "@polgubau",
@@ -43,19 +57,19 @@ const inter = Inter({
 });
 type InterestingLinks = "Home" | "Docs" | "Examples";
 const allLinksTranslations: [InterestingLinks, Record<Locale, string>][] = [
-	["Home", { es: "Inicio", en: "Home", cn: "Inici", de: "Startseite" }],
+	["Home", { es: "Inicio", en: "Home", se: "Inici", de: "Startseite" }],
 	[
 		"Docs",
 		{
 			es: "Documentación",
 			en: "Docs",
-			cn: "Documentació",
+			se: "Documentació",
 			de: "Dokumentation",
 		},
 	],
 	[
 		"Examples",
-		{ es: "Ejemplos", en: "Examples", cn: "Exemples", de: "Beispiele" },
+		{ es: "Ejemplos", en: "Examples", se: "Exemples", de: "Beispiele" },
 	],
 ];
 const getLinksByLang = (locale: Locale): SearchLink[] => {

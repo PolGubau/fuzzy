@@ -6,7 +6,7 @@ export function baseOptions(locale: Locale): BaseLayoutProps {
 	const docsLabels = {
 		es: "Documentación",
 		en: "Documentation",
-		cn: "Documentació",
+		se: "Documentació",
 		de: "Dokumentation",
 	};
 	return {

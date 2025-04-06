@@ -22,7 +22,7 @@ const metadataByLang: Record<Locale, Metadata> = {
 		description:
 			"A comprehensive library for fuzzy searching and matching, designed for performance and ease of use.",
 	},
-	cn: {
+	se: {
 		title:
 			"Fuzzy - Biblioteca de fuzzy finder optimitzada i fàcil d'usar - Pol Gubau Amores",
 		description:

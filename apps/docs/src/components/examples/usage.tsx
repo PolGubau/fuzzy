@@ -15,72 +15,72 @@ const fruits: Fruit[] = [
 	{
 		color: "red",
 		emoji: "🍎",
-		labels: { en: "Apple", es: "Manzana", cn: "Poma", de: "Apfel" },
+		labels: { en: "Apple", es: "Manzana", se: "Poma", de: "Apfel" },
 	},
 	{
 		color: "yellow",
 		emoji: "🍌",
-		labels: { en: "Banana", es: "Plátano", cn: "Plàtan", de: "Banane" },
+		labels: { en: "Banana", es: "Plátano", se: "Plàtan", de: "Banane" },
 	},
 	{
 		color: "orange",
 		emoji: "🍊",
-		labels: { en: "Orange", es: "Naranja", cn: "Taronja", de: "Orange" },
+		labels: { en: "Orange", es: "Naranja", se: "Taronja", de: "Orange" },
 	},
 	{
 		color: "green",
 		emoji: "🍐",
-		labels: { en: "Pear", es: "Pera", cn: "Perera", de: "Birne" },
+		labels: { en: "Pear", es: "Pera", se: "Perera", de: "Birne" },
 	},
 	{
 		color: "purple",
 		emoji: "🍇",
-		labels: { en: "Grapes", es: "Uvas", cn: "Raïm", de: "Trauben" },
+		labels: { en: "Grapes", es: "Uvas", se: "Raïm", de: "Trauben" },
 	},
 	{
 		color: "brown",
 		emoji: "🥥",
-		labels: { en: "Coconut", es: "Coco", cn: "Coco", de: "Kokosnuss" },
+		labels: { en: "Coconut", es: "Coco", se: "Coco", de: "Kokosnuss" },
 	},
 	{
 		color: "red",
 		emoji: "🍒",
-		labels: { en: "Cherries", es: "Cerezas", cn: "Cireres", de: "Kirschen" },
+		labels: { en: "Cherries", es: "Cerezas", se: "Cireres", de: "Kirschen" },
 	},
 	{
 		color: "red",
 		emoji: "🍓",
-		labels: { en: "Strawberry", es: "Fresa", cn: "Maduixa", de: "Erdbeere" },
+		labels: { en: "Strawberry", es: "Fresa", se: "Maduixa", de: "Erdbeere" },
 	},
 	{
 		color: "yellow",
 		emoji: "🍍",
-		labels: { en: "Pineapple", es: "Piña", cn: "Pinya", de: "Ananas" },
+		labels: { en: "Pineapple", es: "Piña", se: "Pinya", de: "Ananas" },
 	},
 	{
 		color: "green",
 		emoji: "🥝",
-		labels: { en: "Kiwi", es: "Kiwi", cn: "Kiwi", de: "Kiwi" },
+		labels: { en: "Kiwi", es: "Kiwi", se: "Kiwi", de: "Kiwi" },
 	},
 	{
 		color: "blue",
 		emoji: "🫐",
-		labels: { en: "Blueberry", es: "Arándano", cn: "Nabiu", de: "Heidelbeere" },
+		labels: { en: "Blueberry", es: "Arándano", se: "Nabiu", de: "Heidelbeere" },
 	},
 	{
 		color: "orange",
 		emoji: "🥭",
-		labels: { en: "Mango", es: "Mango", cn: "Mango", de: "Mango" },
+		labels: { en: "Mango", es: "Mango", se: "Mango", de: "Mango" },
 	},
 	{
 		color: "brown",
 		emoji: "🌰",
-		labels: { en: "Chestnut", es: "Castaña", cn: "Castanya", de: "Kastanie" },
+		labels: { en: "Chestnut", es: "Castaña", se: "Castanya", de: "Kastanie" },
 	},
 	{
 		color: "yellow",
 		emoji: "🍋",
-		labels: { en: "Lemon", es: "Limón", cn: "Llimona", de: "Zitrone" },
+		labels: { en: "Lemon", es: "Limón", se: "Llimona", de: "Zitrone" },
 	},
 	{
 		color: "green",
@@ -88,19 +88,19 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Green Apple",
 			es: "Manzana verde",
-			cn: "Poma verda",
+			se: "Poma verda",
 			de: "Grüner Apfel",
 		},
 	},
 	{
 		color: "red",
 		emoji: "🍅",
-		labels: { en: "Tomato", es: "Tomate", cn: "Tomàquet", de: "Tomate" },
+		labels: { en: "Tomato", es: "Tomate", se: "Tomàquet", de: "Tomate" },
 	},
 	{
 		color: "brown",
 		emoji: "🥑",
-		labels: { en: "Avocado", es: "Aguacate", cn: "Alvocat", de: "Avocado" },
+		labels: { en: "Avocado", es: "Aguacate", se: "Alvocat", de: "Avocado" },
 	},
 	{
 		color: "purple",
@@ -108,34 +108,34 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Eggplant",
 			es: "Berenjena",
-			cn: "Albergínia",
+			se: "Albergínia",
 			de: "Aubergine",
 		},
 	},
 	{
 		color: "green",
 		emoji: "🥒",
-		labels: { en: "Cucumber", es: "Pepino", cn: "Cogombre", de: "Gurke" },
+		labels: { en: "Cucumber", es: "Pepino", se: "Cogombre", de: "Gurke" },
 	},
 	{
 		color: "orange",
 		emoji: "🥕",
-		labels: { en: "Carrot", es: "Zanahoria", cn: "Pastanaga", de: "Karotte" },
+		labels: { en: "Carrot", es: "Zanahoria", se: "Pastanaga", de: "Karotte" },
 	},
 	{
 		color: "white",
 		emoji: "🌽",
-		labels: { en: "Corn", es: "Maíz", cn: "Blat de moro", de: "Mais" },
+		labels: { en: "Corn", es: "Maíz", se: "Blat de moro", de: "Mais" },
 	},
 	{
 		color: "green",
 		emoji: "🥬",
-		labels: { en: "Lettuce", es: "Lechuga", cn: "Enciam", de: "Kopfsalat" },
+		labels: { en: "Lettuce", es: "Lechuga", se: "Enciam", de: "Kopfsalat" },
 	},
 	{
 		color: "white",
 		emoji: "🥔",
-		labels: { en: "Potato", es: "Patata", cn: "Patata", de: "Kartoffel" },
+		labels: { en: "Potato", es: "Patata", se: "Patata", de: "Kartoffel" },
 	},
 	{
 		color: "orange",
@@ -143,19 +143,19 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Sweet Potato",
 			es: "Boniato",
-			cn: "Moniato",
+			se: "Moniato",
 			de: "Süßkartoffel",
 		},
 	},
 	{
 		color: "white",
 		emoji: "🧄",
-		labels: { en: "Garlic", es: "Ajo", cn: "All", de: "Knoblauch" },
+		labels: { en: "Garlic", es: "Ajo", se: "All", de: "Knoblauch" },
 	},
 	{
 		color: "white",
 		emoji: "🧅",
-		labels: { en: "Onion", es: "Cebolla", cn: "Ceba", de: "Zwiebel" },
+		labels: { en: "Onion", es: "Cebolla", se: "Ceba", de: "Zwiebel" },
 	},
 	{
 		color: "red",
@@ -163,34 +163,34 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Watermelon",
 			es: "Sandía",
-			cn: "Síndria",
+			se: "Síndria",
 			de: "Wassermelone",
 		},
 	},
 	{
 		color: "yellow",
 		emoji: "🍈",
-		labels: { en: "Melon", es: "Melón", cn: "Meló", de: "Melone" },
+		labels: { en: "Melon", es: "Melón", se: "Meló", de: "Melone" },
 	},
 	{
 		color: "brown",
 		emoji: "🥜",
-		labels: { en: "Peanut", es: "Cacahuete", cn: "Cacauet", de: "Erdnuss" },
+		labels: { en: "Peanut", es: "Cacahuete", se: "Cacauet", de: "Erdnuss" },
 	},
 	{
 		color: "brown",
 		emoji: "🌰",
-		labels: { en: "Hazelnut", es: "Avellana", cn: "Avellana", de: "Haselnuss" },
+		labels: { en: "Hazelnut", es: "Avellana", se: "Avellana", de: "Haselnuss" },
 	},
 	{
 		color: "green",
 		emoji: "🫛",
-		labels: { en: "Peas", es: "Guisantes", cn: "Pèsols", de: "Erbsen" },
+		labels: { en: "Peas", es: "Guisantes", se: "Pèsols", de: "Erbsen" },
 	},
 	{
 		color: "green",
 		emoji: "🫒",
-		labels: { en: "Olive", es: "Aceituna", cn: "Oliva", de: "Olive" },
+		labels: { en: "Olive", es: "Aceituna", se: "Oliva", de: "Olive" },
 	},
 	{
 		color: "red",
@@ -198,24 +198,24 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Wild Strawberry",
 			es: "Fresa silvestre",
-			cn: "Maduixeta",
+			se: "Maduixeta",
 			de: "Wald-Erdbeere",
 		},
 	},
 	{
 		color: "green",
 		emoji: "🍃",
-		labels: { en: "Herbs", es: "Hierbas", cn: "Herbes", de: "Kräuter" },
+		labels: { en: "Herbs", es: "Hierbas", se: "Herbes", de: "Kräuter" },
 	},
 	{
 		color: "green",
 		emoji: "🍀",
-		labels: { en: "Clover", es: "Trébol", cn: "Trèvol", de: "Klee" },
+		labels: { en: "Clover", es: "Trébol", se: "Trèvol", de: "Klee" },
 	},
 	{
 		color: "purple",
 		emoji: "🫐",
-		labels: { en: "Blackberry", es: "Mora", cn: "Móra", de: "Brombeere" },
+		labels: { en: "Blackberry", es: "Mora", se: "Móra", de: "Brombeere" },
 	},
 	{
 		color: "red",
@@ -223,7 +223,7 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Cherry Tomato",
 			es: "Tomatito",
-			cn: "Tomàquet cherry",
+			se: "Tomàquet cherry",
 			de: "Cherrytomate",
 		},
 	},
@@ -233,19 +233,19 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Tangerine",
 			es: "Mandarina",
-			cn: "Mandarina",
+			se: "Mandarina",
 			de: "Mandarine",
 		},
 	},
 	{
 		color: "yellow",
 		emoji: "🍋",
-		labels: { en: "Citron", es: "Cidra", cn: "Cidra", de: "Zedrat-Zitrone" },
+		labels: { en: "Citron", es: "Cidra", se: "Cidra", de: "Zedrat-Zitrone" },
 	},
 	{
 		color: "green",
 		emoji: "🥒",
-		labels: { en: "Zucchini", es: "Calabacín", cn: "Carbassó", de: "Zucchini" },
+		labels: { en: "Zucchini", es: "Calabacín", se: "Carbassó", de: "Zucchini" },
 	},
 	{
 		color: "white",
@@ -253,14 +253,14 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "White Coconut",
 			es: "Coco blanco",
-			cn: "Coco blanc",
+			se: "Coco blanc",
 			de: "Weiße Kokosnuss",
 		},
 	},
 	{
 		color: "red",
 		emoji: "🍓",
-		labels: { en: "Raspberry", es: "Frambuesa", cn: "Gerd", de: "Himbeere" },
+		labels: { en: "Raspberry", es: "Frambuesa", se: "Gerd", de: "Himbeere" },
 	},
 	{
 		color: "red",
@@ -268,7 +268,7 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Red Olive",
 			es: "Aceituna roja",
-			cn: "Oliva roja",
+			se: "Oliva roja",
 			de: "Rote Olive",
 		},
 	},
@@ -278,7 +278,7 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Purple Yam",
 			es: "Ñame morado",
-			cn: "Nyam morat",
+			se: "Nyam morat",
 			de: "Lila Yamswurzel",
 		},
 	},
@@ -288,19 +288,19 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Brazil Nut",
 			es: "Nuez de Brasil",
-			cn: "Nou del Brasil",
+			se: "Nou del Brasil",
 			de: "Paranuss",
 		},
 	},
 	{
 		color: "brown",
 		emoji: "🥜",
-		labels: { en: "Almond", es: "Almendra", cn: "Ametlla", de: "Mandel" },
+		labels: { en: "Almond", es: "Almendra", se: "Ametlla", de: "Mandel" },
 	},
 	{
 		color: "brown",
 		emoji: "🥜",
-		labels: { en: "Walnut", es: "Nuez", cn: "Nou", de: "Walnuss" },
+		labels: { en: "Walnut", es: "Nuez", se: "Nou", de: "Walnuss" },
 	},
 	{
 		color: "green",
@@ -308,14 +308,14 @@ const fruits: Fruit[] = [
 		labels: {
 			en: "Honeydew",
 			es: "Melón verde",
-			cn: "Meló verd",
+			se: "Meló verd",
 			de: "Honigmelone",
 		},
 	},
 	{
 		color: "green",
 		emoji: "🥬",
-		labels: { en: "Spinach", es: "Espinaca", cn: "Espinac", de: "Spinat" },
+		labels: { en: "Spinach", es: "Espinaca", se: "Espinac", de: "Spinat" },
 	},
 ];
 export const UsageExample = () => {
@@ -330,7 +330,7 @@ export const UsageExample = () => {
 		list: fruits,
 		query,
 		getKey(item) {
-			return [item.labels.en, item.labels.es, item.labels.cn, item.labels.de];
+			return [item.labels.en, item.labels.es, item.labels.se, item.labels.de];
 		},
 	});
 
@@ -390,7 +390,7 @@ export const UsageExample = () => {
 				fuzzy: "Buscador Fuzzy",
 			},
 		},
-		cn: {
+		se: {
 			heading: "Prova a buscar: ",
 			headingOptions: [
 				{ name: "Poma", value: "poma" },
