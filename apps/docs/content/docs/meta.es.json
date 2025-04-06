@@ -3,6 +3,7 @@
   "defaultOpen": true,
   "pages": [
     "index",
+    "whyYouNeed",
     "get-started",
     "customization",
     "usage",

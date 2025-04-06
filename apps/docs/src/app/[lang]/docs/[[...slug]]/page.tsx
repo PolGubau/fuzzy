@@ -18,6 +18,7 @@ import {
 	DocsTitle,
 } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
+import { UsageExample } from "@/components/examples/usage";
 
 export default async function Page({
 	params,
@@ -86,6 +87,7 @@ export default async function Page({
 
 						// examples
 						ExampleNotesSearchDisplay,
+						UsageExample,
 					}}
 				/>
 			</DocsBody>
